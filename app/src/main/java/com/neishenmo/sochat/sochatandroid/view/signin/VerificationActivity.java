@@ -1,0 +1,223 @@
+package com.neishenmo.sochat.sochatandroid.view.signin;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.InputType;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.neishenmo.sochat.sochatandroid.R;
+import com.neishenmo.sochat.sochatandroid.app.NeiShenMeApp;
+import com.neishenmo.sochat.sochatandroid.bean.PhoneBean;
+import com.neishenmo.sochat.sochatandroid.bean.SignBean;
+import com.neishenmo.sochat.sochatandroid.bean.VerificationBean;
+import com.neishenmo.sochat.sochatandroid.net.RetrofitHelper;
+import com.neishenmo.sochat.sochatandroid.net.ServiceApi;
+import com.neishenmo.sochat.sochatandroid.requestbean.PhoneRequest;
+import com.neishenmo.sochat.sochatandroid.requestbean.SignRequst;
+import com.neishenmo.sochat.sochatandroid.requestbean.VerificationRequst;
+import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
+import com.neishenmo.sochat.sochatandroid.view.MainActivity;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
+/**
+ * 小果冻
+ * 短信验证码验证
+ * Created by Administrator on 2018\4\24 0024.
+ */
+
+public class VerificationActivity extends Activity implements View.OnClickListener {
+
+
+    private ImageView mIvReturn;
+    private TextView mTvText;
+    private TextView mTvPhoneErification;
+    private EditText mEdErificationNumber;
+    private ImageView mIvNextStep;
+    private TextView mTvAgain;
+    private String phone;
+
+    private String phone_state;
+    private SharedPreferences sp;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_verification);
+        initView();
+    }
+
+    private void initView() {
+        mIvReturn = (ImageView) findViewById(R.id.iv_return);
+        mIvReturn.setOnClickListener(this);
+        mTvText = (TextView) findViewById(R.id.tv_text);
+        mTvText.setOnClickListener(this);
+        mTvPhoneErification = (TextView) findViewById(R.id.tv_phone_erification);
+        mTvPhoneErification.setOnClickListener(this);
+        mEdErificationNumber = (EditText) findViewById(R.id.ed_erification_number);
+        mEdErificationNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mEdErificationNumber.setOnClickListener(this);
+        mIvNextStep = (ImageView) findViewById(R.id.iv_next_step);
+        mIvNextStep.setOnClickListener(this);
+        mTvAgain = (TextView) findViewById(R.id.tv_again);
+        mTvAgain.setOnClickListener(this);
+
+        /**
+         *intent 传递登录或注册状态，手机号。
+         */
+        Intent intent = getIntent();
+        phone_state = intent.getStringExtra("state");
+        if (phone_state == "1"){
+            mTvText.setText(R.string.sign_title);
+        }
+        else if (phone_state == "0") {
+            mTvText.setText(R.string.register_title);
+        }
+        phone = intent.getStringExtra("phone");
+        mTvPhoneErification.setText(String.format(getString(R.string.input_phione),phone));
+//        mTvPhoneErification.setText(String.format(getString(R.string.input_phione),intent.getStringArrayExtra("phone").toString()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            /**
+             * 返回按钮点击事件
+             */
+            case R.id.iv_return:
+                Intent intent = new Intent(VerificationActivity.this,SplaActivity.class);
+                startActivity(intent);
+            break;
+            /**
+             * 下一步点击事件
+             */
+            case R.id.iv_next_step:
+                NextStep();
+                break;
+            /**
+             * 重新发送点击事件
+             */
+            case R.id.tv_again:
+                Continue();
+                break;
+        }
+    }
+
+    private void NextStep() {
+        /**
+         * 登录
+         */
+        if (phone_state.equals("1")){
+            SignIn();
+        }
+        /**
+         * 注册
+         */
+        else if (phone_state.equals("0")){
+            Register();
+        }
+    }
+
+    /**
+     * 登录
+     */
+    private void SignIn() {
+        VerificationRequst requst = new VerificationRequst(phone,mEdErificationNumber.getText().toString());
+        ServiceApi api = RetrofitHelper.getServiceApi();
+        api.getVerification(requst)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<VerificationBean>() {
+                    @Override
+                    public void accept(VerificationBean verificationBean) throws Exception {
+                        VerificationBean bean = verificationBean;
+                        Log.d("TAG",String.valueOf(bean.getCode())+"保存token之前的code--------------");
+                        Log.d("TAG",String.valueOf(bean.getData().getUserId())+"保存之前的token--------------");
+                        sp = getSharedPreferences("user",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("userId",String.valueOf(bean.getData().getUserId()));
+                        editor.putString("telephone",bean.getData().getTelephone());
+                        editor.putString("nickName",bean.getData().getNickName());
+                        editor.putString("picture",bean.getData().getPicture());
+                        editor.putString("birthday",bean.getData().getBirthday());
+                        editor.putString("sex",bean.getData().getSex());
+                        editor.putString("constellation",bean.getData().getConstellation());
+                        editor.putString("token",bean.getData().getToken());
+                        editor.putString("hxPassword",bean.getData().getHxPassword());
+                        editor.commit();
+                        if (bean.getCode() == 200){
+                            Intent intent = new Intent(VerificationActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else if (bean.getCode() == 302){
+                            editor.putString("token",bean.getData().getToken());
+                            Intent intent = new Intent(VerificationActivity.this,PerfectDataActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 注册
+     */
+    private void Register() {
+        SignRequst requst = new SignRequst(phone,mEdErificationNumber.getText().toString());
+        ServiceApi api = RetrofitHelper.getServiceApi();
+        api.getSign(requst)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SignBean>() {
+                    @Override
+                    public void accept(SignBean signBean) throws Exception {
+                        SignBean bean = signBean;
+                        if (bean.getCode() == 200){
+                            SharedPreferences sp = getSharedPreferences("user",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("token",bean.getToken());
+                            editor.commit();
+                            Intent intent = new Intent(VerificationActivity.this, PerfectDataActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
+    }
+    /**
+     * 重新发送验证码
+     */
+    private void Continue() {
+        PhoneRequest request = new PhoneRequest(phone);
+        ServiceApi api = RetrofitHelper.getServiceApi();
+        api.getPhone(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<PhoneBean>() {
+                    @Override
+                    public void accept(PhoneBean phoneBean) throws Exception {
+                        PhoneBean bean = phoneBean;
+                        if (bean.getCode() == 200){
+                            ToastUtils.makeText(VerificationActivity.this,"短信发送成功，请注意查收",2);
+                        }
+                    }
+                });
+    }
+}

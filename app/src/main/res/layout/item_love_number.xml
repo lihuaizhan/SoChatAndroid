@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    android:background="@drawable/shape_soild">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_love"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/civ_love"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:id="@+id/love_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="小果冻"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/love_time"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="2018-05-02 17:02"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="41dp"
+        android:src="@drawable/love"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tv_number"/>
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X30"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

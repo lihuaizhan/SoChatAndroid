@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#333333">
+
+    <LinearLayout
+        android:id="@+id/ll_love"
+        android:layout_width="match_parent"
+        android:layout_height="222dp"
+        android:background="@drawable/money_back"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="118dp"
+            android:layout_height="118dp"
+            android:src="@drawable/money_list_number"
+            android:layout_marginTop="36dp"/>
+
+        <TextView
+            android:id="@+id/nomey_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="18dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ll_love"
+        android:gravity="center">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="零钱记录"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:layout_margin="8dp"/>
+
+
+
+    </LinearLayout>
+
+    <com.neishenmo.sochat.sochatandroid.listview.PullListView
+        android:id="@+id/plv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:getMoreType="auto"
+        android:layout_below="@+id/ll_love"
+        android:layout_marginTop="28dp">
+
+    </com.neishenmo.sochat.sochatandroid.listview.PullListView>
+
+</RelativeLayout>

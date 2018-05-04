@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register_background">
+
+    <EditText
+        android:id="@+id/ed_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/sign_in_phone"
+        android:textColorHint="#FFFFFFFF"
+        android:background="@null"
+        android:maxLength="11"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="98dp"
+        android:textColor="#FFFFFFFF"
+        android:textSize="28sp"/>
+
+    <ImageView
+        android:id="@+id/iv_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_next_press"
+        android:layout_above="@+id/ll_agreement"
+        android:layout_marginBottom="22dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_agreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="98dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in_agree"
+            android:textColor="#FFFFFFFF"/>
+
+
+        <TextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFE12B2B"
+            android:text="@string/sign_in_agreement" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
