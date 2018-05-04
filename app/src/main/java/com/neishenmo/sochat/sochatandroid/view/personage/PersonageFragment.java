@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,11 +34,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.ClientConfiguration;
+import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
 import com.alibaba.sdk.android.oss.common.OSSLog;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvider;
+import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.neishenmo.sochat.sochatandroid.R;
@@ -47,6 +55,7 @@ import com.neishenmo.sochat.sochatandroid.bean.Perfect;
 import com.neishenmo.sochat.sochatandroid.net.RetrofitHelper;
 import com.neishenmo.sochat.sochatandroid.net.ServiceApi;
 import com.neishenmo.sochat.sochatandroid.popupwindow.CommonPopupWindow;
+import com.neishenmo.sochat.sochatandroid.requestbean.HeadRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.PerfectRequest;
 import com.neishenmo.sochat.sochatandroid.requestbean.RelationShipRequest;
 import com.neishenmo.sochat.sochatandroid.requestbean.SetName;
@@ -55,6 +64,7 @@ import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
 import com.neishenmo.sochat.sochatandroid.utils.ObtainAlbumUtils;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
+import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
 
 import bpwidget.lib.wjj.blurpopupwindowlib.widget.BlurPopWin;
@@ -79,6 +89,7 @@ public class PersonageFragment extends BaseFragment {
     private ImageView mCallCamera;
     private RequestManager with;
     private  String mPhotoPath;
+    private String uploadFilePath;
     /**
      * 姓名
      */
@@ -131,6 +142,9 @@ public class PersonageFragment extends BaseFragment {
     private String accessKeySecret = "H4woB6oRaJ2lJRnUQNmTE5OOtpYT9p ";
     private OSS oss;
     private String endpoint = "https://oss-cn-beijing.aliyuncs.com";
+    private static final String testBucket = "neishenme";
+    private String token;
+    private long time;
     private String name;
     private  SetName setName1;
     @Override
@@ -167,7 +181,6 @@ public class PersonageFragment extends BaseFragment {
         mSave = view.findViewById(R.id.saves);
         cancelDeposit = view.findViewById(R.id.deposit_cancel);
         setName = view.findViewById(R.id.set_name);
-
         //初始化阿里云
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
         ClientConfiguration conf = new ClientConfiguration();
@@ -188,6 +201,7 @@ public class PersonageFragment extends BaseFragment {
         //修改昵称参数类
         setName1 = new SetName();
         setName1.setToken(user.getString("token",""));
+        token = user.getString("token","");
 
 
         //点击心进入点赞详情页面
@@ -340,6 +354,7 @@ public class PersonageFragment extends BaseFragment {
                 myName.setVisibility(View.VISIBLE);
                 myName.setText(s);
                 setName1.setNickName(s);
+                time = System.currentTimeMillis();
                 serviceApi.setName(setName1).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<LogOut>() {
@@ -353,6 +368,7 @@ public class PersonageFragment extends BaseFragment {
 
                             }
                         });
+                beginupload();
             }
         });
 
@@ -368,6 +384,8 @@ public class PersonageFragment extends BaseFragment {
                              * 头像 拍照
                              */
                             case R.id.tv_menu_1:
+//                                uploadFilePath
+                                mPhotoPath = ObtainAlbumUtils.getSDPath()+"/"+ObtainAlbumUtils.getPhotoFileName();
                                 ObtainAlbumUtils.openCamera(getActivity(),mPhotoPath);
 //                openCamera();
                                 break;
@@ -496,6 +514,37 @@ public class PersonageFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 选择照片完成后传回
+         */
+        if (requestCode == PICTUR_HEAD && resultCode == AlbumActivity.HEAD_OK) {
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = bundle.getParcelable("bitmap");
+            uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
+            picture.setImageBitmap(bitmap);
+        }
+        /**
+         * 调用截图
+         */
+        else if (requestCode  == 33){
+            if (data!=null){
+                ObtainAlbumUtils.BitmapScreenshot(data,getActivity());
+            }
+        }
+        /**
+         * 截图之后设置头像
+         */
+        else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT){
+            if (data!=null) {
+                Bitmap bitmap = data.getParcelableExtra("data");
+                uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
+                picture.setImageBitmap(bitmap);
+            }
+        }
+    }
 
     /**
      * 打开相册
@@ -503,6 +552,50 @@ public class PersonageFragment extends BaseFragment {
     private void openAlbum() {
         Intent intent = new Intent(getActivity(), AlbumActivity.class);
         startActivityForResult(intent, PICTUR_HEAD);
+    }
+
+    /**
+     * 图片传到阿里云服务器
+     */
+    private void beginupload() {
+        PutObjectRequest put = new PutObjectRequest(testBucket,token+time,uploadFilePath);
+        OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                NextStop();
+//                Log.d("TAG", "UploadSuccess");
+//                Log.d("TAG", "ETag"+result.getETag());
+//                Log.d("TAG", "RequestId"+result.getRequestId());
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
+                if (clientException != null) {
+                    Log.d("TAG","本地异常");
+                    // 本地异常如网络异常等
+                }
+                if (serviceException != null) {
+                    Log.d("TAG","服务异常");
+                    // 服务异常
+                }
+            }
+        });
+    }
+
+    private void NextStop() {
+        serviceApi.setHead(new HeadRequst(token,"https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LogOut>() {
+                    @Override
+                    public void accept(LogOut logOut) throws Exception {
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
     }
 
 

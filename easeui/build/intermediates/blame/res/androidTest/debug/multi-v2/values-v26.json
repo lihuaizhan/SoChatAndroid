@@ -6,6 +6,14 @@
                 {
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\values-v26\\values-v26.xml",
                     "from": {
+                        "startLines": "-1,-1,4,8,-1,-1",
+                        "startColumns": "-1,-1,4,5,-1,-1",
+                        "startOffsets": "-1,-1,217,432,-1,-1",
+                        "endLines": "-1,-1,7,11,-1,-1",
+                        "endColumns": "-1,-1,12,12,-1,-1",
+                        "endOffsets": "-1,-1,426,653,-1,-1"
+                    },
+                    "to": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
                         "startOffsets": "55,130,217,431,657,896",

@@ -3,6 +3,7 @@ package com.neishenmo.sochat.sochatandroid.net;
 
 import com.neishenmo.sochat.sochatandroid.bean.Friends;
 import com.neishenmo.sochat.sochatandroid.bean.HomeListBean;
+import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
 import com.neishenmo.sochat.sochatandroid.bean.Like;
 import com.neishenmo.sochat.sochatandroid.bean.LogOut;
 import com.neishenmo.sochat.sochatandroid.bean.LoveListBean;
@@ -12,8 +13,10 @@ import com.neishenmo.sochat.sochatandroid.bean.Perfect;
 import com.neishenmo.sochat.sochatandroid.bean.PerfectDataBean;
 import com.neishenmo.sochat.sochatandroid.bean.PhoneBean;
 import com.neishenmo.sochat.sochatandroid.bean.SignBean;
+import com.neishenmo.sochat.sochatandroid.bean.Thumbs;
 import com.neishenmo.sochat.sochatandroid.bean.VerificationBean;
 import com.neishenmo.sochat.sochatandroid.bean.Visitor;
+import com.neishenmo.sochat.sochatandroid.requestbean.HeadRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.HomeRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.LoveListRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.MoneyListRequst;
@@ -99,6 +102,21 @@ public interface ServiceApi {
      */
     @POST(ConnectorApi.MONEY_LIST_URL+ConnectorApi.SUFFIX)
     Observable<MoneyListBean> getMonet(@Body MoneyListRequst requst);
+    /**
+     * 获取首页信息
+     */
+    @POST(ConnectorApi.HOME_DATA_URL+ConnectorApi.SUFFIX)
+    Observable<HomeOthers> getHomeOthers(@Body MoneyListRequst requst);
+    /**
+     * 获取首页信息
+     */
+    @POST(ConnectorApi.LIKE_URL+ConnectorApi.SUFFIX)
+    Observable<LogOut> setThumbs(@Body Thumbs requst);
+    /**
+     * 获取首页信息
+     */
+    @POST(ConnectorApi.MODIFY_PICYURE_URL+ConnectorApi.SUFFIX)
+    Observable<LogOut> setHead(@Body HeadRequst requst);
 
 
 }

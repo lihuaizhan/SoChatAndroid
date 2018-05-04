@@ -1,64 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rl_home"
     android:background="#333232">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="小果冻"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+    <!--<TextView-->
+        <!--android:id="@+id/tv_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="小果冻"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="28sp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="20dp"/>-->
 
-    <LinearLayout
-        android:id="@+id/ll_lable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/tv_name">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_label"
-            android:text="22岁"
-            android:gravity="center"
-            android:layout_margin="4dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_label"
-            android:text="天蝎座"
-            android:gravity="center"
-            android:layout_margin="4dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_label"
-            android:text="11分钟前"
-            android:gravity="center"
-            android:layout_margin="4dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_label"
-            android:text="1km"
-            android:gravity="center"
-            android:layout_margin="4dp"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll_lable"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_below="@+id/tv_name">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/shape_label"-->
+            <!--android:text="22岁"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_margin="4dp"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/shape_label"-->
+            <!--android:text="天蝎座"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_margin="4dp"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/shape_label"-->
+            <!--android:text="11分钟前"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_margin="4dp"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/shape_label"-->
+            <!--android:text="1km"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_margin="4dp"/>-->
+    <!--</LinearLayout>-->
 
-    <android.support.v4.view.ViewPager
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/rl_user"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="230dp"-->
+        <!--android:layout_below="@+id/ll_lable"-->
+        <!--android:layout_marginTop="68dp"></android.support.v4.view.ViewPager>-->
+    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
         android:id="@+id/rl_user"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_below="@+id/ll_lable"
-        android:layout_marginTop="68dp"></android.support.v4.view.ViewPager>
-
+        android:layout_height="400dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:rvp_triggerOffset="0.1"
+        app:rvp_singlePageFling="true"
+        android:clipToPadding="false"/>
     <!--<android.support.v7.widget.RecyclerView-->
         <!--android:id="@+id/rl_user"-->
         <!--android:layout_width="match_parent"-->

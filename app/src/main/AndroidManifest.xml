@@ -18,7 +18,8 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".app.NeiShenMeApp"
         android:allowBackup="true"
@@ -36,27 +37,26 @@
         </activity>
         <activity android:name=".view.relation.VisitorMoreActivity" />
         <activity android:name=".view.relation.LikeMoreActivity" />
-        <activity android:name=".view.relation.FriendsMoreActivity"></activity>
-        <activity android:name=".view.signin.SplaActivity"/>
-        <activity android:name=".view.signin.VerificationActivity"/>
-        <activity android:name=".view.signin.AlbumActivity"/>
-        <activity android:name=".view.signin.PerfectDataActivity"/>
-        <activity android:name=".view.personage.LoveNumberActivity"/>
-        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
-        <activity android:name=".view.personage.MoneyListActivity"/>
+        <activity android:name=".view.relation.FriendsMoreActivity" />
+        <activity android:name=".view.signin.SplaActivity" />
+        <activity android:name=".view.signin.VerificationActivity" />
+        <activity android:name=".view.signin.AlbumActivity" />
+        <activity android:name=".view.signin.PerfectDataActivity" />
+        <activity android:name=".view.personage.LoveNumberActivity" />
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity" />
+        <activity android:name=".view.personage.MoneyListActivity" />
 
         <!-- 这个是查看大图的activity -->
         <activity
             android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide"
-            />
+            android:theme="@style/horizontal_slide" />
 
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1113170926178264#newneishense" />
-        <!-- 声明SDK所需的service  SDK核心功能-->
+        <!-- 声明SDK所需的service  SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
@@ -77,14 +77,17 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="bS5Dns38GvWtZb8lADEkPr6mWIdMpWg3" />
 
+        <activity android:name=".view.particular.ParticularActivity"></activity>
     </application>
 
 </manifest>

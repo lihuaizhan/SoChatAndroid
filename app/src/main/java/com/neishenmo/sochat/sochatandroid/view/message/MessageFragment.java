@@ -1,36 +1,51 @@
 package com.neishenmo.sochat.sochatandroid.view.message;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMConversationListener;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.widget.EaseImageView;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.base.BaseFragment;
 
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018-04-24.
  */
 
 public class MessageFragment extends BaseFragment {
-
+    private final static int MSG_REFRESH = 2;
     private RecyclerView mRecyclerView;
     private List<Integer> mDatas;
     private GalleryAdapter mAdapter;
+    protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
 
+    protected EMConversationListener convListener = new EMConversationListener(){
+
+        @Override
+        public void onCoversationUpdate() {
+            refresh();
+        }
+
+    };
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.message_layout, container, false);
@@ -41,7 +56,7 @@ public class MessageFragment extends BaseFragment {
         //传入参数
         Bundle args = new Bundle();
         args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-        args.putString(EaseConstant.EXTRA_USER_ID, "88888888");
+        args.putString(EaseConstant.EXTRA_USER_ID, "开发测试");
         chatFragment.setArguments(args);
         getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
 
@@ -53,10 +68,49 @@ public class MessageFragment extends BaseFragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 //设置适配器
-        mAdapter = new GalleryAdapter(getActivity(), mDatas);
+        mAdapter = new GalleryAdapter(getActivity(), conversationList);
+        conversationList.addAll(loadConversationList());
+        mAdapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(String position) {
+//                Toast.makeText(getActivity(), "123456788"+position, Toast.LENGTH_SHORT).show();
+
+                EaseChatFragment chatFragment = new EaseChatFragment();
+                chatFragment.hideTitleBar();
+                //传入参数
+                Bundle args = new Bundle();
+                args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+                args.putString(EaseConstant.EXTRA_USER_ID,position );
+                chatFragment.setArguments(args);
+
+
+                getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+
+
+
+            }
+        });
+//        myAdapter=new ConversationAdapter(getActivity(),0,conversationList);
+//        myAdapter=new ConversationAdapter(getActivity(),0,mDatas)
         mRecyclerView.setAdapter(mAdapter);
 
-
+////会话列表控件
+//        conversationListView = (EaseConversationList) getView().findViewById(R.id.list);
+////初始化，参数为会话列表集合
+//        conversationListView.init(conversationList);
+////刷新列表
+//        conversationListView.refresh();
+//
+//        conversationListFragment = new EaseConversationListFragment();
+//        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
+//            @Override
+//            public void onListItemClicked(EMConversation conversation) {
+//                Toast.makeText(getActivity(), "..............", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//        getFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment).show(conversationListFragment)
+//                .commit();
         return view;
     }
 
@@ -70,22 +124,20 @@ public class MessageFragment extends BaseFragment {
 
     }
 
+    private void initDatas() {
+//        mDatas = new ArrayList<>(Arrays.asList(R.mipmap.ic_launcher, R.drawable.ease_blue_add, R.drawable.ease_default_avatar, R.drawable.ease_default_expression, R.drawable.ease_default_image, R.drawable.common_google_signin_btn_icon_dark_focused, R.drawable.ease_new_friends_icon, R.drawable.ease_location_msg, R.drawable.ease_groups_icon));
 
-    private void initDatas()
-    {
-        mDatas = new ArrayList<>(Arrays.asList(R.mipmap.ic_launcher,
-                R.drawable.ease_blue_add, R.drawable.ease_default_avatar, R.drawable.ease_default_expression, R.drawable.ease_default_image,
-                R.drawable.common_google_signin_btn_icon_dark_focused, R.drawable.ease_new_friends_icon, R.drawable.ease_location_msg, R.drawable.ease_groups_icon));
+
+
+
     }
-    public class GalleryAdapter extends
-            RecyclerView.Adapter<GalleryAdapter.ViewHolder>
-    {
+    public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
         private LayoutInflater mInflater;
-        private List<Integer> mDatas;
-        public GalleryAdapter(Context context, List<Integer> datats)
+        private List<EMConversation> conversationList;
+        public GalleryAdapter(Context context, List<EMConversation> list)
         {
             mInflater = LayoutInflater.from(context);
-            mDatas = datats;
+            conversationList = list;
         }
         public class ViewHolder extends RecyclerView.ViewHolder
         {
@@ -93,37 +145,179 @@ public class MessageFragment extends BaseFragment {
             {
                 super(arg0);
             }
-            EaseImageView mImg;
-            TextView mTxt;
+            //            ImageView mImg;
+//            TextView mTxt;
+            TextView name;
+            /** unread message count */
+            TextView unreadLabel;
+            /** avatar */
+            EaseImageView avatar;
+
         }
         @Override
         public int getItemCount()
         {
-            return mDatas.size();
+            return conversationList.size();
         }
         /**
          * 创建ViewHolder
          */
         @Override
-        public GalleryAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
         {
             View view = mInflater.inflate(R.layout.activity_recycler_item,
                     viewGroup, false);
-            GalleryAdapter.ViewHolder viewHolder = new GalleryAdapter.ViewHolder(view);
-            viewHolder.mImg = (EaseImageView) view
-                    .findViewById(R.id.id_index_gallery_item_image);
-            viewHolder.mImg.setShapeType(1);
+            ViewHolder viewHolder = new ViewHolder(view);
+            viewHolder.name = (TextView) view.findViewById(R.id.name);
+            viewHolder.unreadLabel = (TextView) view.findViewById(R.id.unread_msg_number);
+            viewHolder.avatar = (EaseImageView) view.findViewById(R.id.avatar);
+
+
             return viewHolder;
         }
         /**
          * 设置值
          */
         @Override
-        public void onBindViewHolder(final GalleryAdapter.ViewHolder viewHolder, final int i)
-        {
-            viewHolder.mImg.setImageResource(mDatas.get(i));
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
+
+            final EMConversation conversation = conversationList.get(i);
+            if (conversation.getUnreadMsgCount() > 0) {
+                // show unread message count
+                viewHolder.unreadLabel.setText(String.valueOf(conversation.getUnreadMsgCount()));
+                viewHolder.unreadLabel.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.unreadLabel.setVisibility(View.INVISIBLE);
+            }
+//            viewHolder.avatar.setImageResource(conversationList.get(i).getLastMessage().get.get(i));
+            viewHolder.name.setText(conversationList.get(i).getLastMessage().getUserName());
+
+            if (mListener != null) {
+                //绑定点击事件
+                viewHolder.avatar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //把条目的位置回调回去
+                        mListener.onItemClick(conversationList.get(i).getLastMessage().getUserName());
+                        viewHolder.unreadLabel.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+
+        }
+
+
+
+        public ItemClickListener mListener;
+
+        public void setOnItemClickListener(ItemClickListener listener) {
+            this.mListener = listener;
+        }
+
+
+
+    }
+    protected List<EMConversation> loadConversationList(){
+        // get all conversations
+        Map<String, EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversations();
+        List<Pair<Long, EMConversation>> sortList = new ArrayList<Pair<Long, EMConversation>>();
+        /**
+         * lastMsgTime will change if there is new message during sorting
+         * so use synchronized to make sure timestamp of last message won't change.
+         */
+        synchronized (conversations) {
+            for (EMConversation conversation : conversations.values()) {
+                if (conversation.getAllMessages().size() != 0) {
+                    sortList.add(new Pair<Long, EMConversation>(conversation.getLastMessage().getMsgTime(), conversation));
+                }
+            }
+        }
+        try {
+            // Internal is TimSort algorithm, has bug
+            sortConversationByLastChatTime(sortList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<EMConversation> list = new ArrayList<EMConversation>();
+        for (Pair<Long, EMConversation> sortItem : sortList) {
+            list.add(sortItem.second);
+        }
+        return list;
+    }
+
+    private void sortConversationByLastChatTime(List<Pair<Long, EMConversation>> conversationList) {
+        Collections.sort(conversationList, new Comparator<Pair<Long, EMConversation>>() {
+            @Override
+            public int compare(final Pair<Long, EMConversation> con1, final Pair<Long, EMConversation> con2) {
+
+                if (con1.first.equals(con2.first)) {
+                    return 0;
+                } else if (con2.first.longValue() > con1.first.longValue()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+
+        });
+    }
+    protected android.os.Handler handler = new android.os.Handler(){
+        public void handleMessage(android.os.Message msg) {
+
+            conversationList.clear();
+            conversationList.addAll(loadConversationList());
+        }
+    };
+
+
+    protected boolean hidden;
+    protected boolean isConflict;
+    protected EMConnectionListener connectionListener = new EMConnectionListener() {
+
+        @Override
+        public void onDisconnected(int error) {
+            if (error == EMError.USER_REMOVED || error == EMError.USER_LOGIN_ANOTHER_DEVICE || error == EMError.SERVER_SERVICE_RESTRICTED
+                    || error == EMError.USER_KICKED_BY_CHANGE_PASSWORD || error == EMError.USER_KICKED_BY_OTHER_DEVICE) {
+                isConflict = true;
+            } else {
+                handler.sendEmptyMessage(0);
+            }
+        }
+
+        @Override
+        public void onConnected() {
+            handler.sendEmptyMessage(1);
+        }
+    };
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        this.hidden = hidden;
+        if (!hidden && !isConflict) {
+            refresh();
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        conversationList.clear();
+        conversationList.addAll(loadConversationList());
+        if (!hidden) {
+            refresh();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EMClient.getInstance().removeConnectionListener(connectionListener);
+    }
+
+    public void refresh() {
+        if(!handler.hasMessages(MSG_REFRESH)){
+            handler.sendEmptyMessage(MSG_REFRESH);
+        }
+    }
 
 }

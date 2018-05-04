@@ -1,6 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.utils;
 
 
+import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 
 public class TimeConvertUtil {
+    //计算登陆时间转换
     public static String getTimeInterval(String inputTime) {
 
         // inputTime传入的时间格式必须类似于“yyyy-MM-dd HH:mm:ss”这样的格式
@@ -154,5 +156,50 @@ public class TimeConvertUtil {
 
 
     }
+     //把字符串转为日期
+    public static int ConverToDate(String strDate) throws Exception
+    {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return getAge(df.parse(strDate));
+    }
+    public static int getAge(Date birthDate) {
 
+        if (birthDate == null)
+            throw new
+                    RuntimeException("出生日期不能为null");
+
+        int age = 0;
+
+        Date now = new Date();
+
+        SimpleDateFormat format_y = new
+                SimpleDateFormat("yyyy");
+        SimpleDateFormat format_M = new
+                SimpleDateFormat("MM");
+
+        String birth_year =
+                format_y.format(birthDate);
+        String this_year =
+                format_y.format(now);
+
+        String birth_month =
+                format_M.format(birthDate);
+        String this_month =
+                format_M.format(now);
+
+        // 初步，估算
+        age =
+                Integer.parseInt(this_year) - Integer.parseInt(birth_year);
+
+        // 如果未到出生月份，则age - 1
+        if
+                (this_month.compareTo(birth_month) < 0)
+            age -=
+                    1;
+        if (age <
+                0)
+            age =
+                    0;
+        return age;
+    }
 }

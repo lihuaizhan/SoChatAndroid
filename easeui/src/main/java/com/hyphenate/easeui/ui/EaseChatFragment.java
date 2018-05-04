@@ -3,12 +3,14 @@ package com.hyphenate.easeui.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -54,9 +56,10 @@ import com.hyphenate.easeui.widget.EaseVoiceRecorderView.EaseVoiceRecorderCallba
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
-import com.hyphenate.util.PathUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -101,6 +104,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected GroupListener groupListener;
     protected ChatRoomListener chatRoomListener;
     protected EMMessage contextMenuMessage;
+    private String mPhotoPath;
 
     static final int ITEM_TAKE_PICTURE = 1;
     static final int ITEM_PICTURE = 2;
@@ -114,6 +118,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected MyItemClickListener extendMenuItemClickListener;
     protected boolean isRoaming = false;
     private ExecutorService fetchQueue;
+    private String absolutePath;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -446,8 +451,11 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
-                if (cameraFile != null && cameraFile.exists())
-                    sendImageMessage(cameraFile.getAbsolutePath());
+                if (cameraFile != null) {
+                    absolutePath = cameraFile.getAbsolutePath();
+                    sendImageMessage(absolutePath);
+//                    selectPicFromLocal();
+                }
             } else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
                 if (data != null) {
                     Uri selectedImage = data.getData();
@@ -643,6 +651,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             switch (itemId) {
                 case ITEM_TAKE_PICTURE:
                     selectPicFromCamera();
+//                    ObtainAlbumUtils.openCamera(getActivity(),mPhotoPath);
                     break;
                 case ITEM_PICTURE:
                     selectPicFromLocal();
@@ -860,19 +869,61 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
      * capture new image
      */
     protected void selectPicFromCamera() {
-        if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
-            return;
+//        if (!EaseCommonUtils.isSdcardExist()) {
+//            Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+//        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+//                + System.currentTimeMillis() + ".jpg");
+        //noinspection ResultOfMethodCallIgnored
+//        cameraFile.getParentFile().mkdirs();
+//        startActivityForResult(
+//                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+//                REQUEST_CODE_CAMERA);
+//        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//        mPhotoPath = getSDPath()+"/"+getPhotoFileName();
+//        cameraFile = new File(mPhotoPath);
+//        if (cameraFile.exists()){
+//            try {
+//                cameraFile.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+////        }
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile));
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        // 激活相机
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // 判断存储卡是否可以用，可用进行存储
+        if (hasSdcard()) {
+            SimpleDateFormat timeStampFormat = new SimpleDateFormat(
+                    "yyyy_MM_dd_HH_mm_ss");
+            String filename = timeStampFormat.format(new Date());
+            cameraFile = new File(Environment.getExternalStorageDirectory(),
+                    filename + ".jpg");
+            if (currentapiVersion < 24) {
+                // 从文件中创建uri
+                Uri uri = Uri.fromFile(cameraFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            } else {
+                //兼容android7.0 使用共享文件的形式
+                ContentValues contentValues = new ContentValues(1);
+                contentValues.put(MediaStore.Images.Media.DATA, cameraFile.getAbsolutePath());
+                Uri uri = getActivity().getApplication().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            }
         }
 
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
-        startActivityForResult(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
-                REQUEST_CODE_CAMERA);
+
+        startActivityForResult(intent,REQUEST_CODE_CAMERA);
     }
+
+    public static boolean hasSdcard() {
+        return Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED);
+    }
+
 
     /**
      * select local image

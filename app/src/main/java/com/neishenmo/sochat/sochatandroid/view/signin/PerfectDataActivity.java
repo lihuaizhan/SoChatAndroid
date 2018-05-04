@@ -77,7 +77,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
     private TextView mTvDetermine;
     private LinearLayout mLlLl;
 
-    private String time;
+    private long time;
 
 
     public static int PICTUR_HEAD = 11;
@@ -366,9 +366,10 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
              * 下一步
              */
             case R.id.tv_next_step:
-                time = ObtainAlbumUtils.stampToDate(System.currentTimeMillis());
+                time = System.currentTimeMillis();
                 beginupload();
-                NextStop();
+//                Log.d("TAG","https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time);
+//                NextStop();
                 break;
         }
     }
@@ -377,7 +378,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
      * 把设置好的信息传入服务器
      */
     private void NextStop() {
-
+        Log.d("TAG","https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time);
         PerfectDataRequst requst = new PerfectDataRequst(token, mEtName.getText().toString(), "https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time
                 , selectYear + "" + selectMonth + "" + selectDay, sex);
         ServiceApi api = RetrofitHelper.getServiceApi();
@@ -440,6 +441,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
              * 头像 拍照
              */
             case R.id.tv_menu_1:
+                mPhotoPath = ObtainAlbumUtils.getSDPath()+"/"+ObtainAlbumUtils.getPhotoFileName();
                 ObtainAlbumUtils.openCamera(PerfectDataActivity.this,mPhotoPath);
 //                openCamera();
                 break;
@@ -685,7 +687,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         if (requestCode == PICTUR_HEAD && resultCode == AlbumActivity.HEAD_OK) {
             Bundle bundle = data.getExtras();
             Bitmap bitmap = bundle.getParcelable("bitmap");
-            ObtainAlbumUtils.writeFileByBitmap(bitmap);
+            uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
             mCivHeadPortrait.setImageBitmap(bitmap);
         }
         /**
@@ -702,7 +704,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT){
             if (data!=null) {
                 Bitmap bitmap = data.getParcelableExtra("data");
-                ObtainAlbumUtils.writeFileByBitmap(bitmap);
+                uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
                 mCivHeadPortrait.setImageBitmap(bitmap);
             }
         }
@@ -716,18 +718,22 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-
+                NextStop();
+//                Log.d("TAG", "UploadSuccess");
+//                Log.d("TAG", "ETag"+result.getETag());
+//                Log.d("TAG", "RequestId"+result.getRequestId());
             }
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
                 if (clientException != null) {
+                    Log.d("TAG","本地异常");
                     // 本地异常如网络异常等
                 }
                 if (serviceException != null) {
+                    Log.d("TAG","服务异常");
                     // 服务异常
                 }
-//                Log.d("TAG","异常-----------------------");
             }
         });
     }

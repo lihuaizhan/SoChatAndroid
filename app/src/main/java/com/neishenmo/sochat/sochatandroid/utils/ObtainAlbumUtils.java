@@ -49,7 +49,7 @@ public class ObtainAlbumUtils {
     }
 
 
-    private static String getSDPath(){
+    public static String getSDPath(){
         File sdDir = null;
         boolean sdCardExist = Environment.getExternalStorageState()
                 .equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在
@@ -61,7 +61,7 @@ public class ObtainAlbumUtils {
 
     }
 
-    private static String getPhotoFileName() {
+    public static String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "'IMG'_yyyyMMdd_HHmmss");
@@ -76,7 +76,7 @@ public class ObtainAlbumUtils {
      */
     public static String writeFileByBitmap(Bitmap bitmap) {
         String uploadFilePath;
-        String path = "/storage/emulated/deansm/";//手机设置的存储位置
+        String path = "/storage/emulated/0/wandoujia/downloader/icon/";//手机设置的存储位置
         File file = new File(path);
         String time = System.currentTimeMillis() + ".jpg";
         File imageFile = new File(file, time);

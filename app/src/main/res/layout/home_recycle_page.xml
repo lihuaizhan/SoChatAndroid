@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/other_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="小果冻"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_lable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/other_name"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/other_old"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_label"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="22岁" />
+
+        <TextView
+            android:id="@+id/other_uss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_uss"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="天蝎座" />
+
+        <TextView
+            android:id="@+id/other_regis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_last_time"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="11分钟前" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_km"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="1km" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/other_picture"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/ll_lable"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
+</RelativeLayout>
