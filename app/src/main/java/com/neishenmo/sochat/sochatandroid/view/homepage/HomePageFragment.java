@@ -3,6 +3,7 @@ package com.neishenmo.sochat.sochatandroid.view.homepage;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -199,7 +200,12 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                     @Override
                     public void onClick(int position) {
                        // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+
+                        HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
                         Intent intent = new Intent(getActivity(), ParticularActivity.class);
+                        Bundle mBundle = new Bundle();
+                        mBundle.putSerializable("home",onlineUserListBean);
+                        intent.putExtras(mBundle);
                         startActivity(intent);
                     }
 

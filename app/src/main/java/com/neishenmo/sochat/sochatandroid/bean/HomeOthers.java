@@ -1,12 +1,13 @@
 package com.neishenmo.sochat.sochatandroid.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018-05-04.
  */
 
-public class HomeOthers {
+public class HomeOthers implements Serializable{
 
     /**
      * code : 200
@@ -42,7 +43,7 @@ public class HomeOthers {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         private List<OnlineUserListBean> onlineUserList;
 
         public List<OnlineUserListBean> getOnlineUserList() {
@@ -53,7 +54,7 @@ public class HomeOthers {
             this.onlineUserList = onlineUserList;
         }
 
-        public static class OnlineUserListBean {
+        public static class OnlineUserListBean implements Serializable {
             /**
              * userId : 31
              * telephone : 18710291300

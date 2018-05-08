@@ -6,6 +6,11 @@ package com.neishenmo.sochat.sochatandroid.requestbean;
 
 public class PhoneRequest {
     private String telephone;
+    private String pageNo;
+
+    public PhoneRequest(String telephone) {
+        this.telephone = telephone;
+    }
 
     public String getTelephone() {
         return telephone;
@@ -15,7 +20,11 @@ public class PhoneRequest {
         this.telephone = telephone;
     }
 
-    public PhoneRequest(String telephone) {
-        this.telephone = telephone;
+    public String getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(String pageNo) {
+        this.pageNo = pageNo;
     }
 }

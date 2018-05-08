@@ -11,4 +11,5 @@
     <color name="color_d8d8d8">#d8d8d8</color>
     <color name="color_323232">#323232</color>
     <color name="province_line_border">#D0D0D0</color>
+    <color name="dark_white">#767676</color>
 </resources>

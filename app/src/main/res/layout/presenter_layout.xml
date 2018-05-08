@@ -72,10 +72,10 @@
             android:id="@+id/my_name"
             />
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="修改姓名"
             android:maxLines="1"
+            android:maxLength="8"
             android:textColor="#ffffff"
             android:textSize="26sp"
             android:id="@+id/set_name"
@@ -84,6 +84,9 @@
             android:textColorHint="#ffffff"
             android:background="@null"
             android:visibility="gone"
+            android:layout_marginLeft="20px"
+            android:inputType="text"
+            android:layout_marginRight="20px"
             />
         <ImageView
             android:layout_width="@dimen/x25"
@@ -99,6 +102,7 @@
        android:id="@+id/import_money"
        android:hint="输入金额"
        android:maxLines="1"
+       android:cursorVisible="false"
        android:inputType="number|numberDecimal"
        android:textSize="40sp"
        android:layout_gravity="center"

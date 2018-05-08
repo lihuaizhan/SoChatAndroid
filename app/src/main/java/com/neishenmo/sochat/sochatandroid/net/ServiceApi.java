@@ -9,6 +9,7 @@ import com.neishenmo.sochat.sochatandroid.bean.LogOut;
 import com.neishenmo.sochat.sochatandroid.bean.LoveListBean;
 import com.neishenmo.sochat.sochatandroid.bean.MoneyListBean;
 import com.neishenmo.sochat.sochatandroid.bean.MyMessage;
+import com.neishenmo.sochat.sochatandroid.bean.OtherLiveMsg;
 import com.neishenmo.sochat.sochatandroid.bean.Perfect;
 import com.neishenmo.sochat.sochatandroid.bean.PerfectDataBean;
 import com.neishenmo.sochat.sochatandroid.bean.PhoneBean;
@@ -108,15 +109,20 @@ public interface ServiceApi {
     @POST(ConnectorApi.HOME_DATA_URL+ConnectorApi.SUFFIX)
     Observable<HomeOthers> getHomeOthers(@Body MoneyListRequst requst);
     /**
-     * 获取首页信息
+     * 获取点赞状态
      */
     @POST(ConnectorApi.LIKE_URL+ConnectorApi.SUFFIX)
     Observable<LogOut> setThumbs(@Body Thumbs requst);
     /**
-     * 获取首页信息
+     * 修改头像
      */
     @POST(ConnectorApi.MODIFY_PICYURE_URL+ConnectorApi.SUFFIX)
     Observable<LogOut> setHead(@Body HeadRequst requst);
+    /**
+     * 获取他人动态信息
+     */
+    @POST(ConnectorApi.GETLIVE_MSG_URL+ConnectorApi.SUFFIX)
+    Observable<OtherLiveMsg> getOtherLive(@Body PhoneRequest requst);
 
 
 }

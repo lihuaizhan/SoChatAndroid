@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.app.NeiShenMeApp;
 import com.neishenmo.sochat.sochatandroid.bean.PhoneBean;
@@ -161,6 +163,8 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                         editor.putString("hxPassword",bean.getData().getHxPassword());
                         editor.commit();
                         if (bean.getCode() == 200){
+                            emClient(String.valueOf(bean.getData().getUserId()),bean.getData().getHxPassword());
+
                             Intent intent = new Intent(VerificationActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -175,6 +179,26 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                 });
     }
 
+    private void emClient(String userId, String password) {
+        EMClient.getInstance().login(userId,password,new EMCallBack() {//回调
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                Log.d("main", "登录聊天服务器成功！");
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                Log.d("main", "登录聊天服务器失败！");
+            }
+        });
+    }
 
     /**
      * 注册

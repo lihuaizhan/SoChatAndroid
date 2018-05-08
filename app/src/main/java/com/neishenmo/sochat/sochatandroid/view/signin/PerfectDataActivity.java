@@ -31,6 +31,8 @@ import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvide
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.bean.PerfectDataBean;
 import com.neishenmo.sochat.sochatandroid.net.RetrofitHelper;
@@ -408,6 +410,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
                     }
                 });
     }
+
 
     /**
      * 选择出生日期弹窗

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="110px"
         android:text="小果冻"
         android:textColor="@color/white"
         android:textSize="28sp" />
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/other_name"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="112px"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -30,7 +30,7 @@
             android:background="@drawable/shape_label"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:text="22岁" />
+             />
 
         <TextView
             android:id="@+id/other_uss"

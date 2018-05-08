@@ -22,17 +22,81 @@
         android:layout_marginTop="35dp"
         />
        <ImageView
-           android:layout_width="180dp"
-           android:layout_height="180dp"
+           android:layout_width="140dp"
+           android:layout_height="140dp"
            android:id="@+id/part_picture"
-           android:background="@mipmap/ic_launcher"
            android:layout_marginTop="10dp"
            />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y5"
         >
+        <TextView
+            android:id="@+id/others_old"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_label"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="22岁" />
+
+        <TextView
+            android:id="@+id/others_uss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_uss"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="天蝎座" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333232"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabTextAppearance="@style/CustomTabLayoutTextAppearance"
+            android:layout_gravity="center"
+            app:tabBackground="@null"
+            app:tabGravity="center"
+            app:tabPaddingStart="50dp"
+            app:tabPaddingEnd="8dp"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable">
+        </android.support.design.widget.TabLayout>
 
     </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        ></android.support.v4.view.ViewPager>
+
+    <Button
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/y20"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape"
+        android:textColor="#ffffff"
+        android:layout_marginTop="@dimen/y6"
+        android:text="返回"
+        android:id="@+id/paryicu_finish"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
 </LinearLayout>

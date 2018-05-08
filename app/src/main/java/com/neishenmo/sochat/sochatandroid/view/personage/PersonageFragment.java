@@ -10,8 +10,10 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -147,6 +149,22 @@ public class PersonageFragment extends BaseFragment {
     private long time;
     private String name;
     private  SetName setName1;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //获取sp
+        user = getActivity().getSharedPreferences("user", 0);
+        if(user.getString("token","").equals(""))
+        {
+            Intent intent = new Intent(getActivity(),SplaActivity.class);
+            startActivity(intent);
+//            getActivity().finish();
+//            ViewPager viewById = getActivity().findViewById(R.id.viewPager);
+//            viewById.setCurrentItem(0);
+        }
+    }
+
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -191,8 +209,7 @@ public class PersonageFragment extends BaseFragment {
         OSSLog.enableLog();
         oss = new OSSClient(getActivity().getApplicationContext(),endpoint,credentialProvider,conf);
 
-         //获取sp
-        user = getActivity().getSharedPreferences("user", 0);
+
         //获取token
         request = new RelationShipRequest("0", user.getString("token", ""));
         //获取网络请求辅助类
@@ -328,6 +345,7 @@ public class PersonageFragment extends BaseFragment {
                 setMessage.setVisibility(View.GONE);
                 mSave.setVisibility(View.VISIBLE);
                 mExit.setVisibility(View.VISIBLE);
+                setName.setText(myName.getText());
 //                mExit.setVisibility(View.VISIBLE);
 //                mMaster.setVisibility(View.VISIBLE);
 //                setMessage.setVisibility(View.GONE);
@@ -336,6 +354,7 @@ public class PersonageFragment extends BaseFragment {
 //                mWithdraw.setVisibility(View.GONE);
 //                mDeposit.setVisibility(View.GONE);
 //                setMessage.setVisibility(View.GONE);
+
             }
         });
 
@@ -343,32 +362,46 @@ public class PersonageFragment extends BaseFragment {
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallCamera.setVisibility(View.GONE);
-                mExit.setVisibility(View.GONE);
-                paint.setVisibility(View.GONE);
-                setMessage.setVisibility(View.VISIBLE);
-                mSave.setVisibility(View.GONE);
-               String s = setName.getText().toString();
-                // mSave.requestFocus();
-                setName.setVisibility(View.GONE);
-                myName.setVisibility(View.VISIBLE);
-                myName.setText(s);
-                setName1.setNickName(s);
-                time = System.currentTimeMillis();
-                serviceApi.setName(setName1).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<LogOut>() {
-                            @Override
-                            public void accept(LogOut logOut) throws Exception {
 
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
+                String s = setName.getText().toString();
+                if(s.length()!=0||s.equals("")==false)
+                {  mCallCamera.setVisibility(View.GONE);
+                    mExit.setVisibility(View.GONE);
+                    paint.setVisibility(View.GONE);
+                    setMessage.setVisibility(View.VISIBLE);
+                    mSave.setVisibility(View.GONE);
 
-                            }
-                        });
-                beginupload();
+                    // mSave.requestFocus();
+                    setName.setVisibility(View.GONE);
+                    myName.setVisibility(View.VISIBLE);
+                    myName.setText(s);
+                    setName1.setNickName(s);
+                    time = System.currentTimeMillis();
+                    serviceApi.setName(setName1).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<LogOut>() {
+                                @Override
+                                public void accept(LogOut logOut) throws Exception {
+
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+
+                                }
+                            });
+
+//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    beginupload();
+
+
+                }
+                else {
+                    Toast.makeText(getActivity(),"输入字符不能为空",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
