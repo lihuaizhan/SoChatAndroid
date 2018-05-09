@@ -1,7 +1,11 @@
 package com.neishenmo.sochat.sochatandroid.view.homepage;
 
+import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import android.os.Bundle;
@@ -37,6 +41,11 @@ import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
+import com.vondear.rxtools.RxTool;
+
+import org.limlee.hipraiseanimationlib.HiPraise;
+import org.limlee.hipraiseanimationlib.HiPraiseAnimationView;
+import org.limlee.hipraiseanimationlib.base.IPraise;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +73,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private List<HomeListBean.DataBean.OnlineUserListBean> mHomeList;
     private Thumbs thumbs;
     private RelativeLayout mRlHome;
+    private HiPraiseAnimationView mHiPraiseAnimationView;
 
     private int count = 0;
     private long firstTime = 0;
@@ -82,50 +92,50 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
     private String CLICK = "点击";
 
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-//            ToastUtils.makeText(getActivity(),msg.arg1+"arg1",1);
+//    private Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+////            ToastUtils.makeText(getActivity(),msg.arg1+"arg1",1);
+//
+//            if ((String.valueOf(msg.what)) != null){
+//                String rgb = "#" + checkColorValue(msg.arg1) + checkColorValue(msg.arg2) + checkColorValue(msg.what);
+//                  getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor(rgb));
+//                 mRlHome.setBackgroundColor(Color.parseColor(rgb));
+//                 sleep();
+//            }
+//            if (msg.obj == CLICK){
+//                if (count == 1) {
+//                    ToastUtils.makeText(getActivity(),"单击事件",1);
+//                } else if (count > 1) {
+//                    ToastUtils.makeText(getActivity(),"连续点击事件，共点击了 " + count + " 次",1);
+//                }
+//                delayTimer.cancel();
+//                count = 0;
+//            }
+//            if (msg.what == 666){
+//                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor("#333232"));
+//                mRlHome.setBackgroundColor(Color.parseColor("#333232"));
+//            }
+//
+//        }
+//    };
 
-            if ((String.valueOf(msg.what)) != null){
-                String rgb = "#" + checkColorValue(msg.arg1) + checkColorValue(msg.arg2) + checkColorValue(msg.what);
-                  getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor(rgb));
-                 mRlHome.setBackgroundColor(Color.parseColor(rgb));
-                 sleep();
-            }
-            if (msg.obj == CLICK){
-                if (count == 1) {
-                    ToastUtils.makeText(getActivity(),"单击事件",1);
-                } else if (count > 1) {
-                    ToastUtils.makeText(getActivity(),"连续点击事件，共点击了 " + count + " 次",1);
-                }
-                delayTimer.cancel();
-                count = 0;
-            }
-            if (msg.what == 666){
-                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor("#333232"));
-                mRlHome.setBackgroundColor(Color.parseColor("#333232"));
-            }
-
-        }
-    };
-
-    private void sleep() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Message message = new Message();
-                message.what = 666;
-                handler.sendMessage(message);
-            }
-        }).start();
-    }
+//    private void sleep() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Message message = new Message();
+//                message.what = 666;
+//                handler.sendMessage(message);
+//            }
+//        }).start();
+//    }
 
 
     @Override
@@ -181,6 +191,10 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         mRecycleViewPage = view.findViewById(R.id.rl_user);
         view = view.findViewById(R.id.rl_home);
         mRlHome = view.findViewById(R.id.rl_home);
+        mHiPraiseAnimationView =view.findViewById(R.id.praise_animation);
+
+
+
         mIvLove.setOnClickListener(this);
         mIvMoney.setOnClickListener(this);
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -237,11 +251,23 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_love:
+
                 if (sp.getString("token", "") == "") {
                     Intent intent = new Intent(getActivity(), SplaActivity.class);
                     startActivity(intent);
                 } else {
+                    boolean fastClick = RxTool.isFastClick(200);
+                    if (fastClick) {
+                        Toast.makeText(getActivity(), "快", Toast.LENGTH_SHORT).show();
+                        int rgb = Color.rgb(150, 11, 208);
+                        //mRxHeartLayout.addHeart(rgb);
+                        addPraise();
+                    } else {
+                        //Toast.makeText(getActivity(), "不快", Toast.LENGTH_SHORT).show();
+                        animationColorGradient(Color.BLUE, Color.RED);
 
+
+                    }
 //                    long secondTime = System.currentTimeMillis();
 //                    // 判断每次点击的事件间隔是否符合连击的有效范围
 //                    // 不符合时，有可能是连击的开始，否则就仅仅是单击
@@ -315,118 +341,118 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         colorBean.add(bean9);
     }
 
-    // 延迟时间是连击的时间间隔有效范围
-    private void delay() {
-        if (task != null)
-            task.cancel();
-
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                Message message = new Message();
-                message.obj = CLICK;
-                // message.what = 0;
-                handler.sendMessage(message);
-            }
-        };
-        delayTimer = new Timer();
-        delayTimer.schedule(task, interval);
-    }
-    private void ColorChange() {
-        color ++;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                for (int i = 0; i < 10; i++) {
-                    if (color<colorBean.size() - 1){
-                        if (colorBean.get(color).getR() > colorBean.get(color+1).getR()){
-                            int r = (colorBean.get(color).getR() - colorBean.get(color+1).getR()) / 10;
-                            r1 = colorBean.get(color).getR() - r;
-                        }
-                        else if (colorBean.get(color).getR()<colorBean.get(color+1).getR()){
-                            int r = (colorBean.get(color + 1).getR() - colorBean.get(color).getR()) / 10;
-                            r1 = colorBean.get(color).getR() + r;
-                        }
-                        else {
-
-                        }
-                        if (colorBean.get(color).getG() > colorBean.get(color+1).getG()){
-                            int g = (colorBean.get(color).getG() - colorBean.get(color+1).getG()) / 10;
-                            g1 = colorBean.get(color).getG() - g;
-                        }
-                        else if (colorBean.get(color).getG() < colorBean.get(color+1).getG()){
-                            int g = (colorBean.get(color+1).getG() - colorBean.get(color).getG()) / 10;
-                            g1 = colorBean.get(color).getG() + g;
-                        }
-                        else {
-
-                        }
-                        if (colorBean.get(color).getB() > colorBean.get(color+1).getB()){
-                            int b = (colorBean.get(color).getB() - colorBean.get(color+1).getB()) / 10;
-                            b1 = colorBean.get(color).getB() - b;
-                        }
-                        else if (colorBean.get(color).getG() < colorBean.get(color+1).getG()){
-                            int b = colorBean.get(color+1).getB() - colorBean.get(color).getB();
-                            b1 = colorBean.get(color).getB() + b;
-                        }
-                        else {
-
-                        }
-                    }
-
-
-                    else {
-                        color = 0;
-                        if (colorBean.get(color).getR() > colorBean.get(colorBean.size() - 1).getR()){
-                            int r = (colorBean.get(color).getR() - colorBean.get(colorBean.size() - 1).getR()) / 10;
-                            r1 = colorBean.get(color).getR() - r;
-                        }
-                        else if (colorBean.get(color).getR()<colorBean.get(colorBean.size() - 1).getR()){
-                            int r = (colorBean.get(colorBean.size() - 1).getR() - colorBean.get(color).getR()) / 10;
-                            r1 = colorBean.get(color).getR() + r;
-                        }
-                        else {
-
-                        }
-                        if (colorBean.get(color).getG() > colorBean.get(colorBean.size() - 1).getG()){
-                            int g = (colorBean.get(color).getG() - colorBean.get(colorBean.size() - 1).getG()) / 10;
-                            g1 = colorBean.get(color).getG() - g;
-                        }
-                        else if (colorBean.get(color).getG() < colorBean.get(colorBean.size() - 1).getG()){
-                            int g = (colorBean.get(colorBean.size() - 1).getG() - colorBean.get(color).getG()) / 10;
-                            g1 = colorBean.get(color).getG() + g;
-                        }
-                        else {
-
-                        }
-                        if (colorBean.get(color).getB() > colorBean.get(colorBean.size() - 1).getB()){
-                            int b = (colorBean.get(color).getB() - colorBean.get(colorBean.size() - 1).getB()) / 10;
-                            b1 = colorBean.get(color).getB() - b;
-                        }
-                        else if (colorBean.get(color).getG() < colorBean.get(colorBean.size() - 1).getG()){
-                            int b = colorBean.get(colorBean.size() - 1).getB() - colorBean.get(color).getB();
-                            b1 = colorBean.get(color).getB() + b;
-                        }
-                        else {
-
-                        }
-                    }
-                    Message message = new Message();
-                    message.arg1 = r1;
-                    message.arg2 = g1;
-                    message.what = b1;
-                    handler.sendMessage(message);
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        }).start();
-    }
+//    // 延迟时间是连击的时间间隔有效范围
+//    private void delay() {
+//        if (task != null)
+//            task.cancel();
+//
+//        task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                Message message = new Message();
+//                message.obj = CLICK;
+//                // message.what = 0;
+//                handler.sendMessage(message);
+//            }
+//        };
+//        delayTimer = new Timer();
+//        delayTimer.schedule(task, interval);
+//    }
+//    private void ColorChange() {
+//        color ++;
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                for (int i = 0; i < 10; i++) {
+//                    if (color<colorBean.size() - 1){
+//                        if (colorBean.get(color).getR() > colorBean.get(color+1).getR()){
+//                            int r = (colorBean.get(color).getR() - colorBean.get(color+1).getR()) / 10;
+//                            r1 = colorBean.get(color).getR() - r;
+//                        }
+//                        else if (colorBean.get(color).getR()<colorBean.get(color+1).getR()){
+//                            int r = (colorBean.get(color + 1).getR() - colorBean.get(color).getR()) / 10;
+//                            r1 = colorBean.get(color).getR() + r;
+//                        }
+//                        else {
+//
+//                        }
+//                        if (colorBean.get(color).getG() > colorBean.get(color+1).getG()){
+//                            int g = (colorBean.get(color).getG() - colorBean.get(color+1).getG()) / 10;
+//                            g1 = colorBean.get(color).getG() - g;
+//                        }
+//                        else if (colorBean.get(color).getG() < colorBean.get(color+1).getG()){
+//                            int g = (colorBean.get(color+1).getG() - colorBean.get(color).getG()) / 10;
+//                            g1 = colorBean.get(color).getG() + g;
+//                        }
+//                        else {
+//
+//                        }
+//                        if (colorBean.get(color).getB() > colorBean.get(color+1).getB()){
+//                            int b = (colorBean.get(color).getB() - colorBean.get(color+1).getB()) / 10;
+//                            b1 = colorBean.get(color).getB() - b;
+//                        }
+//                        else if (colorBean.get(color).getG() < colorBean.get(color+1).getG()){
+//                            int b = colorBean.get(color+1).getB() - colorBean.get(color).getB();
+//                            b1 = colorBean.get(color).getB() + b;
+//                        }
+//                        else {
+//
+//                        }
+//                    }
+//
+//
+//                    else {
+//                        color = 0;
+//                        if (colorBean.get(color).getR() > colorBean.get(colorBean.size() - 1).getR()){
+//                            int r = (colorBean.get(color).getR() - colorBean.get(colorBean.size() - 1).getR()) / 10;
+//                            r1 = colorBean.get(color).getR() - r;
+//                        }
+//                        else if (colorBean.get(color).getR()<colorBean.get(colorBean.size() - 1).getR()){
+//                            int r = (colorBean.get(colorBean.size() - 1).getR() - colorBean.get(color).getR()) / 10;
+//                            r1 = colorBean.get(color).getR() + r;
+//                        }
+//                        else {
+//
+//                        }
+//                        if (colorBean.get(color).getG() > colorBean.get(colorBean.size() - 1).getG()){
+//                            int g = (colorBean.get(color).getG() - colorBean.get(colorBean.size() - 1).getG()) / 10;
+//                            g1 = colorBean.get(color).getG() - g;
+//                        }
+//                        else if (colorBean.get(color).getG() < colorBean.get(colorBean.size() - 1).getG()){
+//                            int g = (colorBean.get(colorBean.size() - 1).getG() - colorBean.get(color).getG()) / 10;
+//                            g1 = colorBean.get(color).getG() + g;
+//                        }
+//                        else {
+//
+//                        }
+//                        if (colorBean.get(color).getB() > colorBean.get(colorBean.size() - 1).getB()){
+//                            int b = (colorBean.get(color).getB() - colorBean.get(colorBean.size() - 1).getB()) / 10;
+//                            b1 = colorBean.get(color).getB() - b;
+//                        }
+//                        else if (colorBean.get(color).getG() < colorBean.get(colorBean.size() - 1).getG()){
+//                            int b = colorBean.get(colorBean.size() - 1).getB() - colorBean.get(color).getB();
+//                            b1 = colorBean.get(color).getB() + b;
+//                        }
+//                        else {
+//
+//                        }
+//                    }
+//                    Message message = new Message();
+//                    message.arg1 = r1;
+//                    message.arg2 = g1;
+//                    message.what = b1;
+//                    handler.sendMessage(message);
+//                    try {
+//                        Thread.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//        }).start();
+//    }
 
     //rgb转二进制
     private String checkColorValue(int value){
@@ -437,8 +463,56 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         }
         return Integer.toHexString(value);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
 
+        mHiPraiseAnimationView.start(); //添加点赞动画之前要先开始启动绘制，如果没有，是添加不了任何的动画对象
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
 
+        mHiPraiseAnimationView.stop(); //停止绘制点赞动画，停止后会clear掉整个画布和清空掉所有绘制的对象
+    }
+    //颜色渐变动画
+    public  void animationColorGradient(int beforeColor, int afterColor) {
+        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), new Object[]{Integer.valueOf(beforeColor), Integer.valueOf(afterColor)}).setDuration(3000L);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int i = ((Integer) animation.getAnimatedValue()).intValue();
+                getActivity().findViewById(R.id.home_layout).setBackgroundColor(i);
+            }
+        });
+        valueAnimator.start();
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                getActivity().findViewById(R.id.home_layout).setBackgroundColor(getActivity().getResources().getColor(R.color.bg));
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+    }
+    //点赞动画
+    private void addPraise() {
+        final IPraise hiPraise = new HiPraise(BitmapFactory.decodeResource(getResources(), R.drawable.love));
+        mHiPraiseAnimationView.addPraise(hiPraise);
+    }
 
 }

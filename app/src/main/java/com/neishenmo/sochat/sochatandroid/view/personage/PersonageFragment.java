@@ -50,6 +50,7 @@ import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.neishenmo.sochat.sochatandroid.R;
+import com.neishenmo.sochat.sochatandroid.app.NeiShenMeApp;
 import com.neishenmo.sochat.sochatandroid.base.BaseFragment;
 import com.neishenmo.sochat.sochatandroid.bean.LogOut;
 import com.neishenmo.sochat.sochatandroid.bean.MyMessage;
@@ -68,6 +69,7 @@ import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
+import com.neishenmo.sochat.sochatandroid.wxapi.WXEntryActivity;
 
 import bpwidget.lib.wjj.blurpopupwindowlib.widget.BlurPopWin;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -209,8 +211,12 @@ public class PersonageFragment extends BaseFragment {
         OSSLog.enableLog();
         oss = new OSSClient(getActivity().getApplicationContext(),endpoint,credentialProvider,conf);
 
-
-        //获取token
+        mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+            }
+        });       //获取token
         request = new RelationShipRequest("0", user.getString("token", ""));
         //获取网络请求辅助类
         serviceApi = RetrofitHelper.getServiceApi();

@@ -1,1 +1,1 @@
-include ':app', ':easeui', ':library'
+include ':app', ':easeui', ':library', ':hipraiseanimationlib'

@@ -7,6 +7,9 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
+import com.neishenmo.sochat.sochatandroid.wxapi.WXEntryActivity;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.vondear.rxtools.RxTool;
 
 /**
  * Created by Administrator on 2018-04-24.
@@ -25,5 +28,11 @@ public class NeiShenMeApp extends Application {
         options.setAcceptInvitationAlways(true);
         EMClient.getInstance().init(this, options);
         EaseUI.getInstance().init(this, options);
+        RxTool.init(this);
+        initWeiXin();
+    }
+    public static IWXAPI sApi;
+    private void initWeiXin() {
+        sApi = WXEntryActivity.initWeiXin(this,"wx143deeda4d112579" );
     }
 }

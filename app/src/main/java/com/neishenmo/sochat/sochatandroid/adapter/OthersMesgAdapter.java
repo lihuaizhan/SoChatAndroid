@@ -74,8 +74,15 @@ public class OthersMesgAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         String picture = liveContent.getPicture();
         String substring;
         if(type==0)
-        {
-            holder1.liveIcon.setBackgroundResource(R.mipmap.love);
+        {   if(liveContent.getLon()!=null&!liveContent.getLon().equals("")&liveContent.getLat()!=null&!liveContent.getLat().equals(""))
+           {
+               String s ="http://api.map.baidu.com/staticimage/v2?ak=bS5Dns38GvWtZb8lADEkPr6mWIdMpWg3&mcode=DD:7B:2D:CF:E9:6E:2B:3C:1B:1A:72:67:11:FA:2F:74:1E:BC:A2:AC;com.neishenmo.sochat.sochatandroid&center=" +
+                      liveContent.getLon()+","+liveContent.getLat()+
+                       "&width=300&height=300&zoom=18";
+               with.load(s)
+                       .transform(new GlideCircleTransform(context)).into(holder1.liveContent);
+           }
+            holder1.liveIcon.setBackgroundResource(R.drawable.location_icon);
             holder1.liveIdtor.setText(liveContent.getSimpleAddress());
         }
         else if(type==1)

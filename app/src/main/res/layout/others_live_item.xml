@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/live_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignBottom="@+id/live_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"

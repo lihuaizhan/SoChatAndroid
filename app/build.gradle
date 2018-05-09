@@ -63,4 +63,8 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:design:26.0.0-alpha1'
     implementation 'com.google.code.gson:gson:2.2.4'
+    //Rxtool
+    compile 'com.github.vondear:RxTools:v1.7.7.3'
+    implementation project(':hipraiseanimationlib')
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }

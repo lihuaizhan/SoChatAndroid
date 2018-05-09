@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.gyf.barlibrary.ImmersionBar;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
 import com.neishenmo.sochat.sochatandroid.bean.OtherLiveMsg;
@@ -63,10 +64,13 @@ public class ParticularActivity extends AppCompatActivity implements View.OnClic
     private List<String> list;
     private  List<Fragment> fragments;
     private OtherLiveMsg otherLiveMsgs;
-
+    private ImmersionBar mImmersionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar .statusBarColor(R.color.colorTheme).fitsSystemWindows(true).init();   //所有子类都将继承这些相同的属性
         setContentView(R.layout.activity_particular);
         home = (HomeOthers.DataBean.OnlineUserListBean) getIntent().getSerializableExtra("home");
         serviceApi = RetrofitHelper.getServiceApi();
