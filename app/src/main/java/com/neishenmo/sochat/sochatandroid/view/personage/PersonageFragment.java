@@ -69,7 +69,12 @@ import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
-import com.neishenmo.sochat.sochatandroid.wxapi.WXEntryActivity;
+import com.tsy.sdk.social.PlatformType;
+import com.tsy.sdk.social.SocialApi;
+import com.tsy.sdk.social.listener.AuthListener;
+
+
+import java.util.Map;
 
 import bpwidget.lib.wjj.blurpopupwindowlib.widget.BlurPopWin;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -94,6 +99,7 @@ public class PersonageFragment extends BaseFragment {
     private RequestManager with;
     private  String mPhotoPath;
     private String uploadFilePath;
+    private static final String WX_APPID = "wx143deeda4d112579";
     /**
      * 姓名
      */
@@ -151,7 +157,7 @@ public class PersonageFragment extends BaseFragment {
     private long time;
     private String name;
     private  SetName setName1;
-
+    private SocialApi mSocialApi;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,6 +207,8 @@ public class PersonageFragment extends BaseFragment {
         mSave = view.findViewById(R.id.saves);
         cancelDeposit = view.findViewById(R.id.deposit_cancel);
         setName = view.findViewById(R.id.set_name);
+
+
         //初始化阿里云
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
         ClientConfiguration conf = new ClientConfiguration();
@@ -210,13 +218,18 @@ public class PersonageFragment extends BaseFragment {
         conf.setMaxErrorRetry(2); // 失败后最大重连次数
         OSSLog.enableLog();
         oss = new OSSClient(getActivity().getApplicationContext(),endpoint,credentialProvider,conf);
-
+        //支付宝提现
         mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+               // WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+
             }
-        });       //获取token
+        });
+
+
+
+        //获取token
         request = new RelationShipRequest("0", user.getString("token", ""));
         //获取网络请求辅助类
         serviceApi = RetrofitHelper.getServiceApi();

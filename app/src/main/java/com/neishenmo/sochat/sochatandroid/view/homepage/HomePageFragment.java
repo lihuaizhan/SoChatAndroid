@@ -82,15 +82,15 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private long interval = 500;
 
 
-    int color = 0;
+//    int color = 0;
+//
+//    private List<ColourBean> colorBean;
 
-    private List<ColourBean> colorBean;
-
-    private int r1 = 0;
-    private int g1 = 0;
-    private int b1 = 0;
-
-    private String CLICK = "点击";
+//    private int r1 = 0;
+//    private int g1 = 0;
+//    private int b1 = 0;
+//
+//    private String CLICK = "点击";
 
 //    private Handler handler = new Handler(){
 //        @Override
@@ -182,10 +182,13 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initData() {
         list = new ArrayList<>();
-        colorBean = new ArrayList<>();
-        initAddList();
+      //  colorBean = new ArrayList<>();
+       // initAddList();
         thumbs = new Thumbs();
         sp = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
+        user = getActivity().getSharedPreferences("user", 0);
+        serviceApi = RetrofitHelper.getServiceApi();
+        //获取控件id
         mIvLove = view.findViewById(R.id.iv_love);
         mIvMoney = view.findViewById(R.id.iv_money);
         mRecycleViewPage = view.findViewById(R.id.rl_user);
@@ -194,14 +197,16 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         mHiPraiseAnimationView =view.findViewById(R.id.praise_animation);
 
 
-
+       //点击监听
         mIvLove.setOnClickListener(this);
         mIvMoney.setOnClickListener(this);
+
+
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecycleViewPage.setLayoutManager(layout);
-        user = getActivity().getSharedPreferences("user", 0);
+
         MoneyListRequst request = new MoneyListRequst(user.getString("token", ""), "");
-        serviceApi = RetrofitHelper.getServiceApi();
+
         serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<HomeOthers>() {
@@ -210,7 +215,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
                         list = homeOthers.getData().getOnlineUserList();
                         HomeOthersMessageAdapter homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
-                homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
+                        homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
                     @Override
                     public void onClick(int position) {
                        // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
@@ -235,7 +240,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        String s = throwable.getMessage().toString();
                     }
                 });
 
@@ -256,18 +261,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                     Intent intent = new Intent(getActivity(), SplaActivity.class);
                     startActivity(intent);
                 } else {
-                    boolean fastClick = RxTool.isFastClick(200);
-                    if (fastClick) {
-                        Toast.makeText(getActivity(), "快", Toast.LENGTH_SHORT).show();
-                        int rgb = Color.rgb(150, 11, 208);
-                        //mRxHeartLayout.addHeart(rgb);
-                        addPraise();
-                    } else {
-                        //Toast.makeText(getActivity(), "不快", Toast.LENGTH_SHORT).show();
-                        animationColorGradient(Color.BLUE, Color.RED);
 
-
-                    }
 //                    long secondTime = System.currentTimeMillis();
 //                    // 判断每次点击的事件间隔是否符合连击的有效范围
 //                    // 不符合时，有可能是连击的开始，否则就仅仅是单击
@@ -282,64 +276,82 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 //                    ColorChange();
 
                     //  ToastUtils.makeText(getActivity(),"您已登录",1);
-                    RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
-                    //判断是当前layoutManager是否为LinearLayoutManager
-                    // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
-                    if (layoutManager instanceof LinearLayoutManager) {
-                        LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
-                        //获取第一个可见view的位置
-                        int firstItemPosition = linearManager.findFirstVisibleItemPosition();
+                    if(list.size()!=0)
+                    {   boolean fastClick = RxTool.isFastClick(200);
+                        if (fastClick) {
+                          //  Toast.makeText(getActivity(), "快", Toast.LENGTH_SHORT).show();
+                            int rgb = Color.rgb(150, 11, 208);
+                            //mRxHeartLayout.addHeart(rgb);
+                            addPraise();
+                        } else {
+                            //Toast.makeText(getActivity(), "不快", Toast.LENGTH_SHORT).show();
+                            animationColorGradient(Color.BLUE, Color.RED);
 
-                        // Toast.makeText(getActivity(),firstItemPosition+"",Toast.LENGTH_SHORT).show();
-                        //  LogUtils.d("ssssss",firstItemPosition+"");
-                        HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(firstItemPosition);
-                        //设置点赞参数并调用点赞接口
-                        thumbs.setAmount("1");
-                        thumbs.setTelephone(onlineUserListBean.getTelephone());
-                        thumbs.setToken(user.getString("token", ""));
-                        serviceApi.setThumbs(thumbs).subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<LogOut>() {
-                                    @Override
-                                    public void accept(LogOut logOut) throws Exception {
-                                        Toast.makeText(getActivity(), "点赞成功", Toast.LENGTH_SHORT).show();
-                                    }
-                                }, new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
 
-                                    }
-                                });
+                        }
+                        RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
+                        //判断是当前layoutManager是否为LinearLayoutManager
+                        // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+                        if (layoutManager instanceof LinearLayoutManager) {
+                            LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+                            //获取第一个可见view的位置
+                            int firstItemPosition = linearManager.findFirstVisibleItemPosition();
+
+                            // Toast.makeText(getActivity(),firstItemPosition+"",Toast.LENGTH_SHORT).show();
+                            //  LogUtils.d("ssssss",firstItemPosition+"");
+                            HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(firstItemPosition);
+                            //设置点赞参数并调用点赞接口
+                            thumbs.setAmount("1");
+                            thumbs.setTelephone(onlineUserListBean.getTelephone());
+                            thumbs.setToken(user.getString("token", ""));
+                            serviceApi.setThumbs(thumbs).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Consumer<LogOut>() {
+                                        @Override
+                                        public void accept(LogOut logOut) throws Exception {
+                                            Toast.makeText(getActivity(), "点赞成功", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }, new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+
+                                        }
+                                    });
+                        }
                     }
+                    else{
+                        Toast.makeText(getActivity(),"目前没有推荐用户",Toast.LENGTH_SHORT).show();
+                    }
+
                 }
                 break;
             case R.id.iv_money:
                 break;
         }
     }
-    private void initAddList() {
-        colorBean = new ArrayList<>();
-        ColourBean bean = new ColourBean(138,160,255 );
-        colorBean.add(bean);
-        ColourBean bean1 = new ColourBean(221,118,255 );
-        colorBean.add(bean1);
-        ColourBean bean2 = new ColourBean(254,115,168  );
-        colorBean.add(bean2);
-        ColourBean bean3 = new ColourBean(113,73,255);
-        colorBean.add(bean3);
-        ColourBean bean4 = new ColourBean(102,255,253 );
-        colorBean.add(bean4);
-        ColourBean bean5 = new ColourBean(254,211,108 );
-        colorBean.add(bean5);
-        ColourBean bean6 = new ColourBean(253,123,52 );
-        colorBean.add(bean6);
-        ColourBean bean7 = new ColourBean(205,255,157 );
-        colorBean.add(bean7);
-        ColourBean bean8 = new ColourBean(199,126,255 );
-        colorBean.add(bean8);
-        ColourBean bean9 = new ColourBean(55,255,255 );
-        colorBean.add(bean9);
-    }
+//    private void initAddList() {
+//        colorBean = new ArrayList<>();
+//        ColourBean bean = new ColourBean(138,160,255 );
+//        colorBean.add(bean);
+//        ColourBean bean1 = new ColourBean(221,118,255 );
+//        colorBean.add(bean1);
+//        ColourBean bean2 = new ColourBean(254,115,168  );
+//        colorBean.add(bean2);
+//        ColourBean bean3 = new ColourBean(113,73,255);
+//        colorBean.add(bean3);
+//        ColourBean bean4 = new ColourBean(102,255,253 );
+//        colorBean.add(bean4);
+//        ColourBean bean5 = new ColourBean(254,211,108 );
+//        colorBean.add(bean5);
+//        ColourBean bean6 = new ColourBean(253,123,52 );
+//        colorBean.add(bean6);
+//        ColourBean bean7 = new ColourBean(205,255,157 );
+//        colorBean.add(bean7);
+//        ColourBean bean8 = new ColourBean(199,126,255 );
+//        colorBean.add(bean8);
+//        ColourBean bean9 = new ColourBean(55,255,255 );
+//        colorBean.add(bean9);
+//    }
 
 //    // 延迟时间是连击的时间间隔有效范围
 //    private void delay() {
@@ -454,15 +466,15 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 //        }).start();
 //    }
 
-    //rgb转二进制
-    private String checkColorValue(int value){
-        String str = "";
-        if(value<16){
-            str ="0" + Integer.toHexString(value);
-            return str;
-        }
-        return Integer.toHexString(value);
-    }
+//    //rgb转二进制
+//    private String checkColorValue(int value){
+//        String str = "";
+//        if(value<16){
+//            str ="0" + Integer.toHexString(value);
+//            return str;
+//        }
+//        return Integer.toHexString(value);
+//    }
     @Override
     public void onResume() {
         super.onResume();

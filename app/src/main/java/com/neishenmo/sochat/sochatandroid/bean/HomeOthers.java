@@ -88,7 +88,7 @@ public class HomeOthers implements Serializable{
             private String constellation;
             private int state;
             private String ipAddr;
-            private int balance;
+            private double balance;
             private String hxPassword;
             private String remark;
             private double lon;
@@ -179,11 +179,11 @@ public class HomeOthers implements Serializable{
                 this.ipAddr = ipAddr;
             }
 
-            public int getBalance() {
+            public double getBalance() {
                 return balance;
             }
 
-            public void setBalance(int balance) {
+            public void setBalance(double balance) {
                 this.balance = balance;
             }
 

@@ -23,6 +23,7 @@ import com.neishenmo.sochat.sochatandroid.net.ServiceApi;
 import com.neishenmo.sochat.sochatandroid.requestbean.LoveListRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.PhoneRequest;
 import com.neishenmo.sochat.sochatandroid.utils.GlideCircleTransform;
+import com.neishenmo.sochat.sochatandroid.utils.StringUtil;
 import com.neishenmo.sochat.sochatandroid.utils.TimeConvertUtil;
 
 import java.util.ArrayList;
@@ -99,7 +100,8 @@ public class ParticularActivity extends AppCompatActivity implements View.OnClic
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mPartName.setText(home.getNickName());
+
+        mPartName.setText( StringUtil.toUtf8(home.getNickName()));
         mOthersOld.setText(i + "岁");
         mOthersUss.setText(home.getConstellation());
         if (home.getPicture().equals("baidu.com")) {

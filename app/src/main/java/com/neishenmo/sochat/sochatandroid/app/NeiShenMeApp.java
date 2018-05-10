@@ -7,8 +7,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
-import com.neishenmo.sochat.sochatandroid.wxapi.WXEntryActivity;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
+
 import com.vondear.rxtools.RxTool;
 
 /**
@@ -29,10 +28,10 @@ public class NeiShenMeApp extends Application {
         EMClient.getInstance().init(this, options);
         EaseUI.getInstance().init(this, options);
         RxTool.init(this);
-        initWeiXin();
+       // initWeiXin();
     }
-    public static IWXAPI sApi;
-    private void initWeiXin() {
-        sApi = WXEntryActivity.initWeiXin(this,"wx143deeda4d112579" );
-    }
+//    public static IWXAPI sApi;
+//    private void initWeiXin() {
+//        sApi = WXEntryActivity.initWeiXin(this,"wx143deeda4d112579" );
+//    }
 }
