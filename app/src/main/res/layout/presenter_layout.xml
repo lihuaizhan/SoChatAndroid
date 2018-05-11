@@ -52,7 +52,7 @@
            android:layout_height="@dimen/y35"
            android:id="@+id/call_camera"
            android:visibility="gone"
-           android:background="@mipmap/creame"
+           android:background="@drawable/creame"
            android:layout_centerInParent="true"
            />
    </RelativeLayout>

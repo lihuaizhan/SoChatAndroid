@@ -1,6 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -88,7 +89,7 @@ public class HomeOthers implements Serializable{
             private String constellation;
             private int state;
             private String ipAddr;
-            private double balance;
+            private BigDecimal balance;
             private String hxPassword;
             private String remark;
             private double lon;
@@ -179,11 +180,11 @@ public class HomeOthers implements Serializable{
                 this.ipAddr = ipAddr;
             }
 
-            public double getBalance() {
+            public BigDecimal getBalance() {
                 return balance;
             }
 
-            public void setBalance(double balance) {
+            public void setBalance(BigDecimal balance) {
                 this.balance = balance;
             }
 

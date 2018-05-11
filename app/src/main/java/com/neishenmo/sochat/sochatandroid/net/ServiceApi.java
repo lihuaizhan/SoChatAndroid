@@ -1,6 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.net;
 
 
+import com.neishenmo.sochat.sochatandroid.bean.ApilyLogin;
 import com.neishenmo.sochat.sochatandroid.bean.Friends;
 import com.neishenmo.sochat.sochatandroid.bean.HomeListBean;
 import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
@@ -17,6 +18,7 @@ import com.neishenmo.sochat.sochatandroid.bean.SignBean;
 import com.neishenmo.sochat.sochatandroid.bean.Thumbs;
 import com.neishenmo.sochat.sochatandroid.bean.VerificationBean;
 import com.neishenmo.sochat.sochatandroid.bean.Visitor;
+import com.neishenmo.sochat.sochatandroid.requestbean.AliWith;
 import com.neishenmo.sochat.sochatandroid.requestbean.HeadRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.HomeRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.LoveListRequst;
@@ -25,6 +27,7 @@ import com.neishenmo.sochat.sochatandroid.requestbean.PerfectDataRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.PerfectRequest;
 import com.neishenmo.sochat.sochatandroid.requestbean.PhoneRequest;
 import com.neishenmo.sochat.sochatandroid.requestbean.RelationShipRequest;
+import com.neishenmo.sochat.sochatandroid.requestbean.SendCode;
 import com.neishenmo.sochat.sochatandroid.requestbean.SetName;
 import com.neishenmo.sochat.sochatandroid.requestbean.SignRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.VerificationRequst;
@@ -123,6 +126,19 @@ public interface ServiceApi {
      */
     @POST(ConnectorApi.GETLIVE_MSG_URL+ConnectorApi.SUFFIX)
     Observable<OtherLiveMsg> getOtherLive(@Body PhoneRequest requst);
-
-
+    /**
+     * 支付宝授权登录
+     */
+    @POST(ConnectorApi.ALI_AUTH_LOGIN+ConnectorApi.SUFFIX)
+    Observable<ApilyLogin> apilyLogin(@Body SetName requst);
+    /**
+     *  发送内部验证码（钱包支付、提现）
+     */
+    @POST(ConnectorApi.PAY_URL+ConnectorApi.SUFFIX)
+    Observable<LogOut> sendInternalCode(@Body SendCode requst);
+    /**
+     *  支付宝提现
+     */
+    @POST(ConnectorApi.ALI_WITHD_RAWAL+ConnectorApi.SUFFIX)
+    Observable<LogOut> aliWith(@Body AliWith requst);
 }

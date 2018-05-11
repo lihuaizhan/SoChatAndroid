@@ -491,7 +491,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     }
     //颜色渐变动画
     public  void animationColorGradient(int beforeColor, int afterColor) {
-        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), new Object[]{Integer.valueOf(beforeColor), Integer.valueOf(afterColor)}).setDuration(3000L);
+        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), new Object[]{Integer.valueOf(beforeColor), Integer.valueOf(afterColor)}).setDuration(1000L);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 int i = ((Integer) animation.getAnimatedValue()).intValue();

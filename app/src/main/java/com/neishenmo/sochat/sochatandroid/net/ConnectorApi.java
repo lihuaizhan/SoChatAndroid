@@ -49,6 +49,9 @@ public class ConnectorApi {
     public static final String MY_MESSAGE_URL = "mine/getMineInfo";
     //获取红包列表
     public static final String MONEY_LIST_URL = "mine/getMineRedPacketList";
-
+    //支付宝提现授权接口
+    public static final String ALI_AUTH_LOGIN  = "AliPay/aliAuthLogin";
+    //支付宝提现
+    public static final String ALI_WITHD_RAWAL  = "AliPay/aliWithdrawal";
 
 }
