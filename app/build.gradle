@@ -84,12 +84,12 @@ dependencies {
     //  compile 'com.github.vondear:RxTools:v1.7.7.3'
     implementation project(':hipraiseanimationlib')
     //微信登录
-   // compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-        compile 'com.tsy.social:social-sdk-core:2.0.0'
-        //social sdk 自由选择
-        //微信sdk
-    compile 'pub.devrel:easypermissions:1.0.1'
-        compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
+//    compile 'com.tsy.social:social-sdk-core:2.0.0'
+//    social sdk 自由选择
+// 微信sdk
+//    compile 'pub.devrel:easypermissions:1.0.1'//    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
     implementation files('libs/alipaySdk-20180403.jar')
     compile 'com.jude:easyrecyclerview:4.4.2'
 }

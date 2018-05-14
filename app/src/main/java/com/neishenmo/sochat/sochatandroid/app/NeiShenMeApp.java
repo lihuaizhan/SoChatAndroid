@@ -10,6 +10,7 @@ import com.hyphenate.easeui.controller.EaseUI;
 
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
 
+import com.neishenmo.sochat.sochatandroid.wxapi.WXEntryActivity;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 
@@ -37,12 +38,13 @@ public class NeiShenMeApp extends Application {
 //        EMClient.getInstance().init(this, options);
         EaseUI.getInstance().init(this, null);
        // RxTool.init(this);
-      //  initWeiXin();
+        //注册微信
+        initWeiXin();
     }
-//    public static IWXAPI sApi;
-//    private void initWeiXin() {
-//        sApi = WXEntryActivity.initWeiXin(this,"wx143deeda4d112579" );
-//    }
+    public static IWXAPI sApi;
+    private void initWeiXin() {
+        sApi = WXEntryActivity.initWeiXin(this,"wx143deeda4d112579" );
+    }
 
 //    public static NeiShenMeApp getInstance() {
 //        return mContext;
