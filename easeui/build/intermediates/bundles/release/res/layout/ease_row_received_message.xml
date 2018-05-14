@@ -2,9 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#333232"
     android:paddingTop="13dp">
 
     <TextView
@@ -12,61 +10,89 @@
         style="@style/chat_text_date_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#333232"
-        android:textColor="#898484"
         android:layout_gravity="center" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_chat_activity" >
+        android:layout_marginTop="@dimen/margin_chat_activity">
 
         <com.hyphenate.easeui.widget.EaseImageView
             android:id="@+id/iv_userhead"
             android:layout_width="@dimen/size_avatar"
             android:layout_height="@dimen/size_avatar"
-            app:ease_shape_type="round"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:src="@drawable/ease_default_avatar"
-            android:scaleType="fitXY" />
-
+            android:scaleType="fitXY"
+            android:src="@drawable/ease_default_avatar" />
         <RelativeLayout
             android:id="@+id/bubble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_userid"
             android:layout_marginLeft="@dimen/margin_chat_activity"
             android:layout_toRightOf="@id/iv_userhead"
-            android:background="@drawable/qi_pao"
-             >
+            android:background="@drawable/ease_chatfrom_bg"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_chatcontent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autoLink="web"
                 android:layout_centerInParent="true"
+                android:autoLink="web"
                 android:gravity="center|left"
+                android:lineSpacingExtra="2dp"
+                android:maxWidth="225.0dip"
+                android:minHeight="38dp"
                 android:paddingLeft="6dp"
                 android:paddingRight="1dp"
-                android:lineSpacingExtra="2dp"
-                android:minHeight="38dp"
-                android:maxWidth="225.0dip"
                 android:textColor="#ff000000"
                 android:textSize="15sp" />
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_userid"
-            style="@style/chat_text_name_style"
+        <RelativeLayout
+            android:id="@+id/praise_bubble"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/chat_nick_margin_left"
-            android:textSize="@dimen/chat_nick_text_size"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/margin_chat_activity"
             android:layout_toRightOf="@id/iv_userhead"
-            android:visibility="gone" />
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="46dp"
+                android:layout_height="41dp"
+                android:src="@drawable/like"
+                android:layout_alignParentBottom="true"/>
+            <TextView
+                android:id="@+id/praise_num"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:autoLink="web"
+                android:layout_toRightOf="@+id/like"
+                android:lineSpacingExtra="2dp"
+                android:maxWidth="225.0dip"
+                android:minHeight="38dp"
+                android:paddingRight="1dp"
+                android:textColor="#fff"
+                android:gravity="bottom"
+                android:textSize="12sp"
+                android:text="x 15"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/red_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/margin_chat_activity"
+            android:layout_toRightOf="@id/iv_userhead"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="44dp"
+                android:src="@drawable/redpackets"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
     </RelativeLayout>
-
 </LinearLayout>

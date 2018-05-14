@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.R;
-import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 
 /**
@@ -54,5 +54,7 @@ public class EaseChatRowBigExpression extends EaseChatRowText{
                 imageView.setImageResource(R.drawable.ease_default_expression);
             }
         }
+        
+        handleTextMessage();
     }
 }

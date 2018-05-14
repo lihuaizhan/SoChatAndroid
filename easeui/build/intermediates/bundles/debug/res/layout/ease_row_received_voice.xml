@@ -3,19 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="#333232"
-    android:paddingTop="13dp">
+    android:paddingTop="13dp" >
 
     <TextView
         android:id="@+id/timestamp"
         style="@style/chat_text_date_style"
         android:layout_width="wrap_content"
-        android:background="#333232"
-        android:textColor="#898484"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_userid"
+        style="@style/chat_text_name_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="@dimen/chat_nick_margin_left"
+        android:textSize="@dimen/chat_nick_text_size"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,44 +32,45 @@
             android:id="@+id/iv_userhead"
             android:layout_width="@dimen/size_avatar"
             android:layout_height="@dimen/size_avatar"
-            app:ease_shape_type="round"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_chat_activity"
             android:src="@drawable/ease_default_avatar"
             android:scaleType="fitXY" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/bubble"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_userhead"
             android:layout_marginLeft="@dimen/margin_chat_activity"
+            android:gravity="center_vertical"
             android:layout_below="@+id/tv_userid"
-            android:background="@drawable/qi_pao"
+            android:background="@drawable/ease_chatfrom_bg"
             >
 
             <ImageView
                 android:id="@+id/iv_voice"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
 	            android:paddingRight="12dp"
+                android:adjustViewBounds="true"
 	            android:layout_centerInParent="true"
-                android:src="@drawable/ease_chatfrom_voice_playing" />
-        </RelativeLayout>
+                android:src="@drawable/icon_received_voice" />
 
-        <TextView
-            android:id="@+id/tv_length"
-            style="@style/chat_text_name_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/bubble"
-            android:layout_alignTop="@id/bubble"
-            android:gravity="center"
-            android:text="3&apos;&apos;"
-            tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/tv_length"
+                style="@style/chat_text_name_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="3&apos;&apos;"
+                android:textColor="#ffffff"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+
 
         <ImageView
             android:id="@+id/iv_unread_voice"
@@ -71,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_alignTop="@id/bubble"
-            android:layout_toRightOf="@id/tv_length"
+            android:layout_toRightOf="@id/bubble"
             android:src="@drawable/ease_voice_unread" />
 
         <ProgressBar
@@ -83,15 +90,7 @@
             android:layout_toRightOf="@id/iv_unread_voice"
             android:visibility="invisible" />
 
-         <TextView
-            android:id="@+id/tv_userid"
-            style="@style/chat_text_name_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/chat_nick_margin_left"
-            android:textSize="@dimen/chat_nick_text_size"
-            android:layout_toRightOf="@id/iv_userhead"
-            android:visibility="gone" />
+
     </RelativeLayout>
 
 </LinearLayout>

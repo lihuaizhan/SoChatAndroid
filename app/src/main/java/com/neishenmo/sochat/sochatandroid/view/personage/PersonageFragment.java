@@ -80,11 +80,7 @@ import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
-import com.tsy.sdk.social.PlatformType;
 import com.tsy.sdk.social.SocialApi;
-import com.tsy.sdk.social.listener.AuthListener;
-import com.vondear.rxtools.module.alipay.AliPayOrderInfoUtil;
-import com.vondear.rxtools.module.alipay.PayResult;
 
 
 import java.util.Map;
@@ -170,7 +166,7 @@ public class PersonageFragment extends BaseFragment {
     private long time;
     private String name;
     private SetName setName1;
-    private SocialApi mSocialApi;
+    //    private SocialApi mSocialApi;
     private String orderInfo;
     //提现输入数
     private String s;
@@ -229,180 +225,186 @@ public class PersonageFragment extends BaseFragment {
 //            };
 //            };
 
-            @Override
-            public void onCreate (@Nullable Bundle savedInstanceState){
-                super.onCreate(savedInstanceState);
-                //获取sp
-                user = getActivity().getSharedPreferences("user", 0);
-                if (user.getString("token", "").equals("")) {
-                    Intent intent = new Intent(getActivity(), SplaActivity.class);
-                    startActivity(intent);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //获取sp
+        user = getActivity().getSharedPreferences("user", 0);
+        if (user.getString("token", "").equals("")) {
+            Intent intent = new Intent(getActivity(), SplaActivity.class);
+            startActivity(intent);
 //            getActivity().finish();
 //            ViewPager viewById = getActivity().findViewById(R.id.viewPager);
 //            viewById.setCurrentItem(0);
+        }
+    }
+
+    @Override
+    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
+
+        view = inflater.inflate(R.layout.presenter_layout, container, false);
+
+        return view;
+    }
+
+    @Override
+    protected void initData() {
+        //获取控件id
+        bg = view.findViewById(R.id.bg);
+        picture = view.findViewById(R.id.picture);
+        setMessage = view.findViewById(R.id.set_message);
+        myName = view.findViewById(R.id.my_name);
+        paint = view.findViewById(R.id.set_paint);
+        importMoney = view.findViewById(R.id.import_money);
+        affirmDeposit = view.findViewById(R.id.affirm_deposit);
+        mExit = (ImageView) view.findViewById(R.id.exit);
+        mCallCamera = (ImageView) view.findViewById(R.id.call_camera);
+        mReminder = (TextView) view.findViewById(R.id.reminder);
+        mWithdrawAlipay = (ImageView) view.findViewById(R.id.withdraw_alipay);
+        mWithdrawWeixin = (ImageView) view.findViewById(R.id.withdraw_weixin);
+        mWithdraw = (LinearLayout) view.findViewById(R.id.withdraw);
+        mDeposit = (Button) view.findViewById(R.id.deposit);
+        mMoney = (ImageView) view.findViewById(R.id.money);
+        mMoneyNum = (TextView) view.findViewById(R.id.money_num);
+        mLove = (ImageView) view.findViewById(R.id.love);
+        mLoveNum = (TextView) view.findViewById(R.id.love_num);
+        mMoneyTotal = (TextView) view.findViewById(R.id.money_total);
+        mMaster = (LinearLayout) view.findViewById(R.id.master);
+        mSave = view.findViewById(R.id.saves);
+        cancelDeposit = view.findViewById(R.id.deposit_cancel);
+        setName = view.findViewById(R.id.set_name);
+        SocialApi mSocialApi = SocialApi.get(getActivity().getApplicationContext());
+
+        //初始化阿里云
+        OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
+        ClientConfiguration conf = new ClientConfiguration();
+        conf.setConnectionTimeout(15 * 1000);//连接超时时间
+        conf.setSocketTimeout(15 * 1000);//socket 超时时间
+        conf.setMaxConcurrentRequest(5); //最大发送数
+        conf.setMaxErrorRetry(2); // 失败后最大重连次数
+        OSSLog.enableLog();
+        oss = new OSSClient(getActivity().getApplicationContext(), endpoint, credentialProvider, conf);
+
+
+        final PailyUtils pailyUtils = new PailyUtils();
+        final SetName rqe = new SetName();
+        rqe.setToken(user.getString("token", ""));
+        //支付宝提现
+        mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+                serviceApi.apilyLogin(rqe).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<ApilyLogin>() {
+                            @Override
+                            public void accept(ApilyLogin apilyLogin) throws Exception {
+                                orderInfo = apilyLogin.getData();
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+
+                            }
+                        });
+                s = importMoney.getText().toString().trim();
+                pailyUtils.setActivity(getActivity(), s);
+                if (s != null & !s.equals("")) {
+                    pailyUtils.pay(orderInfo);
+                } else {
+                    Toast.makeText(getActivity(), "请输入提现数量", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
+        });
 
+//微信授权
+        mWithdrawWeixin.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected View initViews (LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState){
-
-                view = inflater.inflate(R.layout.presenter_layout, container, false);
-
-                return view;
+            public void onClick(View view) {
+         //   WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
             }
+        });
 
+        //获取token
+        request = new RelationShipRequest("0", user.getString("token", ""));
+        //获取网络请求辅助类
+        serviceApi = RetrofitHelper.getServiceApi();
+        LogUtils.d("ssssssssssss", user.getString("token", ""));
+        //修改昵称参数类
+        setName1 = new SetName();
+        setName1.setToken(user.getString("token", ""));
+        token = user.getString("token", "");
+
+
+        //点击心进入点赞详情页面
+        mLove.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void initData () {
-                //获取控件id
-                bg = view.findViewById(R.id.bg);
-                picture = view.findViewById(R.id.picture);
-                setMessage = view.findViewById(R.id.set_message);
-                myName = view.findViewById(R.id.my_name);
-                paint = view.findViewById(R.id.set_paint);
-                importMoney = view.findViewById(R.id.import_money);
-                affirmDeposit = view.findViewById(R.id.affirm_deposit);
-                mExit = (ImageView) view.findViewById(R.id.exit);
-                mCallCamera = (ImageView) view.findViewById(R.id.call_camera);
-                mReminder = (TextView) view.findViewById(R.id.reminder);
-                mWithdrawAlipay = (ImageView) view.findViewById(R.id.withdraw_alipay);
-                mWithdrawWeixin = (ImageView) view.findViewById(R.id.withdraw_weixin);
-                mWithdraw = (LinearLayout) view.findViewById(R.id.withdraw);
-                mDeposit = (Button) view.findViewById(R.id.deposit);
-                mMoney = (ImageView) view.findViewById(R.id.money);
-                mMoneyNum = (TextView) view.findViewById(R.id.money_num);
-                mLove = (ImageView) view.findViewById(R.id.love);
-                mLoveNum = (TextView) view.findViewById(R.id.love_num);
-                mMoneyTotal = (TextView) view.findViewById(R.id.money_total);
-                mMaster = (LinearLayout) view.findViewById(R.id.master);
-                mSave = view.findViewById(R.id.saves);
-                cancelDeposit = view.findViewById(R.id.deposit_cancel);
-                setName = view.findViewById(R.id.set_name);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoveNumberActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MoneyListActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
+        //退出登录弹框
+        mExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new BlurPopWin.Builder(getActivity()).setContent("退出后,账号信息会消失哦!")
+                        //Radius越大耗时越长,被图片处理图像越模糊
+                        .setRadius(3).setTitle("确定退出?")
+                        //设置居中还是底部显示
+                        .setshowAtLocationType(0)
+                        .onClick(new BlurPopWin.PopupCallback() {
+                            @Override
+                            public void onCancelClick(@NonNull BlurPopWin blurPopWin) {
+                                blurPopWin.dismiss();
+                            }
 
-                //初始化阿里云
-                OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
-                ClientConfiguration conf = new ClientConfiguration();
-                conf.setConnectionTimeout(15 * 1000);//连接超时时间
-                conf.setSocketTimeout(15 * 1000);//socket 超时时间
-                conf.setMaxConcurrentRequest(5); //最大发送数
-                conf.setMaxErrorRetry(2); // 失败后最大重连次数
-                OSSLog.enableLog();
-                oss = new OSSClient(getActivity().getApplicationContext(), endpoint, credentialProvider, conf);
-                final PailyUtils pailyUtils = new PailyUtils();
-               final SetName rqe = new SetName();
-               rqe.setToken(user.getString("token",""));
-                //支付宝提现
-                mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
-                        serviceApi.apilyLogin(rqe).subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<ApilyLogin>() {
-                                    @Override
-                                    public void accept(ApilyLogin apilyLogin) throws Exception {
-                                        orderInfo =  apilyLogin.getData();
-                                    }
-                                }, new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
+                            @Override
+                            public void onAffirmClick(@NonNull BlurPopWin blurPopWin) {
 
-                                    }
-                                });
-                        s = importMoney.getText().toString().trim();
-                        pailyUtils.setActivity(getActivity(),s);
-                        if(s!=null&!s.equals(""))
-                        {
-                            pailyUtils.pay(orderInfo);
-                        }
-                        else{
-                            Toast.makeText(getActivity(),"请输入提现数量",Toast.LENGTH_SHORT).show();
-                        }
+                                //来访数据请求
+                                serviceApi.logOut(request)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Consumer<LogOut>() {
+                                            @Override
+                                            public void accept(final LogOut logOut) throws Exception {
+                                                String msg = logOut.getMsg();
+                                                if (logOut.getCode() == 200) {
+                                                    Toast.makeText(getActivity(), "您以退出登陆", Toast.LENGTH_SHORT).show();
+                                                    user.edit().clear().commit();
+                                                    Intent intent = new Intent(getActivity(), SplaActivity.class);
+                                                    startActivity(intent);
+                                                    getActivity().finish();
+                                                } else {
+                                                    Toast.makeText(getActivity(), "您还没有登陆", Toast.LENGTH_SHORT).show();
+                                                }
 
+                                            }
+                                        }, new Consumer<Throwable>() {
+                                            @Override
+                                            public void accept(Throwable throwable) throws Exception {
 
-                    }
-                });
-
-
-                //获取token
-                request = new RelationShipRequest("0", user.getString("token", ""));
-                //获取网络请求辅助类
-                serviceApi = RetrofitHelper.getServiceApi();
-                LogUtils.d("ssssssssssss", user.getString("token", ""));
-                //修改昵称参数类
-                setName1 = new SetName();
-                setName1.setToken(user.getString("token", ""));
-                token = user.getString("token", "");
-
-
-                //点击心进入点赞详情页面
-                mLove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), LoveNumberActivity.class);
-                        startActivity(intent);
-                    }
-                });
-
-                mMoney.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), MoneyListActivity.class);
-                        startActivity(intent);
-                    }
-                });
-
-
-                //退出登录弹框
-                mExit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new BlurPopWin.Builder(getActivity()).setContent("退出后,账号信息会消失哦!")
-                                //Radius越大耗时越长,被图片处理图像越模糊
-                                .setRadius(3).setTitle("确定退出?")
-                                //设置居中还是底部显示
-                                .setshowAtLocationType(0)
-                                .onClick(new BlurPopWin.PopupCallback() {
-                                    @Override
-                                    public void onCancelClick(@NonNull BlurPopWin blurPopWin) {
-                                        blurPopWin.dismiss();
-                                    }
-
-                                    @Override
-                                    public void onAffirmClick(@NonNull BlurPopWin blurPopWin) {
-
-                                        //来访数据请求
-                                        serviceApi.logOut(request)
-                                                .subscribeOn(Schedulers.io())
-                                                .observeOn(AndroidSchedulers.mainThread())
-                                                .subscribe(new Consumer<LogOut>() {
-                                                    @Override
-                                                    public void accept(final LogOut logOut) throws Exception {
-                                                        String msg = logOut.getMsg();
-                                                        if (logOut.getCode() == 200) {
-                                                            Toast.makeText(getActivity(), "您以退出登陆", Toast.LENGTH_SHORT).show();
-                                                            user.edit().clear().commit();
-                                                            Intent intent = new Intent(getActivity(), SplaActivity.class);
-                                                            startActivity(intent);
-                                                            getActivity().finish();
-                                                        } else {
-                                                            Toast.makeText(getActivity(), "您还没有登陆", Toast.LENGTH_SHORT).show();
-                                                        }
-
-                                                    }
-                                                }, new Consumer<Throwable>() {
-                                                    @Override
-                                                    public void accept(Throwable throwable) throws Exception {
-
-                                                    }
-                                                });
-                                        blurPopWin.dismiss();
-                                    }
-                                }).show(mExit);
-                    }
-                });
+                                            }
+                                        });
+                                blurPopWin.dismiss();
+                            }
+                        }).show(mExit);
+            }
+        });
 
 
 //         bg.setOnClickListener(new View.OnClickListener() {
@@ -412,56 +414,56 @@ public class PersonageFragment extends BaseFragment {
 //           importMoney.setInputType(InputType.TYPE_NULL); // 关闭软键盘
 //       }
 //   });
-                //修改名字
-                paint.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        myName.setVisibility(View.GONE);
-                        setName.setVisibility(View.VISIBLE);
-                        paint.setVisibility(View.GONE);
+        //修改名字
+        paint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myName.setVisibility(View.GONE);
+                setName.setVisibility(View.VISIBLE);
+                paint.setVisibility(View.GONE);
 
-                    }
-                });
-
-
-                //提现隐藏加切换页面
-                affirmDeposit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            }
+        });
 
 
-                        mMaster.setVisibility(View.GONE);
-                        importMoney.setVisibility(View.VISIBLE);
-                        mReminder.setVisibility(View.VISIBLE);
-                        mWithdraw.setVisibility(View.VISIBLE);
-                        mDeposit.setVisibility(View.VISIBLE);
-                        cancelDeposit.setVisibility(View.VISIBLE);
-                    }
-                });
+        //提现隐藏加切换页面
+        affirmDeposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                //取消提现
-                cancelDeposit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mMaster.setVisibility(View.VISIBLE);
-                        importMoney.setVisibility(View.GONE);
-                        mReminder.setVisibility(View.GONE);
-                        mWithdraw.setVisibility(View.GONE);
-                        mDeposit.setVisibility(View.GONE);
-                        cancelDeposit.setVisibility(View.GONE);
-                    }
-                });
 
-                //点击修改信息
-                setMessage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        paint.setVisibility(View.VISIBLE);
-                        mCallCamera.setVisibility(View.VISIBLE);
-                        setMessage.setVisibility(View.GONE);
-                        mSave.setVisibility(View.VISIBLE);
-                        mExit.setVisibility(View.VISIBLE);
-                        setName.setText(myName.getText());
+                mMaster.setVisibility(View.GONE);
+                importMoney.setVisibility(View.VISIBLE);
+                mReminder.setVisibility(View.VISIBLE);
+                mWithdraw.setVisibility(View.VISIBLE);
+                mDeposit.setVisibility(View.VISIBLE);
+                cancelDeposit.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //取消提现
+        cancelDeposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMaster.setVisibility(View.VISIBLE);
+                importMoney.setVisibility(View.GONE);
+                mReminder.setVisibility(View.GONE);
+                mWithdraw.setVisibility(View.GONE);
+                mDeposit.setVisibility(View.GONE);
+                cancelDeposit.setVisibility(View.GONE);
+            }
+        });
+
+        //点击修改信息
+        setMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paint.setVisibility(View.VISIBLE);
+                mCallCamera.setVisibility(View.VISIBLE);
+                setMessage.setVisibility(View.GONE);
+                mSave.setVisibility(View.VISIBLE);
+                mExit.setVisibility(View.VISIBLE);
+                setName.setText(myName.getText());
 //                mExit.setVisibility(View.VISIBLE);
 //                mMaster.setVisibility(View.VISIBLE);
 //                setMessage.setVisibility(View.GONE);
@@ -471,105 +473,105 @@ public class PersonageFragment extends BaseFragment {
 //                mDeposit.setVisibility(View.GONE);
 //                setMessage.setVisibility(View.GONE);
 
-                    }
-                });
+            }
+        });
 
-                //保存信息并更改
-                mSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+        //保存信息并更改
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                        String s = setName.getText().toString();
-                        if (s.length() != 0 || s.equals("") == false) {
-                            mCallCamera.setVisibility(View.GONE);
-                            mExit.setVisibility(View.GONE);
-                            paint.setVisibility(View.GONE);
-                            setMessage.setVisibility(View.VISIBLE);
-                            mSave.setVisibility(View.GONE);
+                String s = setName.getText().toString();
+                if (s.length() != 0 || s.equals("") == false) {
+                    mCallCamera.setVisibility(View.GONE);
+                    mExit.setVisibility(View.GONE);
+                    paint.setVisibility(View.GONE);
+                    setMessage.setVisibility(View.VISIBLE);
+                    mSave.setVisibility(View.GONE);
 
-                            // mSave.requestFocus();
-                            setName.setVisibility(View.GONE);
-                            myName.setVisibility(View.VISIBLE);
-                            myName.setText(s);
-                            setName1.setNickName(s);
-                            time = System.currentTimeMillis();
-                            serviceApi.setName(setName1).subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Consumer<LogOut>() {
-                                        @Override
-                                        public void accept(LogOut logOut) throws Exception {
+                    // mSave.requestFocus();
+                    setName.setVisibility(View.GONE);
+                    myName.setVisibility(View.VISIBLE);
+                    myName.setText(s);
+                    setName1.setNickName(s);
+                    time = System.currentTimeMillis();
+                    serviceApi.setName(setName1).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<LogOut>() {
+                                @Override
+                                public void accept(LogOut logOut) throws Exception {
 
-                                        }
-                                    }, new Consumer<Throwable>() {
-                                        @Override
-                                        public void accept(Throwable throwable) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
 
-                                        }
-                                    });
+                                }
+                            });
 
 //                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                            beginupload();
+                    beginupload();
 
 
-                        } else {
-                            Toast.makeText(getActivity(), "输入字符不能为空", Toast.LENGTH_SHORT).show();
-                        }
+                } else {
+                    Toast.makeText(getActivity(), "输入字符不能为空", Toast.LENGTH_SHORT).show();
+                }
 
 
-                    }
-                });
+            }
+        });
 
-                mCallCamera.setOnClickListener(new View.OnClickListener() {
+        mCallCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.makeText(getActivity(), "ssssssss", Toast.LENGTH_LONG);
+                new CommonPopupWindow(new CommonPopupWindow.OnPopWindowClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        ToastUtils.makeText(getActivity(), "ssssssss", Toast.LENGTH_LONG);
-                        new CommonPopupWindow(new CommonPopupWindow.OnPopWindowClickListener() {
-                            @Override
-                            public void onPopWindowClickListener(View view) {
-                                switch (view.getId()) {
-                                    /**
-                                     * 头像 拍照
-                                     */
-                                    case R.id.tv_menu_1:
+                    public void onPopWindowClickListener(View view) {
+                        switch (view.getId()) {
+                            /**
+                             * 头像 拍照
+                             */
+                            case R.id.tv_menu_1:
 //                                uploadFilePath
-                                        mPhotoPath = ObtainAlbumUtils.getSDPath() + "/" + ObtainAlbumUtils.getPhotoFileName();
-                                        ObtainAlbumUtils.openCamera(getActivity(), mPhotoPath);
+                                mPhotoPath = ObtainAlbumUtils.getSDPath() + "/" + ObtainAlbumUtils.getPhotoFileName();
+                                ObtainAlbumUtils.openCamera(getActivity(), mPhotoPath);
 //                openCamera();
-                                        break;
-                                    /**
-                                     * 头像  相册选择
-                                     */
-                                    case R.id.tv_menu_2:
-                                        openAlbum();
-                                        break;
-                                    /**
-                                     * 取消选择
-                                     */
-                                    case R.id.tv_close_popup_window:
+                                break;
+                            /**
+                             * 头像  相册选择
+                             */
+                            case R.id.tv_menu_2:
+                                openAlbum();
+                                break;
+                            /**
+                             * 取消选择
+                             */
+                            case R.id.tv_close_popup_window:
 
-                                        break;
-                                }
-                            }
-                        }, getActivity()).show();
-                    }
-                });
-
-
-                //提现输入框操作
-                importMoney.setOnFocusChangeListener(new android.view.View.
-                        OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (hasFocus) {
-                            // 此处为得到焦点时的处理内容
-                            getActivity().findViewById(R.id.magic_indicator4).setVisibility(View.GONE);
-                        } else {
-                            // 此处为失去焦点时的处理内容
-                            getActivity().findViewById(R.id.magic_indicator4).setVisibility(View.VISIBLE);
+                                break;
                         }
                     }
-                });
+                }, getActivity()).show();
+            }
+        });
+
+
+        //提现输入框操作
+        importMoney.setOnFocusChangeListener(new android.view.View.
+                OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // 此处为得到焦点时的处理内容
+                    getActivity().findViewById(R.id.magic_indicator4).setVisibility(View.GONE);
+                } else {
+                    // 此处为失去焦点时的处理内容
+                    getActivity().findViewById(R.id.magic_indicator4).setVisibility(View.VISIBLE);
+                }
+            }
+        });
 //        importMoney.setOnTouchListener(new View.OnTouchListener()
 //        { public boolean onTouch(View v, MotionEvent event)
 //        {     InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
@@ -578,179 +580,179 @@ public class PersonageFragment extends BaseFragment {
 //            return false;
 //            }});
 
-                //设置提现输入框只能输入两位小数点
-                importMoney.addTextChangedListener(new TextWatcher() {
+        //设置提现输入框只能输入两位小数点
+        importMoney.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 3);
+                        importMoney.setText(s);
+                        importMoney.setSelection(s.length());
+                    }
+                }
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    importMoney.setText(s);
+                    importMoney.setSelection(2);
+                }
+
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        importMoney.setText(s.subSequence(0, 1));
+                        importMoney.setSelection(1);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+        //请求参数
+        RelationShipRequest request = new RelationShipRequest("", user.getString("token", ""));
+        //请求获取个人信息
+        serviceApi = RetrofitHelper.getServiceApi();
+        serviceApi.getMyMessage(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyMessage>() {
                     @Override
-                    public void onTextChanged(CharSequence s, int start, int before,
-                                              int count) {
-                        if (s.toString().contains(".")) {
-                            if (s.length() - 1 - s.toString().indexOf(".") > 2) {
-                                s = s.toString().subSequence(0,
-                                        s.toString().indexOf(".") + 3);
-                                importMoney.setText(s);
-                                importMoney.setSelection(s.length());
-                            }
-                        }
-                        if (s.toString().trim().substring(0).equals(".")) {
-                            s = "0" + s;
-                            importMoney.setText(s);
-                            importMoney.setSelection(2);
-                        }
-
-                        if (s.toString().startsWith("0")
-                                && s.toString().trim().length() > 1) {
-                            if (!s.toString().substring(1, 2).equals(".")) {
-                                importMoney.setText(s.subSequence(0, 1));
-                                importMoney.setSelection(1);
-                                return;
-                            }
+                    public void accept(MyMessage myMessage) throws Exception {
+                        //glide图片加载框架
+                        with = Glide.with(getActivity());
+                        //获取昵称并显示
+                        myName.setText(myMessage.getDataMap().getNickName());
+                        //获取收到红包数量并显示
+                        mMoneyNum.setText(myMessage.getDataMap().getCountRedPacket() + "");
+                        //获取收到点赞数量并显示
+                        mLoveNum.setText(myMessage.getDataMap().getCountThumbsUp() + "");
+                        setName.setText(myMessage.getDataMap().getNickName());
+                        //判断头像非空
+                        if (myMessage.getDataMap().getPicture().equals("baidu.com")) {
+                            with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(getActivity())).into(picture);
+                        } else {
+                            with.load(myMessage.getDataMap().getPicture()).transform(new GlideCircleTransform(getActivity())).into(picture);
                         }
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count,
-                                                  int after) {
+                    public void accept(Throwable throwable) throws Exception {
 
                     }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        // TODO Auto-generated method stub
-
-                    }
-
                 });
+    }
 
-                //请求参数
-                RelationShipRequest request = new RelationShipRequest("", user.getString("token", ""));
-                //请求获取个人信息
-                serviceApi = RetrofitHelper.getServiceApi();
-                serviceApi.getMyMessage(request)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<MyMessage>() {
-                            @Override
-                            public void accept(MyMessage myMessage) throws Exception {
-                                //glide图片加载框架
-                                with = Glide.with(getActivity());
-                                //获取昵称并显示
-                                myName.setText(myMessage.getDataMap().getNickName());
-                                //获取收到红包数量并显示
-                                mMoneyNum.setText(myMessage.getDataMap().getCountRedPacket() + "");
-                                //获取收到点赞数量并显示
-                                mLoveNum.setText(myMessage.getDataMap().getCountThumbsUp() + "");
-                                setName.setText(myMessage.getDataMap().getNickName());
-                                //判断头像非空
-                                if (myMessage.getDataMap().getPicture().equals("baidu.com")) {
-                                    with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(getActivity())).into(picture);
-                                } else {
-                                    with.load(myMessage.getDataMap().getPicture()).transform(new GlideCircleTransform(getActivity())).into(picture);
-                                }
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
+    @Override
+    protected void setDefaultFragmentTitle(String title) {
 
-                            }
-                        });
-            }
+    }
 
-            @Override
-            protected void setDefaultFragmentTitle (String title){
-
-            }
-
-            @Override
-            public void onActivityResult ( int requestCode, int resultCode, Intent data){
-                super.onActivityResult(requestCode, resultCode, data);
-                /**
-                 * 选择照片完成后传回
-                 */
-                if (requestCode == PICTUR_HEAD && resultCode == AlbumActivity.HEAD_OK) {
-                    Bundle bundle = data.getExtras();
-                    Bitmap bitmap = bundle.getParcelable("bitmap");
-                    uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
-                    picture.setImageBitmap(bitmap);
-                }
-                /**
-                 * 调用截图
-                 */
-                else if (requestCode == 33) {
-                    if (data != null) {
-                        ObtainAlbumUtils.BitmapScreenshot(data, getActivity());
-                    }
-                }
-                /**
-                 * 截图之后设置头像
-                 */
-                else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT) {
-                    if (data != null) {
-                        Bitmap bitmap = data.getParcelableExtra("data");
-                        uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
-                        picture.setImageBitmap(bitmap);
-                    }
-                }
-            }
-
-            /**
-             * 打开相册
-             */
-
-        private void openAlbum() {
-            Intent intent = new Intent(getActivity(), AlbumActivity.class);
-            startActivityForResult(intent, PICTUR_HEAD);
-        }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         /**
-         * 图片传到阿里云服务器
+         * 选择照片完成后传回
          */
-        private void beginupload() {
-            PutObjectRequest put = new PutObjectRequest(testBucket, token + time, uploadFilePath);
-            OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
-                @Override
-                public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-                    NextStop();
+        if (requestCode == PICTUR_HEAD && resultCode == AlbumActivity.HEAD_OK) {
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = bundle.getParcelable("bitmap");
+            uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
+            picture.setImageBitmap(bitmap);
+        }
+        /**
+         * 调用截图
+         */
+        else if (requestCode == 33) {
+            if (data != null) {
+                ObtainAlbumUtils.BitmapScreenshot(data, getActivity());
+            }
+        }
+        /**
+         * 截图之后设置头像
+         */
+        else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT) {
+            if (data != null) {
+                Bitmap bitmap = data.getParcelableExtra("data");
+                uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
+                picture.setImageBitmap(bitmap);
+            }
+        }
+    }
+
+    /**
+     * 打开相册
+     */
+
+    private void openAlbum() {
+        Intent intent = new Intent(getActivity(), AlbumActivity.class);
+        startActivityForResult(intent, PICTUR_HEAD);
+    }
+
+    /**
+     * 图片传到阿里云服务器
+     */
+    private void beginupload() {
+        PutObjectRequest put = new PutObjectRequest(testBucket, token + time, uploadFilePath);
+        OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                NextStop();
 //                Log.d("TAG", "UploadSuccess");
 //                Log.d("TAG", "ETag"+result.getETag());
 //                Log.d("TAG", "RequestId"+result.getRequestId());
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
+                if (clientException != null) {
+                    Log.d("TAG", "本地异常");
+                    // 本地异常如网络异常等
                 }
-
-                @Override
-                public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
-                    if (clientException != null) {
-                        Log.d("TAG", "本地异常");
-                        // 本地异常如网络异常等
-                    }
-                    if (serviceException != null) {
-                        Log.d("TAG", "服务异常");
-                        // 服务异常
-                    }
+                if (serviceException != null) {
+                    Log.d("TAG", "服务异常");
+                    // 服务异常
                 }
-            });
-        }
+            }
+        });
+    }
 
-        private void NextStop() {
-            serviceApi.setHead(new HeadRequst(token, "https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time)).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<LogOut>() {
-                        @Override
-                        public void accept(LogOut logOut) throws Exception {
+    private void NextStop() {
+        serviceApi.setHead(new HeadRequst(token, "https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LogOut>() {
+                    @Override
+                    public void accept(LogOut logOut) throws Exception {
 
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
 
-                        }
-                    });
-        }
+                    }
+                });
+    }
 
-        /**
-         * 支付宝账户授权业务
-         *
-         * @param
-         */
+    /**
+     * 支付宝账户授权业务
+     *
+     * @param
+     */
 //        public void authV2() {
 //            if (TextUtils.isEmpty(PID) || TextUtils.isEmpty(APPID)
 //                    || (TextUtils.isEmpty(RSA2_PRIVATE) && TextUtils.isEmpty(RSA_PRIVATE))
@@ -797,4 +799,4 @@ public class PersonageFragment extends BaseFragment {
 //            Thread authThread = new Thread(authRunnable);
 //            authThread.start();
 //        }
-    }
+}

@@ -2,18 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#333232"
-    android:paddingTop="13dp">
+    android:paddingTop="13dp" >
 
     <TextView
         android:id="@+id/timestamp"
         style="@style/chat_text_date_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#333232"
-        android:textColor="#898484"
         android:layout_gravity="center" />
 
     <RelativeLayout
@@ -26,7 +22,6 @@
             android:id="@+id/iv_userhead"
             android:layout_width="@dimen/size_avatar"
             android:layout_height="@dimen/size_avatar"
-            app:ease_shape_type="round"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_chat_activity"
@@ -51,7 +46,7 @@
             android:layout_toLeftOf="@+id/progress_bar"
             android:layout_toRightOf="@id/iv_userhead"
             android:layout_below="@+id/tv_userid"
-            android:background="@drawable/qi_pao" >
+            android:background="@drawable/ease_chatfrom_bg" >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -87,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#0d0c0c"
+                        android:textColor="#818181"
                         android:textSize="14sp" />
 
                     <TextView
@@ -97,7 +92,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center_vertical"
                         android:text="@string/not_download"
-                        android:textColor="#131313"
+                        android:textColor="#818181"
                         android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>

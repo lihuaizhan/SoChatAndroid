@@ -13,9 +13,17 @@
         android:label="Tests for com.hyphenate.easeui.test"
         android:targetPackage="com.hyphenate.easeui.test" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
 
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"

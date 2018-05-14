@@ -5,14 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="#333232"
     android:paddingTop="13dp">
 
     <TextView
         android:id="@+id/timestamp"
         style="@style/chat_text_date_style"
-        android:background="#333232"
-        android:textColor="#898484"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -28,8 +25,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:src="@drawable/ease_default_avatar"
             app:ease_shape_type="round"
+            android:src="@drawable/ease_default_avatar"
             android:scaleType="fitXY" />
 
         <RelativeLayout
@@ -37,7 +34,6 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:background="@drawable/qi_pao"
             android:layout_toRightOf="@id/iv_userhead"
             android:layout_below="@+id/tv_userid"
              >

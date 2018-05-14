@@ -2,4 +2,5 @@
 <com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenu xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/emojicon"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:background="@color/background"/>

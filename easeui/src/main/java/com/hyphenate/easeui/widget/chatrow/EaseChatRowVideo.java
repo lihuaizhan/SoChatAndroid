@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,15 +25,14 @@ import com.hyphenate.util.TextFormater;
 import java.io.File;
 
 public class EaseChatRowVideo extends EaseChatRowFile{
-    private static final String TAG = "EaseChatRowVideo";
 
-    private ImageView imageView;
+	private ImageView imageView;
     private TextView sizeView;
     private TextView timeLengthView;
 
     public EaseChatRowVideo(Context context, EMMessage message, int position, BaseAdapter adapter) {
-        super(context, message, position, adapter);
-    }
+		super(context, message, position, adapter);
+	}
 
 	@Override
 	protected void onInflateView() {
@@ -82,32 +80,39 @@ public class EaseChatRowVideo extends EaseChatRowFile{
             if (videoBody.thumbnailDownloadStatus() == EMFileMessageBody.EMDownloadStatus.DOWNLOADING ||
                     videoBody.thumbnailDownloadStatus() == EMFileMessageBody.EMDownloadStatus.PENDING) {
                 imageView.setImageResource(R.drawable.ease_default_image);
+                setMessageReceiveCallback();
             } else {
                 // System.err.println("!!!! not back receive, show image directly");
                 imageView.setImageResource(R.drawable.ease_default_image);
                 if (localThumb != null) {
                     showVideoThumbView(localThumb, imageView, videoBody.getThumbnailUrl(), message);
                 }
+
             }
+
             return;
-        }else{
-            if (videoBody.thumbnailDownloadStatus() == EMFileMessageBody.EMDownloadStatus.DOWNLOADING ||
-                    videoBody.thumbnailDownloadStatus() == EMFileMessageBody.EMDownloadStatus.PENDING ||
-                        videoBody.thumbnailDownloadStatus() == EMFileMessageBody.EMDownloadStatus.FAILED) {
-                progressBar.setVisibility(View.INVISIBLE);
-                percentageView.setVisibility(View.INVISIBLE);
-                imageView.setImageResource(R.drawable.ease_default_image);
-            } else {
-                progressBar.setVisibility(View.GONE);
-                percentageView.setVisibility(View.GONE);
-                imageView.setImageResource(R.drawable.ease_default_image);
-                showVideoThumbView(localThumb, imageView, videoBody.getThumbnailUrl(), message);
+        }
+        //handle sending message
+        handleSendMessage();
+	}
+	
+	@Override
+	protected void onBubbleClick() {
+	    EMVideoMessageBody videoBody = (EMVideoMessageBody) message.getBody();
+        EMLog.d(TAG, "video view is on click");
+        Intent intent = new Intent(context, EaseShowVideoActivity.class);
+        intent.putExtra("msg", message);
+        if (message != null && message.direct() == EMMessage.Direct.RECEIVE && !message.isAcked()
+                && message.getChatType() == ChatType.Chat) {
+            try {
+                EMClient.getInstance().chatManager().ackMessageRead(message.getFrom(), message.getMsgId());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+        activity.startActivity(intent);
 	}
-
-
-
+	
 	/**
      * show video thumbnails
      * 
@@ -124,8 +129,8 @@ public class EaseChatRowVideo extends EaseChatRowFile{
         if (bitmap != null) {
             // thumbnail image is already loaded, reuse the drawable
             iv.setImageBitmap(bitmap);
+
         } else {
-            imageView.setImageResource(R.drawable.ease_default_image);
             new AsyncTask<Void, Void, Bitmap>() {
 
                 @Override

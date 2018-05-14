@@ -8,6 +8,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_list_longpressed_holo.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_030.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_030.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_abc_slide_in_bottom.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\anim\\abc_slide_in_bottom.xml"
     },
@@ -30,6 +34,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_007.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_007.gif"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_8.png.flat",
@@ -76,10 +84,6 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.4.0.aar\\aa95055cd29be5d735b2b0d3e45b36e3\\res\\drawable-hdpi-v4\\googleg_standard_color_18.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_qi_pao.9.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\qi_pao.9.png"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ease_chat_edit_normal.9.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chat_edit_normal.9.png"
     },
@@ -94,6 +98,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_expanded_menu_layout.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_icon_speaker_on.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_icon_speaker_on.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -120,20 +128,24 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_chatting_setmode_keyboard_btn_normal.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatting_setmode_keyboard_btn_normal.png"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_chatting_setmode_keyboard_btn_normal.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatting_setmode_keyboard_btn_normal.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_default_avatar.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_default_avatar.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
@@ -154,6 +166,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_common_full_open_on_phone.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.4.0.aar\\aa95055cd29be5d735b2b0d3e45b36e3\\res\\drawable-xhdpi-v4\\common_full_open_on_phone.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_voice.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\voice.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
@@ -200,8 +216,16 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatto_voice_playing_f1.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ease_chatto_bg.9.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chatto_bg.9.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_sent_bigexpression.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_sent_bigexpression.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_pictures.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\pictures.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_settings_selected.png.flat",
@@ -272,6 +296,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_chat_location.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\chat_location.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_notification_bg_normal_pressed.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f243d299e7951d2f761f12b2eb0be63d\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
     },
@@ -296,6 +324,10 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_16.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_030_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_030_cover.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
@@ -310,10 +342,6 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_contact.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_contact.xml"
-    },
-    {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_money.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_money.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_fade_in.xml.flat",
@@ -344,6 +372,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_027_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_027_cover.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -368,6 +400,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\anim\\abc_slide_out_top.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_018.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_018.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
@@ -378,6 +414,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_010_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_010_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_hint_foreground_material_light.xml.flat",
@@ -400,6 +440,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_013_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_013_cover.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.4.0.aar\\aa95055cd29be5d735b2b0d3e45b36e3\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
     },
@@ -416,12 +460,32 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f243d299e7951d2f761f12b2eb0be63d\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_007_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_007_cover.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_record_animate_05.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_05.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_chat_from_bg.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\chat_from_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_010.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_010.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_push_bottom_in.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\anim\\push_bottom_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_012.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_012.gif"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_019_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_019_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_18.png.flat",
@@ -508,16 +572,16 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_12.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_chat_sent_bg.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\chat_sent_bg.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_search_view.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\abc_search_view.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_6.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_6.png"
-    },
-    {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_ease_chatto_bg.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_chatto_bg.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_widget_title_bar.xml.flat",
@@ -548,8 +612,8 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_chat_image_selector.xml"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_bag_gradient.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\bag_gradient.xml"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_022_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_022_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
@@ -592,6 +656,10 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chatting_biaoqing_btn_enable.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_theitem_gift_message.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\theitem_gift_message.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_ic_launcher.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_ic_launcher.png"
     },
@@ -606,6 +674,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_icon_chat_on.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\icon_chat_on.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -708,10 +780,6 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_ease_chatfrom_bg.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_chatfrom_bg.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_chat_history.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_chat_history.xml"
     },
@@ -742,6 +810,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_googleg_disabled_color_18.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.4.0.aar\\aa95055cd29be5d735b2b0d3e45b36e3\\res\\drawable-hdpi-v4\\googleg_disabled_color_18.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_chat_video_pressed.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_chat_video_pressed.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -794,6 +866,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_screen_toolbar.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_sent_fleet_message.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_sent_fleet_message.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
@@ -880,10 +956,6 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_19.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_pic.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_pic.png"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -948,6 +1020,10 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_video_recorder_start_btn.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ease_chatfrom_bg.9.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chatfrom_bg.9.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_app_panel_video_icon.9.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_app_panel_video_icon.9.png"
     },
@@ -970,6 +1046,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_chatting_setmode_voice_btn_normal.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatting_setmode_voice_btn_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_chant_send_selector.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\chant_send_selector.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ease_chat_image_normal.png.flat",
@@ -1008,10 +1088,6 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_recall_message_bg.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\recall_message_bg.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_tooltip_exit.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\anim\\tooltip_exit.xml"
     },
@@ -1040,12 +1116,24 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_10.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_chat_voice_call_pressed.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_chat_voice_call_pressed.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_received_file.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_received_file.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_widget_chat_primary_menu.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_widget_chat_primary_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_chat_picture.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\chat_picture.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_sent_fleet_voice.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_sent_fleet_voice.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_template_icon_group.xml.flat",
@@ -1116,6 +1204,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\color\\abc_primary_text_disable_only_material_light.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_remarks.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\remarks.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_ease_btn_cancel_normal_shape.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_btn_cancel_normal_shape.xml"
     },
@@ -1134,6 +1226,14 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_mm_listitem_disable.9.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_mm_listitem_disable.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_035_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_035_cover.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_019.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_019.gif"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_googleg_disabled_color_18.png.flat",
@@ -1184,12 +1284,16 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_wo_pao.9.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\wo_pao.9.png"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_002_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_002_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_035.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_035.gif"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_search_bar_with_padding.xml.flat",
@@ -1240,6 +1344,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_chat_camera.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\chat_camera.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_tooltip_frame_light.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable\\tooltip_frame_light.xml"
     },
@@ -1250,6 +1358,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_received_location.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_received_location.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_029_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_029_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_push_top_out.xml.flat",
@@ -1328,6 +1440,10 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_22.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_021.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_021.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.4.0.aar\\aa95055cd29be5d735b2b0d3e45b36e3\\res\\drawable-xxhdpi-v4\\googleg_disabled_color_18.png"
     },
@@ -1356,10 +1472,6 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_acitivity_ding_msg_send.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_acitivity_ding_msg_send.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -1368,12 +1480,12 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_35.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_voice_from_icon.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\anim\\voice_from_icon.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_abc_tint_btn_checkable.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\color-v23\\abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_voice_from_icon.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\anim\\voice_from_icon.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_ease_btn_cancel_bj.xml.flat",
@@ -1394,6 +1506,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_022.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_022.gif"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_appitem_del_btn_normal.png.flat",
@@ -1444,10 +1560,6 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_widget_voice_recorder.xml"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_aaaaa.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\aaaaa.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
     },
@@ -1468,12 +1580,20 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_em_chat_voice_call_selector.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\em_chat_voice_call_selector.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_tint_seek_thumb.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\color\\abc_tint_seek_thumb.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_received_voice.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_received_voice.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_020_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_020_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ic_search_api_material.xml.flat",
@@ -1490,6 +1610,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_contact_list_selected.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_contact_list_selected.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_edit_cursor_color.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\edit_cursor_color.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
@@ -1534,6 +1658,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_takephotos.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\takephotos.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -1596,6 +1724,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_location.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\location.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
@@ -1608,8 +1740,20 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_013.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_013.gif"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_back.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\back.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_layout_chat_primary_menu.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_layout_chat_primary_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_020.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_020.gif"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_20.png.flat",
@@ -1622,6 +1766,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.4.0.aar\\aa95055cd29be5d735b2b0d3e45b36e3\\res\\drawable-hdpi-v4\\common_google_signin_btn_icon_dark_normal_background.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_em_chat_video_selector.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\em_chat_video_selector.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_video_download_btn_nor.png.flat",
@@ -1642,6 +1790,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_like.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\like.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_31.png.flat",
@@ -1672,6 +1824,10 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_08.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_040.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_040.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
@@ -1700,10 +1856,6 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_activity_ding_ack_user_list.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_activity_ding_ack_user_list.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
@@ -1728,6 +1880,10 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_5.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_received_fleet_message.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_received_fleet_message.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_support_simple_spinner_dropdown_item.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
@@ -1748,6 +1904,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_received_voice.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_received_voice.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_abc_tint_edittext.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\color-v23\\abc_tint_edittext.xml"
     },
@@ -1758,6 +1918,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v16_notification_template_custom_big.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f243d299e7951d2f761f12b2eb0be63d\\res\\layout-v16\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_fleet_bg_shape.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\fleet_bg_shape.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_action.xml.flat",
@@ -1790,6 +1954,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_template_media.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\714135a4b68e61f21a17e61af53f820a\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_edit_bg_normal_shape.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\edit_bg_normal_shape.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_googleg_disabled_color_18.png.flat",
@@ -1860,6 +2028,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_widget_chat_primary_fleet_menu.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_widget_chat_primary_fleet_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
@@ -1872,12 +2044,8 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_camera.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_camera.png"
-    },
-    {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_jp.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_jp.png"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_layout_chat_primary_fleet_menu.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_layout_chat_primary_fleet_menu.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_login_error_icon.png.flat",
@@ -1924,6 +2092,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f243d299e7951d2f761f12b2eb0be63d\\res\\drawable\\notification_icon_background.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_024.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_024.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
@@ -1940,8 +2112,16 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_chat_video_normal.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_chat_video_normal.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_mm_title_back.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_mm_title_back.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_040_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_040_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_mode_bar.xml.flat",
@@ -1958,10 +2138,6 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_text_cursor_material.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable\\abc_text_cursor_material.xml"
-    },
-    {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_site.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_site.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -2046,6 +2222,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_chatfrom_voice_playing.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatfrom_voice_playing.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_icon_mute_on.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_icon_mute_on.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_googleg_standard_color_18.png.flat",
@@ -2148,12 +2328,20 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_received_fleet_voice.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_received_fleet_voice.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_28.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_28.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_chatting_setmode_keyboard_btn_pressed.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatting_setmode_keyboard_btn_pressed.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_sent_voice.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_sent_voice.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -2178,10 +2366,6 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_record_animate_03.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_03.png"
-    },
-    {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_more.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_more.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_seekbar_thumb_material.xml.flat",
@@ -2240,12 +2424,20 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_029.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_029.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_tooltip.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\tooltip.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_bar_up_container.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_012_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_012_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
@@ -2280,24 +2472,32 @@
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_2.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_ding_ack_user.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_ding_ack_user.xml"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_icon_chat_v.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\icon_chat_v.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_002.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_002.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_default_avatar.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_default_avatar.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_icon_voice.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\icon_voice.png"
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_redpackets.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\redpackets.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_chat_video_call_pressed.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_chat_video_call_pressed.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
@@ -2380,16 +2580,36 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f243d299e7951d2f761f12b2eb0be63d\\res\\drawable-mdpi-v4\\notification_bg_normal.9.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_ease_chat_press_speak_btn_fleet.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_chat_press_speak_btn_fleet.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_location_msg.9.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_location_msg.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_chat_video_call_normal.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_chat_video_call_normal.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_row_sent_video.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_sent_video.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_018_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_018_cover.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_024_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_024_cover.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_activity_chooser_view.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_021_cover.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_021_cover.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ee_4.png.flat",
@@ -2418,6 +2638,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_item_background_holo_dark.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_icon_speaker_normal.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_icon_speaker_normal.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_ease_widget_emojicon_tab_bar.xml.flat",
@@ -2556,12 +2780,20 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f243d299e7951d2f761f12b2eb0be63d\\res\\drawable-xhdpi-v4\\notify_panel_notification_icon_bg.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-ldrtl-mdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_dialog_material_background.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable\\abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_em_chat_video_call_selector.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable\\em_chat_video_call_selector.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ic_clear_material.xml.flat",
@@ -2656,6 +2888,14 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-ldrtl-hdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_enjoy.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\enjoy.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_icon_mute_normal.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_icon_mute_normal.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-ldrtl-xhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -2680,12 +2920,24 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_icon_027.gif.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\icon_027.gif"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_switch_thumb_material.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ease_record_animate_14.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_14.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_icon_hinimg.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\icon_hinimg.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_em_chat_voice_call_normal.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\em_chat_voice_call_normal.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -2722,5 +2974,9 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2a6a5fcbca7d820cb35027346122b6d8\\res\\drawable-mdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_sure.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\res\\SoChatAndroid\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\sure.png"
     }
 ]

@@ -1,43 +1,42 @@
 package com.hyphenate.easeui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
-
+import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.R;
-import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
+import com.hyphenate.easeui.utils.DatasShared;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseConversationList.EaseConversationListHelper;
-import com.hyphenate.easeui.widget.EaseImageView;
 import com.hyphenate.util.DateUtils;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * conversation list adapter
- *
  */
 public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
     private static final String TAG = "ChatAllHistoryAdapter";
@@ -45,19 +44,25 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
     private List<EMConversation> copyConversationList;
     private ConversationFilter conversationFilter;
     private boolean notiyfyByFilter;
-    
+
     protected int primaryColor;
     protected int secondaryColor;
     protected int timeColor;
     protected int primarySize;
     protected int secondarySize;
     protected float timeSize;
+    private boolean ismark;
+
+    public void setRemarks(boolean ismark) {
+        this.ismark = ismark;
+        notifyDataSetChanged();
+    }
 
     public EaseConversationAdapter(Context context, int resource,
                                    List<EMConversation> objects) {
         super(context, resource, objects);
         conversationList = objects;
-        copyConversationList = new ArrayList<EMConversation>();
+        copyConversationList = new ArrayList<>();
         copyConversationList.addAll(objects);
     }
 
@@ -80,7 +85,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.ease_row_chat_history, parent, false);
         }
@@ -95,49 +100,39 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.msgState = convertView.findViewById(R.id.msg_state);
             holder.list_itease_layout = (RelativeLayout) convertView.findViewById(R.id.list_itease_layout);
             holder.motioned = (TextView) convertView.findViewById(R.id.mentioned);
+            holder.nikenameLayout = (LinearLayout) convertView.findViewById(R.id.ease_linearlayout_nikename);
+            holder.nikename = (EditText) convertView.findViewById(R.id.ease_edit_nikename);
             convertView.setTag(holder);
         }
-        holder.list_itease_layout.setBackgroundResource(R.drawable.ease_mm_listitem);
+        holder.list_itease_layout.setBackgroundColor(Color.parseColor("#e8eae3"));
 
         // get conversation
         EMConversation conversation = getItem(position);
         // get username or group id
         String username = conversation.conversationId();
-        
+//        String avatar = DateUtils
         if (conversation.getType() == EMConversationType.GroupChat) {
             String groupId = conversation.conversationId();
-            if(EaseAtMessageHelper.get().hasAtMeMsg(groupId)){
+            if (EaseAtMessageHelper.get().hasAtMeMsg(groupId)) {
                 holder.motioned.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 holder.motioned.setVisibility(View.GONE);
             }
             // group message, show group avatar
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMGroup group = EMClient.getInstance().groupManager().getGroup(username);
             holder.name.setText(group != null ? group.getGroupName() : username);
-        } else if(conversation.getType() == EMConversationType.ChatRoom){
+        } else if (conversation.getType() == EMConversationType.ChatRoom) {
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMChatRoom room = EMClient.getInstance().chatroomManager().getChatRoom(username);
             holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
             holder.motioned.setVisibility(View.GONE);
-        }else {
-            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
-            EaseUserUtils.setUserNick(username, holder.name);
+        } else {
+            EaseUserUtils.setUserAvatar(getContext(), null, "", holder.avatar);
+            EaseUserUtils.setUserNick(null, username, holder.name);
             holder.motioned.setVisibility(View.GONE);
         }
 
-        EaseAvatarOptions avatarOptions = EaseUI.getInstance().getAvatarOptions();
-        if(avatarOptions != null && holder.avatar instanceof EaseImageView) {
-            EaseImageView avatarView = ((EaseImageView) holder.avatar);
-            if (avatarOptions.getAvatarShape() != 0)
-                avatarView.setShapeType(avatarOptions.getAvatarShape());
-            if (avatarOptions.getAvatarBorderWidth() != 0)
-                avatarView.setBorderWidth(avatarOptions.getAvatarBorderWidth());
-            if (avatarOptions.getAvatarBorderColor() != 0)
-                avatarView.setBorderColor(avatarOptions.getAvatarBorderColor());
-            if (avatarOptions.getAvatarRadius() != 0)
-                avatarView.setRadius(avatarOptions.getAvatarRadius());
-        }
         if (conversation.getUnreadMsgCount() > 0) {
             // show unread message count
             holder.unreadLabel.setText(String.valueOf(conversation.getUnreadMsgCount()));
@@ -147,49 +142,70 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         }
 
         if (conversation.getAllMsgCount() != 0) {
-        	// show the content of latest message
+            // show the content of latest message
             EMMessage lastMessage = conversation.getLastMessage();
             String content = null;
-            if(cvsListHelper != null){
+            if (cvsListHelper != null) {
                 content = cvsListHelper.onSetItemSecondaryText(lastMessage);
             }
             holder.message.setText(EaseSmileUtils.getSmiledText(getContext(), EaseCommonUtils.getMessageDigest(lastMessage, (this.getContext()))),
                     BufferType.SPANNABLE);
-            if(content != null){
+            if (content != null) {
                 holder.message.setText(content);
             }
             holder.time.setText(DateUtils.getTimestampString(new Date(lastMessage.getMsgTime())));
+            if (DatasShared.getHXInfo(username) != null) {
+                Glide.with(getContext()).load(DatasShared.getHXInfo(username)).into(holder.avatar);
+            }
+            if (DatasShared.getHXNickName(username) != null) {
+                holder.name.setText(DatasShared.getHXNickName(username));
+            }
             if (lastMessage.direct() == EMMessage.Direct.SEND && lastMessage.status() == EMMessage.Status.FAIL) {
                 holder.msgState.setVisibility(View.VISIBLE);
             } else {
                 holder.msgState.setVisibility(View.GONE);
             }
         }
-        
+
         //set property
         holder.name.setTextColor(primaryColor);
         holder.message.setTextColor(secondaryColor);
         holder.time.setTextColor(timeColor);
-        if(primarySize != 0)
+        if (primarySize != 0)
             holder.name.setTextSize(TypedValue.COMPLEX_UNIT_PX, primarySize);
-        if(secondarySize != 0)
+        if (secondarySize != 0)
             holder.message.setTextSize(TypedValue.COMPLEX_UNIT_PX, secondarySize);
-        if(timeSize != 0)
+        if (timeSize != 0)
             holder.time.setTextSize(TypedValue.COMPLEX_UNIT_PX, timeSize);
-
+        if(ismark){
+            holder.nikenameLayout.setVisibility(View.VISIBLE);
+            if(DatasShared.getHXNickName(username) != null){
+                holder.nikename.setText(DatasShared.getHXNickName(username));
+            }else{
+                holder.nikename.setHint("添加备注");
+            }
+        }else{
+            if(holder.nikename.getText().toString().trim() != null && !holder.nikename.getText().toString().trim().equals("")){
+                DatasShared.setHXNickName(username, holder.nikename.getText().toString().trim());
+            }
+            holder.nikenameLayout.setVisibility(View.GONE);
+            if(DatasShared.getHXNickName(username) != null &&  !DatasShared.getHXNickName(username).equals("")){
+                holder.name.setText(DatasShared.getHXNickName(username));
+            }
+        }
         return convertView;
     }
-    
+
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
-        if(!notiyfyByFilter){
+        if (!notiyfyByFilter) {
             copyConversationList.clear();
             copyConversationList.addAll(conversationList);
             notiyfyByFilter = false;
         }
     }
-    
+
     @Override
     public Filter getFilter() {
         if (conversationFilter == null) {
@@ -197,7 +213,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         }
         return conversationFilter;
     }
-    
+
 
     public void setPrimaryColor(int primaryColor) {
         this.primaryColor = primaryColor;
@@ -242,9 +258,6 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                 results.values = copyConversationList;
                 results.count = copyConversationList.size();
             } else {
-                if (copyConversationList.size() > mOriginalValues.size()) {
-                    mOriginalValues = copyConversationList;
-                }
                 String prefixString = prefix.toString();
                 final int count = mOriginalValues.size();
                 final ArrayList<EMConversation> newValues = new ArrayList<EMConversation>();
@@ -252,25 +265,25 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                 for (int i = 0; i < count; i++) {
                     final EMConversation value = mOriginalValues.get(i);
                     String username = value.conversationId();
-                    
+
                     EMGroup group = EMClient.getInstance().groupManager().getGroup(username);
-                    if(group != null){
+                    if (group != null) {
                         username = group.getGroupName();
-                    }else{
+                    } else {
                         EaseUser user = EaseUserUtils.getUserInfo(username);
                         // TODO: not support Nick anymore
-//                        if(user != null && user.getNick() != null)
-//                            username = user.getNick();
+                        if (user != null && user.getNick() != null)
+                            username = user.getNick();
                     }
 
                     // First match against the whole ,non-splitted value
                     if (username.startsWith(prefixString)) {
                         newValues.add(value);
-                    } else{
-                          final String[] words = username.split(" ");
-                            final int wordCount = words.length;
+                    } else {
+                        final String[] words = username.split(" ");
+                        final int wordCount = words.length;
 
-                            // Start at index 0, in case valueText starts with space(s)
+                        // Start at index 0, in case valueText starts with space(s)
                         for (String word : words) {
                             if (word.startsWith(prefixString)) {
                                 newValues.add(value);
@@ -303,24 +316,46 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
 
     private EaseConversationListHelper cvsListHelper;
 
-    public void setCvsListHelper(EaseConversationListHelper cvsListHelper){
+    public void setCvsListHelper(EaseConversationListHelper cvsListHelper) {
         this.cvsListHelper = cvsListHelper;
     }
-    
+
     private static class ViewHolder {
-        /** who you chat with */
+        /**
+         * who you chat with
+         */
+        LinearLayout nikenameLayout;
+        /**
+         * who you chat with
+         */
+        EditText nikename;
+        /**
+         * who you chat with
+         */
         TextView name;
-        /** unread message count */
+        /**
+         * unread message count
+         */
         TextView unreadLabel;
-        /** content of last message */
+        /**
+         * content of last message
+         */
         TextView message;
-        /** time of last message */
+        /**
+         * time of last message
+         */
         TextView time;
-        /** avatar */
+        /**
+         * avatar
+         */
         ImageView avatar;
-        /** status of last message */
+        /**
+         * status of last message
+         */
         View msgState;
-        /** layout */
+        /**
+         * layout
+         */
         RelativeLayout list_itease_layout;
         TextView motioned;
     }

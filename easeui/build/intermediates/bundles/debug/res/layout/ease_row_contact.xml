@@ -14,8 +14,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:textColor="#8a99ac"
-        android:textSize="15sp"
-        android:visibility="gone" />
+        android:textSize="15sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +22,7 @@
         android:background="@drawable/ease_mm_listitem"
         android:duplicateParentState="true" >
 
-        <com.hyphenate.easeui.widget.EaseImageView
+        <ImageView
             android:id="@+id/avatar"
             android:layout_width="43dp"
             android:layout_height="43dp"

@@ -16,7 +16,8 @@ import android.widget.Toast;
 import com.alipay.sdk.app.AuthTask;
 import com.neishenmo.sochat.sochatandroid.utils.AuthResult;
 import com.neishenmo.sochat.sochatandroid.utils.OrderInfoUtil2_0;
-import com.vondear.rxtools.module.alipay.PayResult;
+import com.neishenmo.sochat.sochatandroid.utils.PayResult;
+
 
 import java.util.HashMap;
 import java.util.Map;

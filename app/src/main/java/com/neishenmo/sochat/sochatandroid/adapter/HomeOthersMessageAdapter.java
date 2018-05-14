@@ -15,6 +15,7 @@ import com.neishenmo.sochat.sochatandroid.bean.Friends;
 import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
 import com.neishenmo.sochat.sochatandroid.utils.GlideCircleTransform;
 import com.neishenmo.sochat.sochatandroid.utils.StringUtil;
+import com.neishenmo.sochat.sochatandroid.utils.StringUtils;
 import com.neishenmo.sochat.sochatandroid.utils.TimeConvertUtil;
 
 import java.util.List;
@@ -77,7 +78,7 @@ public class HomeOthersMessageAdapter extends RecyclerView.Adapter<RecyclerView.
             e.printStackTrace();
         }
         holder1.otherOld.setText(i+"岁");
-        String s = StringUtil.toUtf8(onlineUserListBean.getNickName());
+        String s = StringUtils.toUtf8(onlineUserListBean.getNickName());
         holder1.otherName.setText(s);
 
         holder1.otherUss.setText(onlineUserListBean.getConstellation());

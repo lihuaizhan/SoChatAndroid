@@ -148,33 +148,37 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                     @Override
                     public void accept(VerificationBean verificationBean) throws Exception {
                         VerificationBean bean = verificationBean;
-                        Log.d("TAG",String.valueOf(bean.getCode())+"保存token之前的code--------------");
-                        Log.d("TAG",String.valueOf(bean.getData().getUserId())+"保存之前的token--------------");
-                        sp = getSharedPreferences("user",MODE_PRIVATE);
+                        Log.d("TAG", String.valueOf(bean.getCode()) + "保存token之前的code--------------");
+                        Log.d("TAG", String.valueOf(bean.getData().getUserId()) + "保存之前的token--------------");
+                        sp = getSharedPreferences("user", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("userId",String.valueOf(bean.getData().getUserId()));
-                        editor.putString("telephone",bean.getData().getTelephone());
-                        editor.putString("nickName",bean.getData().getNickName());
-                        editor.putString("picture",bean.getData().getPicture());
-                        editor.putString("birthday",bean.getData().getBirthday());
-                        editor.putString("sex",bean.getData().getSex());
-                        editor.putString("constellation",bean.getData().getConstellation());
-                        editor.putString("token",bean.getData().getToken());
-                        editor.putString("hxPassword",bean.getData().getHxPassword());
+                        editor.putString("userId", String.valueOf(bean.getData().getUserId()));
+                        editor.putString("telephone", bean.getData().getTelephone());
+                        editor.putString("nickName", bean.getData().getNickName());
+                        editor.putString("picture", bean.getData().getPicture());
+                        editor.putString("birthday", bean.getData().getBirthday());
+                        editor.putString("sex", bean.getData().getSex());
+                        editor.putString("constellation", bean.getData().getConstellation());
+                        editor.putString("token", bean.getData().getToken());
+                        editor.putString("hxPassword", bean.getData().getHxPassword());
                         editor.commit();
-                        if (bean.getCode() == 200){
-                            emClient(String.valueOf(bean.getData().getUserId()),bean.getData().getHxPassword());
+                        if (bean.getCode() == 200) {
+                            emClient(String.valueOf(bean.getData().getUserId()), bean.getData().getHxPassword());
 
                             Intent intent = new Intent(VerificationActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-                        }
-                        else if (bean.getCode() == 302){
-                            editor.putString("token",bean.getData().getToken());
-                            Intent intent = new Intent(VerificationActivity.this,PerfectDataActivity.class);
+                        } else if (bean.getCode() == 302) {
+                            editor.putString("token", bean.getData().getToken());
+                            Intent intent = new Intent(VerificationActivity.this, PerfectDataActivity.class);
                             startActivity(intent);
                             finish();
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
                     }
                 });
     }

@@ -61,7 +61,7 @@ public class VerificationBean {
          * lastActiveTime : 2018-04-27 13:26:05
          */
 
-        private int userId;
+        private String userId;
         private String telephone;
         private String nickName;
         private String picture;
@@ -79,11 +79,11 @@ public class VerificationBean {
         private String token;
         private String lastActiveTime;
 
-        public int getUserId() {
+        public String getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(String userId) {
             this.userId = userId;
         }
 

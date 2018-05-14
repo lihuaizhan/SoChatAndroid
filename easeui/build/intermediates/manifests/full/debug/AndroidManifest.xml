@@ -6,4 +6,12 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="26" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+    </application>
+
 </manifest>

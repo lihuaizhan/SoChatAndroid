@@ -1,14 +1,25 @@
 apply plugin: 'com.android.application'
 
 android {
-//    signingConfigs {
-//        debug {
-//            keyAlias 'test'
-//            keyPassword '111111'
-//            storeFile file('F:/ChangZhi/sss.jks')
-//            storePassword '111111'
-//        }
-//    }
+
+        signingConfigs {
+            release {
+                keyAlias 'key0'
+                keyPassword '111111'
+                storeFile file('F:/ChangZhi/sss.jks')
+                storePassword '111111'
+            }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
     compileSdkVersion 26
     lintOptions {
         checkReleaseBuilds false
@@ -23,12 +34,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
 }
 
 dependencies {
@@ -68,14 +79,16 @@ dependencies {
     //tablayout
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:design:26.0.0-alpha1'
-    implementation 'com.google.code.gson:gson:2.2.4'
+    //    implementation 'com.google.code.gson:gson:2.2.4'
     //Rxtool
-    compile 'com.github.vondear:RxTools:v1.7.7.3'
+    //  compile 'com.github.vondear:RxTools:v1.7.7.3'
     implementation project(':hipraiseanimationlib')
-    //compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-    compile 'com.tsy.social:social-sdk-core:2.0.0'
-    //social sdk 自由选择
-    //微信sdk
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
+    //微信登录
+   // compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+        compile 'com.tsy.social:social-sdk-core:2.0.0'
+        //social sdk 自由选择
+        //微信sdk
+        compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
     implementation files('libs/alipaySdk-20180403.jar')
+    compile 'com.jude:easyrecyclerview:4.4.2'
 }

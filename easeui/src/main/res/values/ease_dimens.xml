@@ -1,9 +1,10 @@
 <resources>
 
-     <dimen name="height_top_bar">46dp</dimen>
+     <dimen name="height_top_bar">50dp</dimen>
     <dimen name="padding_search_bar">5dp</dimen>
     <dimen name="height_row_weixin">59dp</dimen>
     <dimen name="size_avatar">48dp</dimen>
+    <dimen name="size_avatar_fleet">25dp</dimen>
     <dimen name="margin_chat_activity">5dp</dimen>
     <dimen name="field_textsize">14sp</dimen>
     <dimen name="field_margin_right">5dp</dimen>
@@ -17,10 +18,4 @@
     <dimen name="image_thumbnail_spacing">1dp</dimen>
 	<dimen name="chat_nick_margin_left">12dp</dimen>
 	<dimen name="chat_nick_text_size">13sp</dimen>
-    <dimen name="recall_dimen">8dp</dimen>
-    <dimen name="recall_dimen_bg">2dp</dimen>
-    <dimen name="recall_dimen_4">4dp</dimen>
-    <dimen name="recall_dimen_256">256dp</dimen>
-    <dimen name="recall_size_12">12sp</dimen>
-    <dimen name="recall_size_8">8sp</dimen>
 </resources>

@@ -13,12 +13,8 @@
  */
 package com.hyphenate.easeui.utils;
 
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.text.TextUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMMessage;
@@ -30,8 +26,12 @@ import com.hyphenate.util.EMLog;
 import com.hyphenate.util.HanziToPinyin;
 import com.hyphenate.util.HanziToPinyin.Token;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.text.TextUtils;
 
 public class EaseCommonUtils {
 	private static final String TAG = "CommonUtils";
@@ -147,7 +147,7 @@ public class EaseCommonUtils {
 	
 	/**
      * set initial letter of according user's nickname( username if no nickname)
-     * 
+     *
      * @param user
      */
     public static void setUserInitialLetter(EaseUser user) {

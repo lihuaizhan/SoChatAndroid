@@ -4,28 +4,21 @@
     android:id="@+id/chat_menu_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#333232"
     android:layout_alignParentBottom="true"
-    android:orientation="vertical" >
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <!-- <com.hyphenate.easeui.widget.EaseChatPrimaryMenu
         android:id="@+id/primary_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" /> -->
-    
-    <FrameLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/primary_menu_container"
-        >
-    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/extend_menu_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333232"
-        android:visibility="gone" >
+        android:background="@color/background"
+        android:visibility="gone">
 
         <com.hyphenate.easeui.widget.EaseChatExtendMenu
             android:id="@+id/extend_menu"
@@ -33,13 +26,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="9dp"
+            android:background="@color/background"
             hyphenate:numColumns="4" />
 
-        <FrameLayout 
+        <FrameLayout
+            android:id="@+id/emojicon_menu_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emojicon_menu_container"
-            ></FrameLayout>
+            android:background="@color/background"></FrameLayout>
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/primary_menu_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"></FrameLayout>
+
 
 </LinearLayout>

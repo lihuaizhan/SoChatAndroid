@@ -22,7 +22,7 @@ import com.hyphenate.easeui.R;
  * Created by lzan13 on 2015/4/30.
  * customized ImageView，Rounded Rectangle and border is implemented, and change color when you press
  */
-public class EaseImageView extends ImageView {
+public class EaseImageView extends android.support.v7.widget.AppCompatImageView {
     // paint when user press
     private Paint pressPaint;
     private int width;
@@ -90,6 +90,7 @@ public class EaseImageView extends ImageView {
         pressPaint.setAlpha(0);
         pressPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 
+        setClickable(true);
         setDrawingCacheEnabled(true);
         setWillNotDraw(false);
     }
@@ -112,9 +113,7 @@ public class EaseImageView extends ImageView {
         Bitmap bitmap = getBitmapFromDrawable(drawable);
         drawDrawable(canvas, bitmap);
 
-        if(isClickable()){
-            drawPress(canvas);
-        }
+        drawPress(canvas);
         drawBorder(canvas);
     }
 
@@ -241,7 +240,6 @@ public class EaseImageView extends ImageView {
     }
 
     /**
-     *
      * @param drawable
      * @return
      */
@@ -317,7 +315,7 @@ public class EaseImageView extends ImageView {
     }
 
     /**
-     * set shape,1 is circle, 2 is rectangle
+     * set shape
      *
      * @param shapeType
      */

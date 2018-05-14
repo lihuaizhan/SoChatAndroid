@@ -1,23 +1,27 @@
 package com.hyphenate.easeui.widget.chatrow;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMLocationMessageBody;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessage.ChatType;
+import com.hyphenate.easeui.R;
+//import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
+import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
+import com.hyphenate.exceptions.HyphenateException;
+import com.hyphenate.util.LatLng;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.hyphenate.chat.EMLocationMessageBody;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.R;
-import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
-import com.hyphenate.util.LatLng;
-
 public class EaseChatRowLocation extends EaseChatRow{
 
     private TextView locationView;
     private EMLocationMessageBody locBody;
 
-    public EaseChatRowLocation(Context context, EMMessage message, int position, BaseAdapter adapter) {
+	public EaseChatRowLocation(Context context, EMMessage message, int position, BaseAdapter adapter) {
         super(context, message, position, adapter);
     }
 
@@ -37,49 +41,60 @@ public class EaseChatRowLocation extends EaseChatRow{
     protected void onSetUpView() {
 		locBody = (EMLocationMessageBody) message.getBody();
 		locationView.setText(locBody.getAddress());
-    }
 
-    @Override
-    protected void onViewUpdate(EMMessage msg) {
-        switch (msg.status()) {
-            case CREATE:
-                onMessageCreate();
+		// handle sending message
+		if (message.direct() == EMMessage.Direct.SEND) {
+		    setMessageSendCallback();
+            switch (message.status()) {
+            case CREATE: 
+                progressBar.setVisibility(View.GONE);
+                statusView.setVisibility(View.VISIBLE);
                 break;
             case SUCCESS:
-                onMessageSuccess();
+                progressBar.setVisibility(View.GONE);
+                statusView.setVisibility(View.GONE);
                 break;
             case FAIL:
-                onMessageError();
+                progressBar.setVisibility(View.GONE);
+                statusView.setVisibility(View.VISIBLE);
                 break;
             case INPROGRESS:
-                onMessageInProgress();
+                progressBar.setVisibility(View.VISIBLE);
+                statusView.setVisibility(View.GONE);
                 break;
+            default:
+               break;
+            }
+        }else{
+            if(!message.isAcked() && message.getChatType() == ChatType.Chat){
+                try {
+                    EMClient.getInstance().chatManager().ackMessageRead(message.getFrom(), message.getMsgId());
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-
-    private void onMessageCreate() {
-        progressBar.setVisibility(View.VISIBLE);
-        statusView.setVisibility(View.GONE);
+    
+    @Override
+    protected void onUpdateView() {
+        adapter.notifyDataSetChanged();
     }
-
-    private void onMessageSuccess() {
-        progressBar.setVisibility(View.GONE);
-        statusView.setVisibility(View.GONE);
+    
+    @Override
+    protected void onBubbleClick() {
+        EMLocationMessageBody locBody = (EMLocationMessageBody) message.getBody();
+        //TODO if need map
+        Intent intent = new Intent(context, EaseBaiduMapActivity.class);
+        intent.putExtra("latitude", locBody.getLatitude());
+        intent.putExtra("longitude", locBody.getLongitude());
+        intent.putExtra("address", locBody.getAddress());
+        activity.startActivity(intent);
     }
-
-    private void onMessageError() {
-        progressBar.setVisibility(View.GONE);
-        statusView.setVisibility(View.VISIBLE);
-    }
-
-    private void onMessageInProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-        statusView.setVisibility(View.GONE);
-    }
-
+    
     /*
-         * listener for map clicked
-         */
+	 * listener for map clicked
+	 */
 	protected class MapClickListener implements OnClickListener {
 
 		LatLng location;

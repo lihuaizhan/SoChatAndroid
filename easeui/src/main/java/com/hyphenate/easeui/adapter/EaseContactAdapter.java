@@ -15,12 +15,9 @@ import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.R;
-import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
-import com.hyphenate.easeui.widget.EaseImageView;
 import com.hyphenate.util.EMLog;
 
 import java.util.ArrayList;
@@ -74,6 +71,7 @@ public class EaseContactAdapter extends ArrayAdapter<EaseUser> implements Sectio
             Log.d("ContactAdapter", position + "");
         String username = user.getUsername();
         String header = user.getInitialLetter();
+        String avatar = user.getAvatar();
         
         if (position == 0 || header != null && !header.equals(getItem(position - 1).getInitialLetter())) {
             if (TextUtils.isEmpty(header)) {
@@ -86,21 +84,8 @@ public class EaseContactAdapter extends ArrayAdapter<EaseUser> implements Sectio
             holder.headerView.setVisibility(View.GONE);
         }
 
-        EaseAvatarOptions avatarOptions = EaseUI.getInstance().getAvatarOptions();
-        if(avatarOptions != null && holder.avatar instanceof EaseImageView) {
-            EaseImageView avatarView = ((EaseImageView) holder.avatar);
-            if (avatarOptions.getAvatarShape() != 0)
-                avatarView.setShapeType(avatarOptions.getAvatarShape());
-            if (avatarOptions.getAvatarBorderWidth() != 0)
-                avatarView.setBorderWidth(avatarOptions.getAvatarBorderWidth());
-            if (avatarOptions.getAvatarBorderColor() != 0)
-                avatarView.setBorderColor(avatarOptions.getAvatarBorderColor());
-            if (avatarOptions.getAvatarRadius() != 0)
-                avatarView.setRadius(avatarOptions.getAvatarRadius());
-        }
-
-        EaseUserUtils.setUserNick(username, holder.nameView);
-        EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+//        EaseUserUtils.setUserNick(null,"哈哈", holder.nameView);
+//        EaseUserUtils.setUserAvatar(getContext(), null, avatar, holder.avatar);
         
        
         if(primaryColor != 0)
@@ -186,10 +171,6 @@ public class EaseContactAdapter extends ArrayAdapter<EaseUser> implements Sectio
                 results.values = copyUserList;
                 results.count = copyUserList.size();
             }else{
-
-                if (copyUserList.size() > mOriginalList.size()) {
-                    mOriginalList = copyUserList;
-                }
                 String prefixString = prefix.toString();
                 final int count = mOriginalList.size();
                 final ArrayList<EaseUser> newValues = new ArrayList<EaseUser>();

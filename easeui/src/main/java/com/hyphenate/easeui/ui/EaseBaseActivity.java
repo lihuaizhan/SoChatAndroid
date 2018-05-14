@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
-import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.controller.EaseUI;
 
 @SuppressLint({"NewApi", "Registered"})
 public class EaseBaseActivity extends FragmentActivity {
@@ -43,6 +43,7 @@ public class EaseBaseActivity extends FragmentActivity {
                 return;
             }
         }
+        
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
     

@@ -23,6 +23,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.adapter.HomeOthersMessageAdapter;
@@ -41,7 +44,6 @@ import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
-import com.vondear.rxtools.RxTool;
 
 import org.limlee.hipraiseanimationlib.HiPraise;
 import org.limlee.hipraiseanimationlib.HiPraiseAnimationView;
@@ -81,7 +83,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private TimerTask task;
     private long interval = 500;
 
-
+    private static long lastClickTime;
 //    int color = 0;
 //
 //    private List<ColourBean> colorBean;
@@ -90,7 +92,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 //    private int g1 = 0;
 //    private int b1 = 0;
 //
-//    private String CLICK = "点击";
+    private String CLICK = "点击";
 
 //    private Handler handler = new Handler(){
 //        @Override
@@ -120,6 +122,52 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 //
 //        }
 //    };
+
+
+
+
+//
+//    private Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+////            ToastUtils.makeText(getActivity(),msg.arg1+"arg1",1);
+//
+////            if ((String.valueOf(msg.what)) != null){
+////                String rgb = "#" + checkColorValue(msg.arg1) + checkColorValue(msg.arg2) + checkColorValue(msg.what);
+////                  getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor(rgb));
+////                 mRlHome.setBackgroundColor(Color.parseColor(rgb));
+////                 sleep();
+////            }
+//            if (msg.obj == CLICK) {
+//                if (count == 1) {
+//                    ToastUtils.makeText(getActivity(), "单击事件", 1);
+//                } else if (count > 1) {
+//                    ToastUtils.makeText(getActivity(), "连续点击事件，共点击了 " + count + " 次", 1);
+//                }
+//
+//                EMMessage message = EMMessage.createTxtSendMessage(count + "", nickName + "");
+//                message.setAttribute(EaseUserUtils.FROM_MEMBER_NICK, onlineUserListBean.getNickName());
+//                message.setAttribute(EaseUserUtils.FROM_AVATAR, user.getString("picture", ""));
+//                message.setAttribute(EaseUserUtils.TOMAVATAR, user.getString("picture", ""));
+//                message.setAttribute(EaseUserUtils.TOMEMBER_NICK, onlineUserListBean.getNickName());
+//                message.setAttribute(EaseUserUtils.PRAISEFLAG, count);
+//                message.setAttribute(EaseUserUtils.MESSAGETYPE, "praiseType");
+//                EMClient.getInstance().chatManager().sendMessage(message);
+//
+//                delayTimer.cancel();
+//                count = 0;
+//            }
+////            if (msg.what == 666){
+////                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor("#333232"));
+////                mRlHome.setBackgroundColor(Color.parseColor("#333232"));
+////            }
+//
+//        }
+//    };
+    private HomeOthers.DataBean.OnlineUserListBean onlineUserListBean;
+    private int nickName;
+
 
 //    private void sleep() {
 //        new Thread(new Runnable() {
@@ -277,7 +325,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
                     //  ToastUtils.makeText(getActivity(),"您已登录",1);
                     if(list.size()!=0)
-                    {   boolean fastClick = RxTool.isFastClick(200);
+                    {   boolean fastClick = isFastClick(200);
                         if (fastClick) {
                           //  Toast.makeText(getActivity(), "快", Toast.LENGTH_SHORT).show();
                             int rgb = Color.rgb(150, 11, 208);
@@ -299,7 +347,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
                             // Toast.makeText(getActivity(),firstItemPosition+"",Toast.LENGTH_SHORT).show();
                             //  LogUtils.d("ssssss",firstItemPosition+"");
-                            HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(firstItemPosition);
+                            onlineUserListBean = list.get(firstItemPosition);
                             //设置点赞参数并调用点赞接口
                             thumbs.setAmount("1");
                             thumbs.setTelephone(onlineUserListBean.getTelephone());
@@ -322,7 +370,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                     else{
                         Toast.makeText(getActivity(),"目前没有推荐用户",Toast.LENGTH_SHORT).show();
                     }
-
+                    nickName = onlineUserListBean.getUserId();
                 }
                 break;
             case R.id.iv_money:
@@ -526,5 +574,14 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         final IPraise hiPraise = new HiPraise(BitmapFactory.decodeResource(getResources(), R.drawable.love));
         mHiPraiseAnimationView.addPraise(hiPraise);
     }
-
+    public static boolean isFastClick(int millisecond) {
+        long curClickTime = System.currentTimeMillis();
+        long interval = curClickTime - lastClickTime;
+        if(0L < interval && interval < (long)millisecond) {
+            return true;
+        } else {
+            lastClickTime = curClickTime;
+            return false;
+        }
+    }
 }
