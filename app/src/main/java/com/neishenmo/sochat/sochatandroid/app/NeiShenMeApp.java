@@ -37,7 +37,7 @@ public class NeiShenMeApp extends Application {
 //        EMClient.getInstance().init(this, options);
         EaseUI.getInstance().init(this, null);
        // RxTool.init(this);
-      //  initWeiXin();
+       // initWeiXin();
     }
 //    public static IWXAPI sApi;
 //    private void initWeiXin() {
