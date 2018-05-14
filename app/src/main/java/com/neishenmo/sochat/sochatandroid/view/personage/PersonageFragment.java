@@ -80,15 +80,20 @@ import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
+import com.tsy.sdk.social.PlatformConfig;
+import com.tsy.sdk.social.PlatformType;
 import com.tsy.sdk.social.SocialApi;
+import com.tsy.sdk.social.listener.AuthListener;
 
 
+import java.util.List;
 import java.util.Map;
 
 import bpwidget.lib.wjj.blurpopupwindowlib.widget.BlurPopWin;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -98,7 +103,9 @@ import static com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity
  * Created by Administrator on 2018-04-24.
  */
 
-public class PersonageFragment extends BaseFragment {
+public class PersonageFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks {
+    private static final int REQUEST_LOCATION = 1;
+
     private View view;
     private ImageView picture;
     private ImageView setMessage;
@@ -198,8 +205,8 @@ public class PersonageFragment extends BaseFragment {
 
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
-
-//    @SuppressLint("HandlerLeak")
+    private SocialApi mSocialApi;
+    //    @SuppressLint("HandlerLeak")
 //    private Handler mHandler = new Handler() {
 //        @SuppressWarnings("unused")
 //        public void handleMessage(Message msg) {
@@ -274,7 +281,8 @@ public class PersonageFragment extends BaseFragment {
         mSave = view.findViewById(R.id.saves);
         cancelDeposit = view.findViewById(R.id.deposit_cancel);
         setName = view.findViewById(R.id.set_name);
-        SocialApi mSocialApi = SocialApi.get(getActivity().getApplicationContext());
+        PlatformConfig.setWeixin(WX_APPID);
+        mSocialApi = SocialApi.get(getActivity().getApplicationContext());
 
         //初始化阿里云
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
@@ -325,6 +333,7 @@ public class PersonageFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
          //   WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+                mSocialApi.doOauthVerify(getActivity(), PlatformType.WEIXIN , new MyAuthListener());
             }
         });
 
@@ -666,6 +675,8 @@ public class PersonageFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        mSocialApi.onActivityResult(requestCode, resultCode, data);
+
         /**
          * 选择照片完成后传回
          */
@@ -747,7 +758,25 @@ public class PersonageFragment extends BaseFragment {
                     }
                 });
     }
+    public class MyAuthListener implements AuthListener {
+        @Override
+        public void onComplete(PlatformType platform_type, Map<String, String> map) {
+            Toast.makeText(getActivity(), platform_type + " login onComplete", Toast.LENGTH_SHORT).show();
+            Log.i("tsy", "login onComplete:" + map);
+        }
 
+        @Override
+        public void onError(PlatformType platform_type, String err_msg) {
+            Toast.makeText(getActivity(), platform_type + " login onError:" + err_msg, Toast.LENGTH_SHORT).show();
+            Log.i("tsy", "login onError:" + err_msg);
+        }
+
+        @Override
+        public void onCancel(PlatformType platform_type) {
+            Toast.makeText(getActivity(), platform_type + " login onCancel", Toast.LENGTH_SHORT).show();
+            Log.i("tsy", "login onCancel");
+        }
+    }
     /**
      * 支付宝账户授权业务
      *
@@ -799,4 +828,33 @@ public class PersonageFragment extends BaseFragment {
 //            Thread authThread = new Thread(authRunnable);
 //            authThread.start();
 //        }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //申请权限
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (!EasyPermissions.hasPermissions(getActivity(), perms)) {
+            EasyPermissions.requestPermissions(this, "need access external storage", REQUEST_LOCATION, perms);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(getActivity(), perms)) {
+            Toast.makeText(getActivity().getApplicationContext(), "前往设置开启访问存储空间权限", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+        }
+    }
 }
