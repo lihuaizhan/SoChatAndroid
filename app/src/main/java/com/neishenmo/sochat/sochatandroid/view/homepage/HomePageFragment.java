@@ -42,15 +42,14 @@ import com.neishenmo.sochat.sochatandroid.requestbean.MoneyListRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.RelationShipRequest;
 import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
+import com.neishenmo.sochat.sochatandroid.view.MainActivity;
 import com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
 
-import org.limlee.hipraiseanimationlib.HiPraise;
-import org.limlee.hipraiseanimationlib.HiPraiseAnimationView;
-import org.limlee.hipraiseanimationlib.base.IPraise;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -75,7 +74,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private List<HomeListBean.DataBean.OnlineUserListBean> mHomeList;
     private Thumbs thumbs;
     private RelativeLayout mRlHome;
-    private HiPraiseAnimationView mHiPraiseAnimationView;
+    //  private HiPraiseAnimationView mHiPraiseAnimationView;
 
     private int count = 0;
     private long firstTime = 0;
@@ -84,107 +83,19 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private long interval = 500;
 
     private static long lastClickTime;
-//    int color = 0;
-//
-//    private List<ColourBean> colorBean;
+    Random random = new Random();
+    Random random1 = new Random();
+    private int r = random.nextInt(256);
+    private int g = random.nextInt(256);
+    private int b = random.nextInt(256);
+    private int r1 = random1.nextInt(256);
+    private int g1 = random1.nextInt(256);
+    private int b1 = random1.nextInt(256);
 
-//    private int r1 = 0;
-//    private int g1 = 0;
-//    private int b1 = 0;
-//
-    private String CLICK = "点击";
-
-//    private Handler handler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-////            ToastUtils.makeText(getActivity(),msg.arg1+"arg1",1);
-//
-//            if ((String.valueOf(msg.what)) != null){
-//                String rgb = "#" + checkColorValue(msg.arg1) + checkColorValue(msg.arg2) + checkColorValue(msg.what);
-//                  getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor(rgb));
-//                 mRlHome.setBackgroundColor(Color.parseColor(rgb));
-//                 sleep();
-//            }
-//            if (msg.obj == CLICK){
-//                if (count == 1) {
-//                    ToastUtils.makeText(getActivity(),"单击事件",1);
-//                } else if (count > 1) {
-//                    ToastUtils.makeText(getActivity(),"连续点击事件，共点击了 " + count + " 次",1);
-//                }
-//                delayTimer.cancel();
-//                count = 0;
-//            }
-//            if (msg.what == 666){
-//                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor("#333232"));
-//                mRlHome.setBackgroundColor(Color.parseColor("#333232"));
-//            }
-//
-//        }
-//    };
-
-
-
-
-//
-//    private Handler handler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-////            ToastUtils.makeText(getActivity(),msg.arg1+"arg1",1);
-//
-////            if ((String.valueOf(msg.what)) != null){
-////                String rgb = "#" + checkColorValue(msg.arg1) + checkColorValue(msg.arg2) + checkColorValue(msg.what);
-////                  getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor(rgb));
-////                 mRlHome.setBackgroundColor(Color.parseColor(rgb));
-////                 sleep();
-////            }
-//            if (msg.obj == CLICK) {
-//                if (count == 1) {
-//                    ToastUtils.makeText(getActivity(), "单击事件", 1);
-//                } else if (count > 1) {
-//                    ToastUtils.makeText(getActivity(), "连续点击事件，共点击了 " + count + " 次", 1);
-//                }
-//
-//                EMMessage message = EMMessage.createTxtSendMessage(count + "", nickName + "");
-//                message.setAttribute(EaseUserUtils.FROM_MEMBER_NICK, onlineUserListBean.getNickName());
-//                message.setAttribute(EaseUserUtils.FROM_AVATAR, user.getString("picture", ""));
-//                message.setAttribute(EaseUserUtils.TOMAVATAR, user.getString("picture", ""));
-//                message.setAttribute(EaseUserUtils.TOMEMBER_NICK, onlineUserListBean.getNickName());
-//                message.setAttribute(EaseUserUtils.PRAISEFLAG, count);
-//                message.setAttribute(EaseUserUtils.MESSAGETYPE, "praiseType");
-//                EMClient.getInstance().chatManager().sendMessage(message);
-//
-//                delayTimer.cancel();
-//                count = 0;
-//            }
-////            if (msg.what == 666){
-////                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.parseColor("#333232"));
-////                mRlHome.setBackgroundColor(Color.parseColor("#333232"));
-////            }
-//
-//        }
-//    };
     private HomeOthers.DataBean.OnlineUserListBean onlineUserListBean;
-    private int nickName;
-
-
-//    private void sleep() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(5000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                Message message = new Message();
-//                message.what = 666;
-//                handler.sendMessage(message);
-//            }
-//        }).start();
-//    }
-
+    private String nickName;
+//页面标识
+    private int page = 0;
 
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -230,8 +141,8 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initData() {
         list = new ArrayList<>();
-      //  colorBean = new ArrayList<>();
-       // initAddList();
+        //  colorBean = new ArrayList<>();
+        // initAddList();
         thumbs = new Thumbs();
         sp = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
         user = getActivity().getSharedPreferences("user", 0);
@@ -242,19 +153,26 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         mRecycleViewPage = view.findViewById(R.id.rl_user);
         view = view.findViewById(R.id.rl_home);
         mRlHome = view.findViewById(R.id.rl_home);
-        mHiPraiseAnimationView =view.findViewById(R.id.praise_animation);
+        // mHiPraiseAnimationView = view.findViewById(R.id.praise_animation);
 
 
-       //点击监听
+        //点击监听
         mIvLove.setOnClickListener(this);
         mIvMoney.setOnClickListener(this);
 
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecycleViewPage.setLayoutManager(layout);
+        //首页请求参数
+        HomeRequst request = new HomeRequst();
+        if(user.getString("token","")=="")
+        {
+            page = 1;
+        }
+        request.setPageNo(page+"");
+        request.setToken(user.getString("token",""));
 
-        MoneyListRequst request = new MoneyListRequst(user.getString("token", ""), "");
-
+        //请求首页数据
         serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<HomeOthers>() {
@@ -264,23 +182,23 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                         list = homeOthers.getData().getOnlineUserList();
                         HomeOthersMessageAdapter homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
                         homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
-                    @Override
-                    public void onClick(int position) {
-                       // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onClick(int position) {
+                                // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
 
-                        HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
-                        Intent intent = new Intent(getActivity(), ParticularActivity.class);
-                        Bundle mBundle = new Bundle();
-                        mBundle.putSerializable("home",onlineUserListBean);
-                        intent.putExtras(mBundle);
-                        startActivity(intent);
-                    }
+                                HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
+                                Intent intent = new Intent(getActivity(), ParticularActivity.class);
+                                Bundle mBundle = new Bundle();
+                                mBundle.putSerializable("home", onlineUserListBean);
+                                intent.putExtras(mBundle);
+                                startActivity(intent);
+                            }
 
-                    @Override
-                    public void onLongClick(int position) {
+                            @Override
+                            public void onLongClick(int position) {
 
-                    }
-                });
+                            }
+                        });
                         mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
 
 
@@ -304,36 +222,29 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_love:
-
+                r = random.nextInt(256);
+                g = random.nextInt(256);
+                b = random.nextInt(256);
+                r1 = random1.nextInt(256);
+                g1 = random1.nextInt(256);
+                b1 = random1.nextInt(256);
                 if (sp.getString("token", "") == "") {
                     Intent intent = new Intent(getActivity(), SplaActivity.class);
                     startActivity(intent);
                 } else {
-
-//                    long secondTime = System.currentTimeMillis();
-//                    // 判断每次点击的事件间隔是否符合连击的有效范围
-//                    // 不符合时，有可能是连击的开始，否则就仅仅是单击
-//                    if (secondTime - firstTime <= interval) {
-//                        ++count;
-//                    } else {
-//                        count = 1;
-//                    }
-//                    // 延迟，用于判断用户的点击操作是否结束
-//                    delay();
-//                    firstTime = secondTime;
-//                    ColorChange();
-
-                    //  ToastUtils.makeText(getActivity(),"您已登录",1);
-                    if(list.size()!=0)
-                    {   boolean fastClick = isFastClick(200);
+                    if (list.size() != 0) {
+                        boolean fastClick = isFastClick(200);
                         if (fastClick) {
-                          //  Toast.makeText(getActivity(), "快", Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(getActivity(), "快", Toast.LENGTH_SHORT).show();
                             int rgb = Color.rgb(150, 11, 208);
                             //mRxHeartLayout.addHeart(rgb);
-                            addPraise();
+                            //调用点赞飘心动画
+                            // addPraise();
+                            animationColorGradient(Color.rgb(r, g, b), Color.rgb(r1, g1, b1));
                         } else {
                             //Toast.makeText(getActivity(), "不快", Toast.LENGTH_SHORT).show();
-                            animationColorGradient(Color.BLUE, Color.RED);
+                            getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.rgb(r, g, b));
+                            //  animationColorGradient(Color.rgb(r,g,b),Color.parseColor("#333232"));
 
 
                         }
@@ -366,180 +277,53 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                                         }
                                     });
                         }
+                    } else {
+                        Toast.makeText(getActivity(), "目前没有推荐用户", Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        Toast.makeText(getActivity(),"目前没有推荐用户",Toast.LENGTH_SHORT).show();
-                    }
-                    nickName = onlineUserListBean.getUserId();
+                    //  nickName = onlineUserListBean.getUserId();
                 }
                 break;
             case R.id.iv_money:
                 break;
         }
     }
-//    private void initAddList() {
-//        colorBean = new ArrayList<>();
-//        ColourBean bean = new ColourBean(138,160,255 );
-//        colorBean.add(bean);
-//        ColourBean bean1 = new ColourBean(221,118,255 );
-//        colorBean.add(bean1);
-//        ColourBean bean2 = new ColourBean(254,115,168  );
-//        colorBean.add(bean2);
-//        ColourBean bean3 = new ColourBean(113,73,255);
-//        colorBean.add(bean3);
-//        ColourBean bean4 = new ColourBean(102,255,253 );
-//        colorBean.add(bean4);
-//        ColourBean bean5 = new ColourBean(254,211,108 );
-//        colorBean.add(bean5);
-//        ColourBean bean6 = new ColourBean(253,123,52 );
-//        colorBean.add(bean6);
-//        ColourBean bean7 = new ColourBean(205,255,157 );
-//        colorBean.add(bean7);
-//        ColourBean bean8 = new ColourBean(199,126,255 );
-//        colorBean.add(bean8);
-//        ColourBean bean9 = new ColourBean(55,255,255 );
-//        colorBean.add(bean9);
-//    }
 
-//    // 延迟时间是连击的时间间隔有效范围
-//    private void delay() {
-//        if (task != null)
-//            task.cancel();
-//
-//        task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                Message message = new Message();
-//                message.obj = CLICK;
-//                // message.what = 0;
-//                handler.sendMessage(message);
-//            }
-//        };
-//        delayTimer = new Timer();
-//        delayTimer.schedule(task, interval);
-//    }
-//    private void ColorChange() {
-//        color ++;
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                for (int i = 0; i < 10; i++) {
-//                    if (color<colorBean.size() - 1){
-//                        if (colorBean.get(color).getR() > colorBean.get(color+1).getR()){
-//                            int r = (colorBean.get(color).getR() - colorBean.get(color+1).getR()) / 10;
-//                            r1 = colorBean.get(color).getR() - r;
-//                        }
-//                        else if (colorBean.get(color).getR()<colorBean.get(color+1).getR()){
-//                            int r = (colorBean.get(color + 1).getR() - colorBean.get(color).getR()) / 10;
-//                            r1 = colorBean.get(color).getR() + r;
-//                        }
-//                        else {
-//
-//                        }
-//                        if (colorBean.get(color).getG() > colorBean.get(color+1).getG()){
-//                            int g = (colorBean.get(color).getG() - colorBean.get(color+1).getG()) / 10;
-//                            g1 = colorBean.get(color).getG() - g;
-//                        }
-//                        else if (colorBean.get(color).getG() < colorBean.get(color+1).getG()){
-//                            int g = (colorBean.get(color+1).getG() - colorBean.get(color).getG()) / 10;
-//                            g1 = colorBean.get(color).getG() + g;
-//                        }
-//                        else {
-//
-//                        }
-//                        if (colorBean.get(color).getB() > colorBean.get(color+1).getB()){
-//                            int b = (colorBean.get(color).getB() - colorBean.get(color+1).getB()) / 10;
-//                            b1 = colorBean.get(color).getB() - b;
-//                        }
-//                        else if (colorBean.get(color).getG() < colorBean.get(color+1).getG()){
-//                            int b = colorBean.get(color+1).getB() - colorBean.get(color).getB();
-//                            b1 = colorBean.get(color).getB() + b;
-//                        }
-//                        else {
-//
-//                        }
-//                    }
-//
-//
-//                    else {
-//                        color = 0;
-//                        if (colorBean.get(color).getR() > colorBean.get(colorBean.size() - 1).getR()){
-//                            int r = (colorBean.get(color).getR() - colorBean.get(colorBean.size() - 1).getR()) / 10;
-//                            r1 = colorBean.get(color).getR() - r;
-//                        }
-//                        else if (colorBean.get(color).getR()<colorBean.get(colorBean.size() - 1).getR()){
-//                            int r = (colorBean.get(colorBean.size() - 1).getR() - colorBean.get(color).getR()) / 10;
-//                            r1 = colorBean.get(color).getR() + r;
-//                        }
-//                        else {
-//
-//                        }
-//                        if (colorBean.get(color).getG() > colorBean.get(colorBean.size() - 1).getG()){
-//                            int g = (colorBean.get(color).getG() - colorBean.get(colorBean.size() - 1).getG()) / 10;
-//                            g1 = colorBean.get(color).getG() - g;
-//                        }
-//                        else if (colorBean.get(color).getG() < colorBean.get(colorBean.size() - 1).getG()){
-//                            int g = (colorBean.get(colorBean.size() - 1).getG() - colorBean.get(color).getG()) / 10;
-//                            g1 = colorBean.get(color).getG() + g;
-//                        }
-//                        else {
-//
-//                        }
-//                        if (colorBean.get(color).getB() > colorBean.get(colorBean.size() - 1).getB()){
-//                            int b = (colorBean.get(color).getB() - colorBean.get(colorBean.size() - 1).getB()) / 10;
-//                            b1 = colorBean.get(color).getB() - b;
-//                        }
-//                        else if (colorBean.get(color).getG() < colorBean.get(colorBean.size() - 1).getG()){
-//                            int b = colorBean.get(colorBean.size() - 1).getB() - colorBean.get(color).getB();
-//                            b1 = colorBean.get(color).getB() + b;
-//                        }
-//                        else {
-//
-//                        }
-//                    }
-//                    Message message = new Message();
-//                    message.arg1 = r1;
-//                    message.arg2 = g1;
-//                    message.what = b1;
-//                    handler.sendMessage(message);
-//                    try {
-//                        Thread.sleep(200);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//        }).start();
-//    }
-
-//    //rgb转二进制
-//    private String checkColorValue(int value){
-//        String str = "";
-//        if(value<16){
-//            str ="0" + Integer.toHexString(value);
-//            return str;
-//        }
-//        return Integer.toHexString(value);
-//    }
     @Override
     public void onResume() {
         super.onResume();
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
 
-        mHiPraiseAnimationView.start(); //添加点赞动画之前要先开始启动绘制，如果没有，是添加不了任何的动画对象
+        //  mHiPraiseAnimationView.start(); //添加点赞动画之前要先开始启动绘制，如果没有，是添加不了任何的动画对象
     }
+
     @Override
     public void onPause() {
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
 
-        mHiPraiseAnimationView.stop(); //停止绘制点赞动画，停止后会clear掉整个画布和清空掉所有绘制的对象
+        //  mHiPraiseAnimationView.stop(); //停止绘制点赞动画，停止后会clear掉整个画布和清空掉所有绘制的对象
     }
+
+//    //点赞动画
+//    private void addPraise() {
+//        final IPraise hiPraise = new HiPraise(BitmapFactory.decodeResource(getResources(), R.drawable.love));
+//        mHiPraiseAnimationView.addPraise(hiPraise);
+//    }
+
+    public static boolean isFastClick(int millisecond) {
+        long curClickTime = System.currentTimeMillis();
+        long interval = curClickTime - lastClickTime;
+        if (0L < interval && interval < (long) millisecond) {
+            return true;
+        } else {
+            lastClickTime = curClickTime;
+            return false;
+        }
+    }
+
     //颜色渐变动画
-    public  void animationColorGradient(int beforeColor, int afterColor) {
-        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), new Object[]{Integer.valueOf(beforeColor), Integer.valueOf(afterColor)}).setDuration(1000L);
+    public void animationColorGradient(int beforeColor, int afterColor) {
+        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), new Object[]{Integer.valueOf(beforeColor), Integer.valueOf(afterColor)}).setDuration(500L);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 int i = ((Integer) animation.getAnimatedValue()).intValue();
@@ -555,7 +339,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                getActivity().findViewById(R.id.home_layout).setBackgroundColor(getActivity().getResources().getColor(R.color.bg));
+                getActivity().findViewById(R.id.home_layout).setBackgroundResource(R.color.bg);
             }
 
             @Override
@@ -568,20 +352,5 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
             }
         });
-    }
-    //点赞动画
-    private void addPraise() {
-        final IPraise hiPraise = new HiPraise(BitmapFactory.decodeResource(getResources(), R.drawable.love));
-        mHiPraiseAnimationView.addPraise(hiPraise);
-    }
-    public static boolean isFastClick(int millisecond) {
-        long curClickTime = System.currentTimeMillis();
-        long interval = curClickTime - lastClickTime;
-        if(0L < interval && interval < (long)millisecond) {
-            return true;
-        } else {
-            lastClickTime = curClickTime;
-            return false;
-        }
     }
 }

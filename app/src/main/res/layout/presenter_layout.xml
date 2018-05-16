@@ -107,7 +107,7 @@
        android:textSize="40sp"
        android:layout_gravity="center"
        android:gravity="center"
-       android:textColor="#ffffff"
+       android:textColor="#525252"
        android:textColorHint="#ffffff"
        android:background="@null"
        android:visibility="gone"
@@ -124,31 +124,61 @@
         android:text="当前最大提现金额为2700"
         android:layout_marginTop="@dimen/y15"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/withdraw"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/y20"
-        >
-        <ImageView
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/withdraw"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:gravity="center"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_marginTop="@dimen/y20"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/x50"-->
+            <!--android:layout_height="@dimen/y35"-->
+            <!--android:id="@+id/withdraw_alipay"-->
+            <!--android:background="@mipmap/alipay"-->
+            <!--android:layout_marginRight="@dimen/x30"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/x50"-->
+            <!--android:layout_height="@dimen/y35"-->
+            <!--android:id="@+id/withdraw_weixin"-->
+            <!--android:background="@mipmap/weixin"-->
+            <!--android:layout_marginLeft="@dimen/x30"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+    <RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/withdraw"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:visibility="gone"
+    android:layout_marginTop="@dimen/y20">
+
+        <RadioButton
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/y35"
             android:id="@+id/withdraw_alipay"
-            android:background="@mipmap/alipay"
+            android:background="@drawable/select_apily"
+            android:button="@null"
+            android:gravity="center"
             android:layout_marginRight="@dimen/x30"
             />
-        <ImageView
-            android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/y35"
-            android:id="@+id/withdraw_weixin"
-            android:background="@mipmap/weixin"
-            android:layout_marginLeft="@dimen/x30"
+
+        <RadioButton
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/y35"
+        android:id="@+id/withdraw_weixin"
+            android:background="@drawable/select_weixin"
+            android:gravity="center"
+            android:button="@null"
+        android:layout_marginLeft="@dimen/x30"
             />
-    </LinearLayout>
+    </RadioGroup>
     <Button
         android:layout_width="@dimen/x80"
         android:layout_height="@dimen/y20"

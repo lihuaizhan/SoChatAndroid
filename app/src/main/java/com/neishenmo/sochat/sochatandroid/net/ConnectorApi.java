@@ -8,7 +8,7 @@ package com.neishenmo.sochat.sochatandroid.net;
 public class ConnectorApi {
 
     //生成环境
-    public static final String BASE_URL = "http://47.104.134.162/nsm-master/";
+    public static final String BASE_URL = "https://bushinazhong.cn/nsm-master/";
     //后缀
     public static final String SUFFIX = ".shtml";
     //发送外部验证码（登陆、注册）,params:telephone;
@@ -53,5 +53,8 @@ public class ConnectorApi {
     public static final String ALI_AUTH_LOGIN  = "AliPay/aliAuthLogin";
     //支付宝提现
     public static final String ALI_WITHD_RAWAL  = "AliPay/aliWithdrawal";
+    //微信提现：
+
+    public static final String WEIXIN_WITHD_RAWAL  = "WeiXinPay/wexinWithdrawal";
 
 }

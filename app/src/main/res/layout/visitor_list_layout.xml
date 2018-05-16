@@ -2,30 +2,77 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     >
-    <LinearLayout
+    <!--<ImageView-->
+        <!--android:layout_width="@dimen/x50"-->
+        <!--android:layout_height="@dimen/y50"-->
+        <!--android:id="@+id/visitor_tou"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_marginTop="@dimen/y4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/visitor_time"-->
+        <!--android:layout_alignBottom="@id/visitor_tou"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="#ffffff"-->
+        <!--/>-->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:gravity="center"
-       android:padding="@dimen/x1"
+        android:padding="@dimen/x2"
+        android:layout_centerVertical="true"
         >
+
+        <ImageView
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/y20"
+            android:id="@+id/delete_bg"
+            android:visibility="gone"
+            android:layout_toRightOf="@id/visitor_tou"
+            android:layout_alignBottom="@id/visitor_tou"
+            android:background="@drawable/delete_bg" />
         <ImageView
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/y50"
             android:id="@+id/visitor_tou"
-            android:layout_gravity="center"
+          android:layout_centerInParent="true"
+
             />
         <TextView
-            android:layout_marginTop="@dimen/y4"
+            android:layout_marginTop="@dimen/y10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/visitor_time"
-            android:layout_gravity="center"
             android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/visitor_tou"
+
             />
-    </LinearLayout>
+
+    </RelativeLayout>
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="@dimen/x2"-->
+    <!--&gt;-->
+    <!--<ImageView-->
+        <!--android:layout_width="@dimen/x50"-->
+        <!--android:layout_height="@dimen/y50"-->
+        <!--android:id="@+id/visitor_tou"-->
+        <!--android:layout_gravity="center"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_marginTop="@dimen/y4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/visitor_time"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:textColor="#ffffff"-->
+        <!--/>-->
+<!--</LinearLayout>-->
 
 </RelativeLayout>

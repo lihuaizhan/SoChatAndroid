@@ -97,6 +97,7 @@
 //            case BaseResp.ErrCode.ERR_OK:
 //                String code = ((SendAuth.Resp) resp).code;
 //                Log.i("ssssssssssssssssssss",code);
+//                finish();
 //                break;
 //            case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
 //                finish();

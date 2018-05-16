@@ -110,7 +110,7 @@ public interface ServiceApi {
      * 获取首页信息
      */
     @POST(ConnectorApi.HOME_DATA_URL+ConnectorApi.SUFFIX)
-    Observable<HomeOthers> getHomeOthers(@Body MoneyListRequst requst);
+    Observable<HomeOthers> getHomeOthers(@Body HomeRequst requst);
     /**
      * 获取点赞状态
      */

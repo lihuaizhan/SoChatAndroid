@@ -79,7 +79,7 @@ public class HomeOthers implements Serializable{
              * lastLoginTime : 2018-05-04 13:11:39
              */
 
-            private int userId;
+            private String userId;
             private String telephone;
             private String nickName;
             private String picture;
@@ -100,11 +100,11 @@ public class HomeOthers implements Serializable{
             private String lastActiveTime;
             private String lastLoginTime;
 
-            public int getUserId() {
+            public String getUserId() {
                 return userId;
             }
 
-            public void setUserId(int userId) {
+            public void setUserId(String userId) {
                 this.userId = userId;
             }
 

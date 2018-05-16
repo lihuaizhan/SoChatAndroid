@@ -31,6 +31,7 @@ import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.MainActivity;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +58,8 @@ public class VerificationActivity extends Activity implements View.OnClickListen
 
     private String phone_state;
     private SharedPreferences sp;
+    private  String msgCode;
+    private Bundle bundle = new Bundle();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,14 +87,15 @@ public class VerificationActivity extends Activity implements View.OnClickListen
          */
         Intent intent = getIntent();
         phone_state = intent.getStringExtra("state");
-        if (phone_state == "1"){
-            mTvText.setText(R.string.sign_title);
-        }
-        else if (phone_state == "0") {
-            mTvText.setText(R.string.register_title);
-        }
         phone = intent.getStringExtra("phone");
         mTvPhoneErification.setText(String.format(getString(R.string.input_phione),phone));
+        if ("1".equals(phone_state ) ){
+            mTvText.setText(R.string.sign_title);
+        }
+        else if ("0".equals(phone_state )) {
+            mTvText.setText(R.string.register_title);
+        }
+
 //        mTvPhoneErification.setText(String.format(getString(R.string.input_phione),intent.getStringArrayExtra("phone").toString()));
     }
 
@@ -109,6 +113,9 @@ public class VerificationActivity extends Activity implements View.OnClickListen
              * 下一步点击事件
              */
             case R.id.iv_next_step:
+                 msgCode = mEdErificationNumber.getText().toString().trim();
+                 bundle.putString("code",msgCode);
+                 bundle.putString("call",phone);
                 NextStep();
                 break;
             /**
@@ -139,7 +146,7 @@ public class VerificationActivity extends Activity implements View.OnClickListen
      * 登录
      */
     private void SignIn() {
-        VerificationRequst requst = new VerificationRequst(phone,mEdErificationNumber.getText().toString());
+        VerificationRequst requst = new VerificationRequst(phone,msgCode);
         ServiceApi api = RetrofitHelper.getServiceApi();
         api.getVerification(requst)
                 .subscribeOn(Schedulers.io())
@@ -147,6 +154,7 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                 .subscribe(new Consumer<VerificationBean>() {
                     @Override
                     public void accept(VerificationBean verificationBean) throws Exception {
+
                         VerificationBean bean = verificationBean;
                         Log.d("TAG", String.valueOf(bean.getCode()) + "保存token之前的code--------------");
                         Log.d("TAG", String.valueOf(bean.getData().getUserId()) + "保存之前的token--------------");
@@ -161,18 +169,21 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                         editor.putString("constellation", bean.getData().getConstellation());
                         editor.putString("token", bean.getData().getToken());
                         editor.putString("hxPassword", bean.getData().getHxPassword());
+                        editor.putString("balance", bean.getData().getBalance().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
                         editor.commit();
                         if (bean.getCode() == 200) {
                             emClient(String.valueOf(bean.getData().getUserId()), bean.getData().getHxPassword());
 
                             Intent intent = new Intent(VerificationActivity.this, MainActivity.class);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                             finish();
                         } else if (bean.getCode() == 302) {
-                            editor.putString("token", bean.getData().getToken());
-                            Intent intent = new Intent(VerificationActivity.this, PerfectDataActivity.class);
-                            startActivity(intent);
-                            finish();
+                            //editor.putString("token", bean.getData().getToken());
+//                            Intent intent = new Intent(VerificationActivity.this, PerfectDataActivity.class);
+//                            startActivity(intent);
+//                            finish();
+                            Toast.makeText(getApplicationContext(),"请输入正确的验证码",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Consumer<Throwable>() {
@@ -218,11 +229,12 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                     public void accept(SignBean signBean) throws Exception {
                         SignBean bean = signBean;
                         if (bean.getCode() == 200){
-                            SharedPreferences sp = getSharedPreferences("user",MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putString("token",bean.getToken());
-                            editor.commit();
+//                            SharedPreferences sp = getSharedPreferences("user",MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sp.edit();
+//                            editor.putString("token",bean.getToken());
+//                            editor.commit();
                             Intent intent = new Intent(VerificationActivity.this, PerfectDataActivity.class);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                             finish();
                         }

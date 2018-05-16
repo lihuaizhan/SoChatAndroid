@@ -60,6 +60,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/y5"
                     android:background="@mipmap/more"
+                    android:visibility="gone"
                     android:id="@+id/visitor_more"
                     />
 
@@ -126,6 +127,7 @@
                     android:layout_marginBottom="@dimen/y5"
                     android:background="@mipmap/more"
                     android:id="@+id/like_more"
+                    android:visibility="gone"
                     />
 
             </LinearLayout>
@@ -192,6 +194,7 @@
                     android:layout_marginBottom="@dimen/y5"
                     android:background="@mipmap/more"
                     android:id="@+id/friends_more"
+                    android:visibility="gone"
                     />
 
             </LinearLayout>

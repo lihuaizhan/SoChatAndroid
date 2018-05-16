@@ -6,10 +6,11 @@ package com.neishenmo.sochat.sochatandroid.bean;
 
 public class PerfectDataBean {
 
+
     /**
      * code : 200
-     * msg : 完善信息成功
-     * data : {"userId":2,"telephone":"17611398776","nickName":"阳阳","picture":"baidu.com","birthday":"2006-06-06","sex":"男","registerTime":"2018-04-27 13:25:49","constellation":"双子座","state":0,"ipAddr":"","hxPassword":"KJ73Vz0d","remark":"","lon":0,"lat":0,"simpleAddress":"","token":"B0BAFA29F5E138B2F1BFB1C70A7AB662","lastActiveTime":"2018-04-27 13:26:05"}
+     * msg : 注册成功
+     * data : {"telephone":"17612341234","nickName":"测试0","picture":"baidu.com","birthday":"2006-06-06","sex":"男","registerTime":"2018-05-14 11:38:21","constellation":"双子座","state":1,"ipAddr":"127.0.0.1","balance":0,"userId":"NHPEV5lZ","hxPassword":"W9b9E6gQ","remark":"","lon":0,"lat":0,"distance":-1,"simpleAddress":"","token":"766142657032B0BA91AF26479668FCC7","lastActiveTime":"2018-05-14 11:38:21","lastLoginTime":"2018-05-14 11:38:21"}
      */
 
     private int code;
@@ -42,26 +43,28 @@ public class PerfectDataBean {
 
     public static class DataBean {
         /**
-         * userId : 2
-         * telephone : 17611398776
-         * nickName : 阳阳
+         * telephone : 17612341234
+         * nickName : 测试0
          * picture : baidu.com
          * birthday : 2006-06-06
          * sex : 男
-         * registerTime : 2018-04-27 13:25:49
+         * registerTime : 2018-05-14 11:38:21
          * constellation : 双子座
-         * state : 0
-         * ipAddr :
-         * hxPassword : KJ73Vz0d
+         * state : 1
+         * ipAddr : 127.0.0.1
+         * balance : 0.0
+         * userId : NHPEV5lZ
+         * hxPassword : W9b9E6gQ
          * remark :
-         * lon : 0
-         * lat : 0
+         * lon : 0.0
+         * lat : 0.0
+         * distance : -1.0
          * simpleAddress :
-         * token : B0BAFA29F5E138B2F1BFB1C70A7AB662
-         * lastActiveTime : 2018-04-27 13:26:05
+         * token : 766142657032B0BA91AF26479668FCC7
+         * lastActiveTime : 2018-05-14 11:38:21
+         * lastLoginTime : 2018-05-14 11:38:21
          */
 
-        private int userId;
         private String telephone;
         private String nickName;
         private String picture;
@@ -71,21 +74,17 @@ public class PerfectDataBean {
         private String constellation;
         private int state;
         private String ipAddr;
+        private double balance;
+        private String userId;
         private String hxPassword;
         private String remark;
-        private int lon;
-        private int lat;
+        private double lon;
+        private double lat;
+        private double distance;
         private String simpleAddress;
         private String token;
         private String lastActiveTime;
-
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
+        private String lastLoginTime;
 
         public String getTelephone() {
             return telephone;
@@ -159,6 +158,22 @@ public class PerfectDataBean {
             this.ipAddr = ipAddr;
         }
 
+        public double getBalance() {
+            return balance;
+        }
+
+        public void setBalance(double balance) {
+            this.balance = balance;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
         public String getHxPassword() {
             return hxPassword;
         }
@@ -175,20 +190,28 @@ public class PerfectDataBean {
             this.remark = remark;
         }
 
-        public int getLon() {
+        public double getLon() {
             return lon;
         }
 
-        public void setLon(int lon) {
+        public void setLon(double lon) {
             this.lon = lon;
         }
 
-        public int getLat() {
+        public double getLat() {
             return lat;
         }
 
-        public void setLat(int lat) {
+        public void setLat(double lat) {
             this.lat = lat;
+        }
+
+        public double getDistance() {
+            return distance;
+        }
+
+        public void setDistance(double distance) {
+            this.distance = distance;
         }
 
         public String getSimpleAddress() {
@@ -213,6 +236,14 @@ public class PerfectDataBean {
 
         public void setLastActiveTime(String lastActiveTime) {
             this.lastActiveTime = lastActiveTime;
+        }
+
+        public String getLastLoginTime() {
+            return lastLoginTime;
+        }
+
+        public void setLastLoginTime(String lastLoginTime) {
+            this.lastLoginTime = lastLoginTime;
         }
     }
 }

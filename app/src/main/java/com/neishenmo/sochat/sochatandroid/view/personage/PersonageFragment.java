@@ -10,12 +10,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -38,6 +42,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +83,7 @@ import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
 import com.neishenmo.sochat.sochatandroid.utils.ObtainAlbumUtils;
 import com.neishenmo.sochat.sochatandroid.utils.OrderInfoUtil2_0;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
+import com.neishenmo.sochat.sochatandroid.utils.dpturnxpUtils;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
@@ -86,6 +93,8 @@ import com.tsy.sdk.social.SocialApi;
 import com.tsy.sdk.social.listener.AuthListener;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +103,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import pub.devrel.easypermissions.EasyPermissions;
+
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -104,7 +114,7 @@ import static com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity
  */
 
 public class PersonageFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks {
-    private static final int REQUEST_LOCATION = 1;
+
 
     private View view;
     private ImageView picture;
@@ -129,9 +139,9 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
      * 当前最大提现金额为2700
      */
     private TextView mReminder;
-    private ImageView mWithdrawAlipay;
-    private ImageView mWithdrawWeixin;
-    private LinearLayout mWithdraw;
+    private RadioButton mWithdrawAlipay;
+    private RadioButton mWithdrawWeixin;
+    private RadioGroup mWithdraw;
     /**
      * 确认提现
      */
@@ -205,7 +215,12 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
+    private int flag;
+
     private SocialApi mSocialApi;
+    private static final int REQUEST_LOCATION = 1;
+
+
     //    @SuppressLint("HandlerLeak")
 //    private Handler mHandler = new Handler() {
 //        @SuppressWarnings("unused")
@@ -235,15 +250,15 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //获取sp
+//        //获取sp
         user = getActivity().getSharedPreferences("user", 0);
-        if (user.getString("token", "").equals("")) {
-            Intent intent = new Intent(getActivity(), SplaActivity.class);
-            startActivity(intent);
+//        if (user.getString("token", "").equals("")) {
+//            Intent intent = new Intent(getActivity(), SplaActivity.class);
+//            startActivity(intent);
 //            getActivity().finish();
 //            ViewPager viewById = getActivity().findViewById(R.id.viewPager);
 //            viewById.setCurrentItem(0);
-        }
+        //}
     }
 
     @Override
@@ -257,6 +272,8 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 
     @Override
     protected void initData() {
+        PlatformConfig.setWeixin(WX_APPID);
+        mSocialApi = SocialApi.get(getActivity().getApplicationContext());
         //获取控件id
         bg = view.findViewById(R.id.bg);
         picture = view.findViewById(R.id.picture);
@@ -268,9 +285,9 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         mExit = (ImageView) view.findViewById(R.id.exit);
         mCallCamera = (ImageView) view.findViewById(R.id.call_camera);
         mReminder = (TextView) view.findViewById(R.id.reminder);
-        mWithdrawAlipay = (ImageView) view.findViewById(R.id.withdraw_alipay);
-        mWithdrawWeixin = (ImageView) view.findViewById(R.id.withdraw_weixin);
-        mWithdraw = (LinearLayout) view.findViewById(R.id.withdraw);
+        mWithdrawAlipay =  view.findViewById(R.id.withdraw_alipay);
+        mWithdrawWeixin =  view.findViewById(R.id.withdraw_weixin);
+        mWithdraw =  view.findViewById(R.id.withdraw);
         mDeposit = (Button) view.findViewById(R.id.deposit);
         mMoney = (ImageView) view.findViewById(R.id.money);
         mMoneyNum = (TextView) view.findViewById(R.id.money_num);
@@ -281,8 +298,23 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         mSave = view.findViewById(R.id.saves);
         cancelDeposit = view.findViewById(R.id.deposit_cancel);
         setName = view.findViewById(R.id.set_name);
-        PlatformConfig.setWeixin(WX_APPID);
-        mSocialApi = SocialApi.get(getActivity().getApplicationContext());
+
+
+        //微信支付宝提现
+        mWithdraw.check(R.id.withdraw_alipay);
+       mWithdraw.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(RadioGroup radioGroup, int i) {
+               if(i==R.id.withdraw_weixin)
+               {
+                   flag=1;
+
+               }
+               else{
+                   flag=0;
+               }
+           }
+       });
 
         //初始化阿里云
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
@@ -298,44 +330,60 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         final PailyUtils pailyUtils = new PailyUtils();
         final SetName rqe = new SetName();
         rqe.setToken(user.getString("token", ""));
-        //支付宝提现
-        mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
+
+        mDeposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
-                serviceApi.apilyLogin(rqe).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<ApilyLogin>() {
-                            @Override
-                            public void accept(ApilyLogin apilyLogin) throws Exception {
-                                orderInfo = apilyLogin.getData();
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
+                if(flag ==0)
+                {
+                    serviceApi.apilyLogin(rqe).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<ApilyLogin>() {
+                                @Override
+                                public void accept(ApilyLogin apilyLogin) throws Exception {
+                                    orderInfo = apilyLogin.getData();
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
 
-                            }
-                        });
-                s = importMoney.getText().toString().trim();
-                pailyUtils.setActivity(getActivity(), s);
-                if (s != null & !s.equals("")) {
-                    pailyUtils.pay(orderInfo);
-                } else {
-                    Toast.makeText(getActivity(), "请输入提现数量", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    s = importMoney.getText().toString().trim();
+                    pailyUtils.setActivity(getActivity(), s);
+                    if (s != null & !s.equals("")) {
+                        pailyUtils.pay(orderInfo);
+                    } else {
+                        Toast.makeText(getActivity(), "请输入提现数量", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+                 //微信提现
+                else {
 
-
+                    //WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+                    mSocialApi.doOauthVerify(getActivity(), PlatformType.WEIXIN , new MyAuthListener());
+                }
             }
         });
-
-//微信授权
-        mWithdrawWeixin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-         //   WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
-                mSocialApi.doOauthVerify(getActivity(), PlatformType.WEIXIN , new MyAuthListener());
-            }
-        });
+//        //支付宝提现
+//        mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
+//
+//
+//            }
+//        });
+//
+////微信授权
+//        mWithdrawWeixin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
 
         //获取token
         request = new RelationShipRequest("0", user.getString("token", ""));
@@ -416,13 +464,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         });
 
 
-//         bg.setOnClickListener(new View.OnClickListener() {
-//       @Override
-//       public void onClick(View view) {
-//           importMoney.setFocusable(false);
-//           importMoney.setInputType(InputType.TYPE_NULL); // 关闭软键盘
-//       }
-//   });
+
         //修改名字
         paint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -518,8 +560,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
                                 }
                             });
 
-//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
                     beginupload();
 
 
@@ -544,8 +585,8 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
                              */
                             case R.id.tv_menu_1:
 //                                uploadFilePath
-                                mPhotoPath = ObtainAlbumUtils.getSDPath() + "/" + ObtainAlbumUtils.getPhotoFileName();
-                                ObtainAlbumUtils.openCamera(getActivity(), mPhotoPath);
+                                mPhotoPath = ObtainAlbumUtils.getSDPath()+"/"+ObtainAlbumUtils.getPhotoFileName();
+                                openCamera();
 //                openCamera();
                                 break;
                             /**
@@ -581,13 +622,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
                 }
             }
         });
-//        importMoney.setOnTouchListener(new View.OnTouchListener()
-//        { public boolean onTouch(View v, MotionEvent event)
-//        {     InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
-//              imm.showSoftInputFromInputMethod(importMoney.getWindowToken(),0);
-//
-//            return false;
-//            }});
+
 
         //设置提现输入框只能输入两位小数点
         importMoney.addTextChangedListener(new TextWatcher() {
@@ -675,7 +710,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mSocialApi.onActivityResult(requestCode, resultCode, data);
+      mSocialApi.onActivityResult(requestCode, resultCode, data);
 
         /**
          * 选择照片完成后传回
@@ -687,20 +722,22 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
             picture.setImageBitmap(bitmap);
         }
         /**
-         * 调用截图
+         * 拍照后调用截图
          */
-        else if (requestCode == 33) {
-            if (data != null) {
-                ObtainAlbumUtils.BitmapScreenshot(data, getActivity());
+        else if (requestCode  == 33){
+            if (data!=null){
+//                Log.d("TAG","这个是拍照时返回的");
+                BitmapScreenshot(data);
             }
         }
         /**
          * 截图之后设置头像
          */
-        else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT) {
-            if (data != null) {
+        else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT){
+            if (data!=null) {
                 Bitmap bitmap = data.getParcelableExtra("data");
                 uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
+                Log.d("TAG",bitmap+"这个是拍照截图返回的");
                 picture.setImageBitmap(bitmap);
             }
         }
@@ -758,25 +795,93 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
                     }
                 });
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //申请权限
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (!EasyPermissions.hasPermissions(getActivity(), perms)) {
+            EasyPermissions.requestPermissions(this, "need access external storage", REQUEST_LOCATION, perms);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            Toast.makeText(getActivity().getApplicationContext(), "前往设置开启访问存储空间权限", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+        }
+    }
+
     public class MyAuthListener implements AuthListener {
         @Override
         public void onComplete(PlatformType platform_type, Map<String, String> map) {
-            Toast.makeText(getActivity(), platform_type + " login onComplete", Toast.LENGTH_SHORT).show();
-            Log.i("tsy", "login onComplete:" + map);
+//            Toast.makeText(getActivity(), platform_type + " login onComplete", Toast.LENGTH_SHORT).show();
+//            Log.i("tsy", "login onComplete:" + map);
+            String code = map.get("code");
+
         }
 
         @Override
         public void onError(PlatformType platform_type, String err_msg) {
-            Toast.makeText(getActivity(), platform_type + " login onError:" + err_msg, Toast.LENGTH_SHORT).show();
-            Log.i("tsy", "login onError:" + err_msg);
+//            Toast.makeText(getActivity(), platform_type + " login onError:" + err_msg, Toast.LENGTH_SHORT).show();
+//            Log.i("tsy", "login onError:" + err_msg);
         }
 
         @Override
         public void onCancel(PlatformType platform_type) {
-            Toast.makeText(getActivity(), platform_type + " login onCancel", Toast.LENGTH_SHORT).show();
-            Log.i("tsy", "login onCancel");
+//            Toast.makeText(getActivity(), platform_type + " login onCancel", Toast.LENGTH_SHORT).show();
+//            Log.i("tsy", "login onCancel");
         }
     }
+
+    public void openCamera( ) {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//        mPhotoPath = getSDPath()+"/"+getPhotoFileName();
+        File mPhotoFile = new File(mPhotoPath);
+        if (mPhotoFile.exists()){
+            try {
+                mPhotoFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
+        this.startActivityForResult(intent,33);
+    }
+    public void BitmapScreenshot(Intent data){
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        Bitmap bitmap = data.getParcelableExtra("data");
+        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getActivity().getContentResolver(),bitmap,null,null));
+        intent.setDataAndType(uri,"image/*");
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 裁剪框大小
+        intent.putExtra("aspectX", dpturnxpUtils.wide(getActivity()));
+        intent.putExtra("aspectY", dpturnxpUtils.wide(getActivity()));
+        // outputX outputY 保存图片大小
+        intent.putExtra("outputX", 150);
+        intent.putExtra("outputY", 150);
+        //输出JPG格式图片
+        intent.putExtra("outputFormat",Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("return-data", true);
+        this.startActivityForResult(intent, ObtainAlbumUtils.HEAD_SCREENSHOT);
+    }
+
     /**
      * 支付宝账户授权业务
      *
@@ -828,33 +933,5 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 //            Thread authThread = new Thread(authRunnable);
 //            authThread.start();
 //        }
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        //申请权限
-        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        if (!EasyPermissions.hasPermissions(getActivity(), perms)) {
-            EasyPermissions.requestPermissions(this, "need access external storage", REQUEST_LOCATION, perms);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(getActivity(), perms)) {
-            Toast.makeText(getActivity().getApplicationContext(), "前往设置开启访问存储空间权限", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-        }
-    }
 }

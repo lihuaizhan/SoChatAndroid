@@ -11,20 +11,9 @@ public class HomeRequst {
     private String simpleAddress;
     private String pageNo;
 
-    public HomeRequst(String token, String lon, String lat, String simpleAddress) {
-        this.token = token;
-        this.lon = lon;
-        this.lat = lat;
-        this.simpleAddress = simpleAddress;
-    }
 
-    public HomeRequst(String token, String lon, String lat, String simpleAddress, String pageNo) {
-        this.token = token;
-        this.lon = lon;
-        this.lat = lat;
-        this.simpleAddress = simpleAddress;
-        this.pageNo = pageNo;
-    }
+
+
 
     public String getToken() {
 

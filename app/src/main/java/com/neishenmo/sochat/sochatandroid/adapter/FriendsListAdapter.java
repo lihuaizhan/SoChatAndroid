@@ -1,22 +1,32 @@
 package com.neishenmo.sochat.sochatandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.bean.Friends;
 import com.neishenmo.sochat.sochatandroid.bean.Like;
+import com.neishenmo.sochat.sochatandroid.bean.LogOut;
 import com.neishenmo.sochat.sochatandroid.utils.GlideCircleTransform;
 import com.neishenmo.sochat.sochatandroid.utils.TimeConvertUtil;
+import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
 
 import java.util.List;
+
+import bpwidget.lib.wjj.blurpopupwindowlib.widget.BlurPopWin;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -60,8 +70,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        MyViewHolder holder1 = (MyViewHolder) holder;
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        final MyViewHolder holder1 = (MyViewHolder) holder;
         Friends.DataBean.FuiListBean fuiListBean = list.get(position);
         with = Glide.with(context);
         if (fuiListBean.getPicture().equals("baidu.com")) {
@@ -81,7 +91,41 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder1.visitorTou.setLayoutParams(layoutParams);
             holder1.visitorTime.setText(TimeConvertUtil.getTimeInterval(fuiListBean.getFrTime()));
         }
+        holder1.visitorTou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder1.deleteBg.setVisibility(View.GONE);
+            }
+        });
+        holder1.visitorTou.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                holder1.deleteBg.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
+        holder1.deleteBg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                new BlurPopWin.Builder(context).setContent("删除后,好友将不会在出现在您的好友列表!")
+                        //Radius越大耗时越长,被图片处理图像越模糊
+                        .setRadius(3).setTitle("删除好友")
+                        //设置居中还是底部显示
+                        .setshowAtLocationType(0)
+                        .onClick(new BlurPopWin.PopupCallback() {
+                            @Override
+                            public void onCancelClick(@NonNull BlurPopWin blurPopWin) {
+                                blurPopWin.dismiss();
+                            }
+
+                            @Override
+                            public void onAffirmClick(@NonNull BlurPopWin blurPopWin) {
+                                blurPopWin.dismiss();
+                            }
+                        }).show(holder1.deleteBg);
+            }
+        });
         //判断点击接口是否为空
         if (mOnItemClickListener != null) {
             //点击事件
@@ -89,6 +133,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void onClick(View v) {
                     mOnItemClickListener.onClick(position);
+
                 }
             });
             //长按点击事件
@@ -96,6 +141,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public boolean onLongClick(View v) {
                     mOnItemClickListener.onLongClick(position);
+
                     return true;
                 }
             });
@@ -113,11 +159,13 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView visitorTou;
         private TextView visitorTime;
+        private ImageView deleteBg;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             visitorTou = itemView.findViewById(R.id.visitor_tou);
             visitorTime = itemView.findViewById(R.id.visitor_time);
+            deleteBg = itemView.findViewById(R.id.delete_bg);
 
         }
     }

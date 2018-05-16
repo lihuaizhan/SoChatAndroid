@@ -14,7 +14,6 @@ public class SignBean {
 
     private int code;
     private String msg;
-    private String token;
 
     public int getCode() {
         return code;
@@ -32,11 +31,5 @@ public class SignBean {
         this.msg = msg;
     }
 
-    public String getToken() {
-        return token;
-    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

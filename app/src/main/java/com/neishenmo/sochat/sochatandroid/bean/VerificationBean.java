@@ -1,5 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.bean;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Administrator on 2018\4\28 0028.
  */
@@ -9,7 +11,7 @@ public class VerificationBean {
     /**
      * code : 200
      * msg : 登陆成功
-     * data : {"userId":2,"telephone":"17611398776","nickName":"阳阳","picture":"baidu.com","birthday":"2006-06-06","sex":"男","registerTime":"2018-04-27 13:25:49","constellation":"双子座","state":0,"ipAddr":"","hxPassword":"KJ73Vz0d","remark":"","lon":0,"lat":0,"simpleAddress":"","token":"B0BAFA29F5E138B2F1BFB1C70A7AB662","lastActiveTime":"2018-04-27 13:26:05"}
+     * data : {"userId":6,"telephone":"17319229663","nickName":"有何不可\n","picture":"https://neishenme.oss-cn-beijing.aliyuncs.com/857571E799AAE56AE44412058D7C7DDD1526264107795","birthday":"1993年1月1日","sex":"男","registerTime":"2018-05-09 17:17:47","constellation":"未知","state":1,"ipAddr":"","balance":8,"hxPassword":"9jOY21D8","remark":"","lon":0,"lat":0,"distance":-1,"simpleAddress":"","token":"E81B68703A29643AC636A8E5DA33C3D0","lastActiveTime":"2018-05-15 16:44:06","lastLoginTime":"2018-05-15 16:44:06"}
      */
 
     private int code;
@@ -42,23 +44,27 @@ public class VerificationBean {
 
     public static class DataBean {
         /**
-         * userId : 2
-         * telephone : 17611398776
-         * nickName : 阳阳
-         * picture : baidu.com
-         * birthday : 2006-06-06
+         * userId : 6
+         * telephone : 17319229663
+         * nickName : 有何不可
+
+         * picture : https://neishenme.oss-cn-beijing.aliyuncs.com/857571E799AAE56AE44412058D7C7DDD1526264107795
+         * birthday : 1993年1月1日
          * sex : 男
-         * registerTime : 2018-04-27 13:25:49
-         * constellation : 双子座
-         * state : 0
+         * registerTime : 2018-05-09 17:17:47
+         * constellation : 未知
+         * state : 1
          * ipAddr :
-         * hxPassword : KJ73Vz0d
+         * balance : 8
+         * hxPassword : 9jOY21D8
          * remark :
          * lon : 0
          * lat : 0
+         * distance : -1
          * simpleAddress :
-         * token : B0BAFA29F5E138B2F1BFB1C70A7AB662
-         * lastActiveTime : 2018-04-27 13:26:05
+         * token : E81B68703A29643AC636A8E5DA33C3D0
+         * lastActiveTime : 2018-05-15 16:44:06
+         * lastLoginTime : 2018-05-15 16:44:06
          */
 
         private String userId;
@@ -71,13 +77,16 @@ public class VerificationBean {
         private String constellation;
         private int state;
         private String ipAddr;
+        private BigDecimal balance;
         private String hxPassword;
         private String remark;
-        private int lon;
-        private int lat;
+        private double lon;
+        private double lat;
+        private double distance;
         private String simpleAddress;
         private String token;
         private String lastActiveTime;
+        private String lastLoginTime;
 
         public String getUserId() {
             return userId;
@@ -159,6 +168,14 @@ public class VerificationBean {
             this.ipAddr = ipAddr;
         }
 
+        public BigDecimal getBalance() {
+            return balance;
+        }
+
+        public void setBalance(BigDecimal balance) {
+            this.balance = balance;
+        }
+
         public String getHxPassword() {
             return hxPassword;
         }
@@ -175,20 +192,28 @@ public class VerificationBean {
             this.remark = remark;
         }
 
-        public int getLon() {
+        public double getLon() {
             return lon;
         }
 
-        public void setLon(int lon) {
+        public void setLon(double lon) {
             this.lon = lon;
         }
 
-        public int getLat() {
+        public double getLat() {
             return lat;
         }
 
-        public void setLat(int lat) {
+        public void setLat(double lat) {
             this.lat = lat;
+        }
+
+        public double getDistance() {
+            return distance;
+        }
+
+        public void setDistance(double distance) {
+            this.distance = distance;
         }
 
         public String getSimpleAddress() {
@@ -213,6 +238,14 @@ public class VerificationBean {
 
         public void setLastActiveTime(String lastActiveTime) {
             this.lastActiveTime = lastActiveTime;
+        }
+
+        public String getLastLoginTime() {
+            return lastLoginTime;
+        }
+
+        public void setLastLoginTime(String lastLoginTime) {
+            this.lastLoginTime = lastLoginTime;
         }
     }
 }

@@ -5,18 +5,27 @@ package com.neishenmo.sochat.sochatandroid.requestbean;
  */
 
 public class PerfectDataRequst {
-    private String token;
+    private String telephone;
+    private String msgCode;
     private String nickName;
     private String picture;
     private String birthday;
     private String sex;
 
-    public String getToken() {
-        return token;
+    public String getMsgCode() {
+        return msgCode;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setMsgCode(String msgCode) {
+        this.msgCode = msgCode;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getNickName() {
@@ -51,11 +60,5 @@ public class PerfectDataRequst {
         this.sex = sex;
     }
 
-    public PerfectDataRequst(String token, String nickName, String picture, String birthday, String sex) {
-        this.token = token;
-        this.nickName = nickName;
-        this.picture = picture;
-        this.birthday = birthday;
-        this.sex = sex;
-    }
+
 }

@@ -110,7 +110,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
     private int minTextSize = 14;
     private ImageView mTvNextStep;
 
-    private String token;
+//    private String token;
 
     private  String mPhotoPath;
 
@@ -123,13 +123,18 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
     private String uploadFilePath;
 
     private String AliYunPath;
+    private  String code;
+    private  String phone;
 
-    private SharedPreferences sp;
+  //  private SharedPreferences sp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfect_data);
+        Intent intent = getIntent();
+         code = intent.getStringExtra("code");
+         phone = intent.getStringExtra("call");
         initView();
         //初始化阿里云
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
@@ -144,7 +149,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
     }
 
     private void initView() {
-        sp = getSharedPreferences("user",MODE_PRIVATE);
+        //sp = getSharedPreferences("user",MODE_PRIVATE);
         mTvPerfect = (TextView) findViewById(R.id.tv_perfect);
         mTvPerfect.setOnClickListener(this);
         mCivHeadPortrait = (CircleImageView) findViewById(R.id.civ_head_portrait);
@@ -172,7 +177,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
 
         mIvMan.setSelected(true);
         mIvWoman.setSelected(false);
-        token = sp.getString("token","");
+       // token = sp.getString("token","");
 //        token = getIntent().getStringExtra("token");
 //        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
@@ -380,9 +385,15 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
      * 把设置好的信息传入服务器
      */
     private void NextStop() {
-        Log.d("TAG","https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time);
-        PerfectDataRequst requst = new PerfectDataRequst(token, mEtName.getText().toString(), "https://neishenme.oss-cn-beijing.aliyuncs.com/" + token + time
-                , selectYear + "" + selectMonth + "" + selectDay, sex);
+       // Log.d("TAG","https://neishenme.oss-cn-beijing.aliyuncs.com/" + time);
+        PerfectDataRequst requst = new PerfectDataRequst();
+        requst.setNickName(mEtName.getText().toString());
+        requst.setPicture("https://neishenme.oss-cn-beijing.aliyuncs.com/" + time);
+        requst.setBirthday(selectYear + "" + selectMonth + "" + selectDay);
+        requst.setSex(sex);
+        requst.setMsgCode(code);
+        requst.setTelephone(phone);
+      //  requst.set
         ServiceApi api = RetrofitHelper.getServiceApi();
         api.getPerfectData(requst)
                 .subscribeOn(Schedulers.io())
@@ -717,14 +728,14 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
      * 图片传到阿里云服务器
      */
     private void beginupload() {
-        PutObjectRequest put = new PutObjectRequest(testBucket,token+time,uploadFilePath);
+        PutObjectRequest put = new PutObjectRequest(testBucket,""+time,uploadFilePath);
         OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 NextStop();
-//                Log.d("TAG", "UploadSuccess");
-//                Log.d("TAG", "ETag"+result.getETag());
-//                Log.d("TAG", "RequestId"+result.getRequestId());
+                Log.d("TAG", "UploadSuccess");
+                Log.d("TAG", "ETag"+result.getETag());
+                Log.d("TAG", "RequestId"+result.getRequestId());
             }
 
             @Override

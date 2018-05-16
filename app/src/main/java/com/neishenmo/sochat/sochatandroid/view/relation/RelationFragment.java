@@ -1,6 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.view.relation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -49,6 +50,7 @@ public class RelationFragment extends BaseFragment {
     private ImageView visitorMore;
     private ImageView likeMore;
     private ImageView friendsMore;
+    private  SharedPreferences user;
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.relation_layout, container, false);
@@ -67,10 +69,10 @@ public class RelationFragment extends BaseFragment {
         visitorMore = view.findViewById(R.id.visitor_more);
         likeMore = view.findViewById(R.id.like_more);
         friendsMore = view.findViewById(R.id.friends_more);
+        user = getActivity().getSharedPreferences("user", 0);
 
 
-
-        RelationShipRequest request = new RelationShipRequest("1", "198EB70C9A81DDF0B0EF2DACB3B60C40");
+        RelationShipRequest request = new RelationShipRequest("1", user.getString("token",""));
         ServiceApi serviceApi = RetrofitHelper.getServiceApi();
         //来访数据请求
         serviceApi.getVisitor(request)
@@ -87,6 +89,10 @@ public class RelationFragment extends BaseFragment {
                         //拿到数据
                         final Visitor.DataBean data = visitor.getData();
                         List<Visitor.DataBean.VuiListBean> vuiList = data.getVuiList();
+                        if(vuiList.size()>5)
+                        {
+                            visitorMore.setVisibility(View.VISIBLE);
+                        }
                         visitorNum.setText(visitor.getData().getAmount()+"位");
                         //实例化适配器
                         VisitorListAdapter adapter = new VisitorListAdapter(getActivity(), vuiList, true);
@@ -136,6 +142,10 @@ public class RelationFragment extends BaseFragment {
                         likeRc.setLayoutManager(linearLayoutManager);
                         //拿到数据
                         List<Like.DataBean.TuuiListBean> vuiList = like.getData().getTuuiList();
+                        if(vuiList.size()>5)
+                        {
+                            likeMore.setVisibility(View.VISIBLE);
+                        }
                         //实例化适配器
                         LikeListAdapter likeAdapter = new LikeListAdapter(getActivity(), vuiList, true);
                         //添加适配器
@@ -183,10 +193,16 @@ public class RelationFragment extends BaseFragment {
                         //拿到数据
                         final Friends.DataBean friendsData = friends.getData();
                         List<Friends.DataBean.FuiListBean> fuiList = friendsData.getFuiList();
+                        if(fuiList.size()>5)
+                        {
+                            friendsMore.setVisibility(View.VISIBLE);
+                        }
+
                         //实例化适配器
                         FriendsListAdapter friendsAdapter = new FriendsListAdapter(getActivity(), fuiList, true);
                         //添加适配器
                         friendsRc.setAdapter(friendsAdapter);
+
                         //好友查看更多
                         friendsMore.setOnClickListener(new View.OnClickListener() {
                             @Override

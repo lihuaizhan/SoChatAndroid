@@ -16,12 +16,12 @@
         app:rvp_triggerOffset="0.1"
         app:rvp_singlePageFling="true"
         android:clipToPadding="false"/>
-    <org.limlee.hipraiseanimationlib.HiPraiseAnimationView
-        android:id="@+id/praise_animation"
-        android:layout_width="200dp"
-        android:layout_height="600dp"
-        android:layout_marginLeft="30dp"
-       />
+    <!--<org.limlee.hipraiseanimationlib.HiPraiseAnimationView-->
+        <!--android:id="@+id/praise_animation"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="600dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+       <!--/>-->
 
     <LinearLayout
         android:layout_width="match_parent"

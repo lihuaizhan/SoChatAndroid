@@ -50,46 +50,67 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
+
     //retrofit2的依赖
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
     //rxJava2的依赖
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
     // Because RxAndroid releases are few and far between, it is recommended you also
+
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex.rxjava2:rxjava:2.1.7'
+
     //拦截器的依赖
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
     //Glide图片加载框架
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
     //recycleView列表
     compile 'com.android.support:recyclerview-v7:26.1.0'
     implementation project(':easeui')
+
     //圆形头像
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
     //阿里云sdk
     compile 'com.aliyun.dpa:oss-android-sdk:+'
+
     //高斯模糊加弹窗
     implementation project(':library')
+
     //沉浸式
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
+
     //recycleview实现viewpage
     compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.2@aar'
+
     //tablayout
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:design:26.0.0-alpha1'
+
     //    implementation 'com.google.code.gson:gson:2.2.4'
+
     //Rxtool
+
     //  compile 'com.github.vondear:RxTools:v1.7.7.3'
-    implementation project(':hipraiseanimationlib')
-    //微信登录
-   // compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-        compile 'com.tsy.social:social-sdk-core:2.0.0'
-        //social sdk 自由选择
-        //微信sdk
-    compile 'pub.devrel:easypermissions:1.0.1'
-        compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
+
+    //微信登陆
+ //   compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
+            compile 'com.tsy.social:social-sdk-core:2.0.0'
+
+            //social sdk 自由选择
+
+            //微信sdk
+
+        compile 'pub.devrel:easypermissions:1.0.1'
+
+            compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
     implementation files('libs/alipaySdk-20180403.jar')
     compile 'com.jude:easyrecyclerview:4.4.2'
 }

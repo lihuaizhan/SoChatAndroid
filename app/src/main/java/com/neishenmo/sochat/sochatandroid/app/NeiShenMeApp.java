@@ -10,6 +10,7 @@ import com.hyphenate.easeui.controller.EaseUI;
 
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
 
+
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 
@@ -37,7 +38,7 @@ public class NeiShenMeApp extends Application {
 //        EMClient.getInstance().init(this, options);
         EaseUI.getInstance().init(this, null);
        // RxTool.init(this);
-      //  initWeiXin();
+       //initWeiXin();
     }
 //    public static IWXAPI sApi;
 //    private void initWeiXin() {
