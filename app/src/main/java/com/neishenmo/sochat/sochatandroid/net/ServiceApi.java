@@ -30,7 +30,9 @@ import com.neishenmo.sochat.sochatandroid.requestbean.RelationShipRequest;
 import com.neishenmo.sochat.sochatandroid.requestbean.SendCode;
 import com.neishenmo.sochat.sochatandroid.requestbean.SetName;
 import com.neishenmo.sochat.sochatandroid.requestbean.SignRequst;
+import com.neishenmo.sochat.sochatandroid.requestbean.UnFriend;
 import com.neishenmo.sochat.sochatandroid.requestbean.VerificationRequst;
+import com.neishenmo.sochat.sochatandroid.requestbean.WeiXinRequest;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -141,4 +143,14 @@ public interface ServiceApi {
      */
     @POST(ConnectorApi.ALI_WITHD_RAWAL+ConnectorApi.SUFFIX)
     Observable<LogOut> aliWith(@Body AliWith requst);
+    /**
+     *  微信提现
+     */
+    @POST(ConnectorApi.WEIXIN_WITHD_RAWAL+ConnectorApi.SUFFIX)
+    Observable<LogOut> weiXinWith(@Body WeiXinRequest requst);
+    /**
+     *  删除好友
+     */
+    @POST(ConnectorApi.UN_FRIEND+ConnectorApi.SUFFIX)
+    Observable<LogOut> unFriend(@Body UnFriend requst);
 }

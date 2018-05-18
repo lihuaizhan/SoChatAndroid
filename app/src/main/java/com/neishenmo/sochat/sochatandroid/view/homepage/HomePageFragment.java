@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +42,7 @@ import com.neishenmo.sochat.sochatandroid.requestbean.HomeRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.MoneyListRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.RelationShipRequest;
 import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
+import com.neishenmo.sochat.sochatandroid.utils.StringUtil;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.MainActivity;
 import com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity;
@@ -49,6 +51,7 @@ import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -96,6 +99,13 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private String nickName;
 //页面标识
     private int page = 0;
+    //获取定位传来的经纬度
+    private  Bundle arguments ;
+    private   String lon1 ;
+    private  String lat1 ;
+    private  String address1 ;
+    private  HomeRequst request ;
+    private  HomeOthersMessageAdapter homeOthersMessageAdapter ;
 
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -140,6 +150,16 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 //    }
     @Override
     protected void initData() {
+//        arguments = getArguments();
+        MainActivity activity = (MainActivity) getActivity();
+        activity.setLocation(new MainActivity.GetLocationData() {
+            @Override
+            public void getData(String lon, String lat, String address) {
+                 lon1 = lon;
+                 lat1 = lat;
+                 address1 = address;
+            }
+        });
         list = new ArrayList<>();
         //  colorBean = new ArrayList<>();
         // initAddList();
@@ -164,41 +184,44 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecycleViewPage.setLayoutManager(layout);
         //首页请求参数
-        HomeRequst request = new HomeRequst();
+         request = new HomeRequst();
         if(user.getString("token","")=="")
         {
             page = 1;
         }
         request.setPageNo(page+"");
         request.setToken(user.getString("token",""));
-
+        request.setLat(lat1);
+        request.setLon(lon1);
+        request.setSimpleAddress(address1);
         //请求首页数据
         serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<HomeOthers>() {
-                    @Override
-                    public void accept(HomeOthers homeOthers) throws Exception {
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<HomeOthers>() {
+                                    @Override
+                                    public void accept(HomeOthers homeOthers) throws Exception {
 
-                        list = homeOthers.getData().getOnlineUserList();
-                        HomeOthersMessageAdapter homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
-                        homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
-                            @Override
-                            public void onClick(int position) {
-                                // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+                                        list = homeOthers.getData().getOnlineUserList();
+                                       // List<HomeOthers.DataBean.OnlineUserListBean> list01 = StringUtil.removeDuplicateWithOrder(HomePageFragment.this.list);
+                                         homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
+                                        homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
+                                            @Override
+                                            public void onClick(int position) {
+                                                // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
 
-                                HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
-                                Intent intent = new Intent(getActivity(), ParticularActivity.class);
-                                Bundle mBundle = new Bundle();
-                                mBundle.putSerializable("home", onlineUserListBean);
-                                intent.putExtras(mBundle);
-                                startActivity(intent);
-                            }
+                                                HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
+                                                Intent intent = new Intent(getActivity(), ParticularActivity.class);
+                                                Bundle mBundle = new Bundle();
+                                                mBundle.putSerializable("home", onlineUserListBean);
+                                                intent.putExtras(mBundle);
+                                                startActivity(intent);
+                                            }
 
-                            @Override
-                            public void onLongClick(int position) {
+                                            @Override
+                                            public void onLongClick(int position) {
 
-                            }
-                        });
+                                            }
+                                        });
                         mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
 
 
@@ -209,7 +232,92 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                         String s = throwable.getMessage().toString();
                     }
                 });
+//        RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
+//        //判断是当前layoutManager是否为LinearLayoutManager
+//        // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+//        if (layoutManager instanceof LinearLayoutManager) {
+//            LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+//            //获取最后一个可见view的位置
+//            int lastItemPosition = linearManager.findLastVisibleItemPosition();
+//
+//        }
 
+        if(list.size() == 0)
+        {
+            Toast.makeText(getActivity(),"只有一条",Toast.LENGTH_SHORT).show();
+            //请求首页数据
+            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<HomeOthers>() {
+                        @Override
+                        public void accept(HomeOthers homeOthers) throws Exception {
+
+                            List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList01 = homeOthers.getData().getOnlineUserList();
+                            list.addAll(onlineUserList01);
+
+                            ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
+                            homeOthersMessageAdapter.notifyDataSetChanged();
+
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            String s = throwable.getMessage().toString();
+                        }
+                    });
+        }
+      mRecycleViewPage.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+          //用来标记是否正在向左滑动
+          private boolean isSlidingToLeft = false;
+          @Override
+          public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+              super.onScrollStateChanged(recyclerView, newState);
+              LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//              if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+//              {
+//                  homeOthersMessageAdapter.
+//              }
+              // 当不滑动时
+              if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                  // 获取最后一个完全显示的itemPosition
+                  int lastItemPosition = manager.findLastCompletelyVisibleItemPosition();
+                  int itemCount = manager.getItemCount();
+
+                  // 判断是否滑动到了最后一个Item，并且是向左滑动
+                  if (lastItemPosition == (itemCount - 1) && isSlidingToLeft) {
+                      //请求首页数据
+                      serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+                              .observeOn(AndroidSchedulers.mainThread())
+                              .subscribe(new Consumer<HomeOthers>() {
+                                  @Override
+                                  public void accept(HomeOthers homeOthers) throws Exception {
+
+                                       List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList = homeOthers.getData().getOnlineUserList();
+                                      list.addAll(onlineUserList);
+
+                                      ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
+                                      homeOthersMessageAdapter.notifyDataSetChanged();
+
+                                  }
+                              }, new Consumer<Throwable>() {
+                                  @Override
+                                  public void accept(Throwable throwable) throws Exception {
+                                      String s = throwable.getMessage().toString();
+                                  }
+                              });
+
+                  }
+              }
+          }
+
+          @Override
+          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+              super.onScrolled(recyclerView, dx, dy);
+              // dx值大于0表示正在向左滑动，小于或等于0表示向右滑动或停止
+              isSlidingToLeft = dx > 0;
+          }
+      });
 
     }
 

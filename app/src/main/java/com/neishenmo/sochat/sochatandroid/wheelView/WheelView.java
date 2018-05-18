@@ -40,7 +40,7 @@ import java.util.List;
 
 /**
  * Numeric wheel view.
- * 
+ *
  * @author Yuri Kanivets
  */
 public class WheelView extends View {
@@ -50,7 +50,7 @@ public class WheelView extends View {
 	private int[] SHADOWS_COLORS = new int[] { 0xFF111111,
 			0x00AAAAAA, 0x00AAAAAA };
 	//*/
-	private int[] SHADOWS_COLORS = new int[] {0xFFFFFFFF, 0x00FFFFFF, 0x00FFFFFF };
+	private int[] SHADOWS_COLORS = new int[] {0x00000000, 0x00000000, 0x00000000 };
 
 	/** Top and bottom items offset (to hide that) */
 	private static final int ITEM_OFFSET_PERCENT = 0;
@@ -108,7 +108,7 @@ public class WheelView extends View {
 	private List<OnWheelChangedListener> changingListeners = new LinkedList<OnWheelChangedListener>();
 	private List<OnWheelScrollListener> scrollingListeners = new LinkedList<OnWheelScrollListener>();
 	private List<OnWheelClickedListener> clickingListeners = new LinkedList<OnWheelClickedListener>();
-	
+
 	String label="";
 
 	/**
@@ -194,7 +194,7 @@ public class WheelView extends View {
 
 	/**
 	 * Gets count of visible items
-	 * 
+	 *
 	 * @return the count of visible items
 	 */
 	public int getVisibleItems() {
@@ -205,7 +205,7 @@ public class WheelView extends View {
 	 * Sets the desired count of visible items.
 	 * Actual amount of visible items depends on wheel layout parameters.
 	 * To apply changes and rebuild view call measure().
-	 * 
+	 *
 	 * @param count the desired count for visible items
 	 */
 	public void setVisibleItems(int count) {
@@ -236,7 +236,7 @@ public class WheelView extends View {
 	/**
 	 * Sets view adapter. Usually new adapters contain different views, so
 	 * it needs to rebuild view by calling measure().
-	 * 
+	 *
 	 * @param viewAdapter the view adapter
 	 */
 	public void setViewAdapter(WheelViewAdapter viewAdapter) {
@@ -339,7 +339,7 @@ public class WheelView extends View {
 
 	/**
 	 * Gets current value
-	 * 
+	 *
 	 * @return the current value
 	 */
 	public int getCurrentItem() {
@@ -348,7 +348,7 @@ public class WheelView extends View {
 
 	/**
 	 * Sets the current item. Does nothing when index is wrong.
-	 * 
+	 *
 	 * @param index the item index
 	 * @param animated the animation flag
 	 */
@@ -393,7 +393,7 @@ public class WheelView extends View {
 
 	/**
 	 * Sets the current item w/o animation. Does nothing when index is wrong.
-	 * 
+	 *
 	 * @param index the item index
 	 */
 	public void setCurrentItem(int index) {
@@ -501,7 +501,7 @@ public class WheelView extends View {
 
 	/**
 	 * Calculates desired height for layout
-	 * 
+	 *
 	 * @param layout
 	 *            the source layout
 	 * @return the desired layout height
@@ -818,7 +818,7 @@ public class WheelView extends View {
 
 	/**
 	 * Rebuilds wheel items if necessary. Caches all unused items.
-	 * 
+	 *
 	 * @return true if items are rebuilt
 	 */
 	private boolean rebuildItems() {

@@ -1,9 +1,16 @@
 package com.neishenmo.sochat.sochatandroid.utils;
 
+import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +20,16 @@ import java.util.regex.Pattern;
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2011-7-22
  */
 public class StringUtil {
-
+    public static List removeDuplicateWithOrder(List<HomeOthers.DataBean.OnlineUserListBean> list) {
+        Set set = new HashSet();
+        List newList = new ArrayList();
+        for (Iterator iter = list.iterator(); iter.hasNext();) {
+            Object element = iter.next();
+            if (set.add(element))
+                newList.add(element);
+        }
+        return newList;
+    }
     private StringUtil() {
         throw new AssertionError();
     }

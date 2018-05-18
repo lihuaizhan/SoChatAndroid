@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.bean.LogOut;
 import com.neishenmo.sochat.sochatandroid.net.RetrofitHelper;
@@ -47,9 +48,14 @@ public class SendInternalCodeActivity extends AppCompatActivity implements View.
     private AliWith aliWith;
     private String trim;
     private BigDecimal bigDecimal ;
+    private ImmersionBar mImmersionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar .statusBarColor(R.color.colorTheme).fitsSystemWindows(true).init();
         setContentView(R.layout.activity_send_internal_code);
         user = getSharedPreferences("user", 0);
         telephone = user.getString("telephone", "");

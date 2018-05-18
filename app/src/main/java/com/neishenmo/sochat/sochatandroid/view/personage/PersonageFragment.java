@@ -84,6 +84,7 @@ import com.neishenmo.sochat.sochatandroid.utils.ObtainAlbumUtils;
 import com.neishenmo.sochat.sochatandroid.utils.OrderInfoUtil2_0;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.utils.dpturnxpUtils;
+import com.neishenmo.sochat.sochatandroid.view.MainActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.AlbumActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.PerfectDataActivity;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
@@ -117,10 +118,11 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 
 
     private View view;
+    private String code;
     private ImageView picture;
     private ImageView setMessage;
     private ImageView mExit;
-    private ImageView mSave;
+   // private ImageView mSave;
     private ImageView mCallCamera;
     private RequestManager with;
     private String mPhotoPath;
@@ -130,7 +132,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
      * 姓名
      */
     private TextView myName;
-    private ImageView paint;
+    //private ImageView paint;
     /**
      * 输入金额
      */
@@ -269,17 +271,63 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 
         return view;
     }
+    /** 接收MainActivity的Touch回调的对象，重写其中的onTouchEvent函数 */
+    MainActivity.MyTouchListener myTouchListener = new MainActivity.MyTouchListener() {
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            View view = getActivity().getCurrentFocus();
+            Log.i("tAG==================",(view==null)+"");
 
+            String s = setName.getText().toString();
+            if (s.length() != 0 || s.equals("") == false) {
+                mCallCamera.setVisibility(View.GONE);
+                mExit.setVisibility(View.GONE);
+               // paint.setVisibility(View.GONE);
+                setMessage.setVisibility(View.VISIBLE);
+//                mSave.setVisibility(View.GONE);
+
+                // mSave.requestFocus();
+                setName.setVisibility(View.GONE);
+                myName.setVisibility(View.VISIBLE);
+                myName.setText(s);
+                setName1.setNickName(s);
+                time = System.currentTimeMillis();
+                serviceApi.setName(setName1).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<LogOut>() {
+                            @Override
+                            public void accept(LogOut logOut) throws Exception {
+
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+
+                            }
+                        });
+
+
+                beginupload();
+
+
+            } else {
+                Toast.makeText(getActivity(), "输入字符不能为空", Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }
+    };
     @Override
     protected void initData() {
+        Log.d("sssssss",user.getString("token",""));
         PlatformConfig.setWeixin(WX_APPID);
+        ((MainActivity)this.getActivity()).registerMyTouchListener(myTouchListener);
         mSocialApi = SocialApi.get(getActivity().getApplicationContext());
         //获取控件id
         bg = view.findViewById(R.id.bg);
         picture = view.findViewById(R.id.picture);
         setMessage = view.findViewById(R.id.set_message);
         myName = view.findViewById(R.id.my_name);
-        paint = view.findViewById(R.id.set_paint);
+      // paint = view.findViewById(R.id.set_paint);
         importMoney = view.findViewById(R.id.import_money);
         affirmDeposit = view.findViewById(R.id.affirm_deposit);
         mExit = (ImageView) view.findViewById(R.id.exit);
@@ -295,10 +343,17 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         mLoveNum = (TextView) view.findViewById(R.id.love_num);
         mMoneyTotal = (TextView) view.findViewById(R.id.money_total);
         mMaster = (LinearLayout) view.findViewById(R.id.master);
-        mSave = view.findViewById(R.id.saves);
+       // mSave = view.findViewById(R.id.saves);
         cancelDeposit = view.findViewById(R.id.deposit_cancel);
         setName = view.findViewById(R.id.set_name);
-
+        //设置余额
+        mMoneyTotal.setText("¥"+user.getString("balance",""));
+        String balance = user.getString("balance", "");
+        double v = Double.parseDouble(balance);
+        double v1 = v % 100;
+        int v2 = (int) (v / 100);
+        mReminder.setText("当前最大提现余额为"+v2*100);
+        //importMoney
 
         //微信支付宝提现
         mWithdraw.check(R.id.withdraw_alipay);
@@ -334,6 +389,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         mDeposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                s = importMoney.getText().toString().trim();
                 if(flag ==0)
                 {
                     serviceApi.apilyLogin(rqe).subscribeOn(Schedulers.io())
@@ -349,7 +405,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 
                                 }
                             });
-                    s = importMoney.getText().toString().trim();
+
                     pailyUtils.setActivity(getActivity(), s);
                     if (s != null & !s.equals("")) {
                         pailyUtils.pay(orderInfo);
@@ -362,10 +418,21 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
                 else {
 
                     //WXEntryActivity.loginWeixin(getActivity(), NeiShenMeApp.sApi);
-                    mSocialApi.doOauthVerify(getActivity(), PlatformType.WEIXIN , new MyAuthListener());
+                    if (s != null & !s.equals("")) {
+                        mSocialApi.doOauthVerify(getActivity(), PlatformType.WEIXIN , new MyAuthListener());
+                    } else {
+                        Toast.makeText(getActivity(), "请输入提现数量", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+
+
                 }
             }
         });
+
+
 //        //支付宝提现
 //        mWithdrawAlipay.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -465,16 +532,16 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 
 
 
-        //修改名字
-        paint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myName.setVisibility(View.GONE);
-                setName.setVisibility(View.VISIBLE);
-                paint.setVisibility(View.GONE);
-
-            }
-        });
+//        //修改名字
+//        paint.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                myName.setVisibility(View.GONE);
+//                setName.setVisibility(View.VISIBLE);
+//                paint.setVisibility(View.GONE);
+//
+//            }
+//        });
 
 
         //提现隐藏加切换页面
@@ -509,12 +576,17 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         setMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paint.setVisibility(View.VISIBLE);
+                //paint.setVisibility(View.VISIBLE);
                 mCallCamera.setVisibility(View.VISIBLE);
                 setMessage.setVisibility(View.GONE);
-                mSave.setVisibility(View.VISIBLE);
+              //  mSave.setVisibility(View.VISIBLE);
                 mExit.setVisibility(View.VISIBLE);
                 setName.setText(myName.getText());
+
+                myName.setVisibility(View.GONE);
+                setName.setVisibility(View.VISIBLE);
+               // paint.setVisibility(View.GONE);
+
 //                mExit.setVisibility(View.VISIBLE);
 //                mMaster.setVisibility(View.VISIBLE);
 //                setMessage.setVisibility(View.GONE);
@@ -527,50 +599,50 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
             }
         });
 
-        //保存信息并更改
-        mSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String s = setName.getText().toString();
-                if (s.length() != 0 || s.equals("") == false) {
-                    mCallCamera.setVisibility(View.GONE);
-                    mExit.setVisibility(View.GONE);
-                    paint.setVisibility(View.GONE);
-                    setMessage.setVisibility(View.VISIBLE);
-                    mSave.setVisibility(View.GONE);
-
-                    // mSave.requestFocus();
-                    setName.setVisibility(View.GONE);
-                    myName.setVisibility(View.VISIBLE);
-                    myName.setText(s);
-                    setName1.setNickName(s);
-                    time = System.currentTimeMillis();
-                    serviceApi.setName(setName1).subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<LogOut>() {
-                                @Override
-                                public void accept(LogOut logOut) throws Exception {
-
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-
-                                }
-                            });
-
-
-                    beginupload();
-
-
-                } else {
-                    Toast.makeText(getActivity(), "输入字符不能为空", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        });
+//        //保存信息并更改
+//        mSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                String s = setName.getText().toString();
+//                if (s.length() != 0 || s.equals("") == false) {
+//                    mCallCamera.setVisibility(View.GONE);
+//                    mExit.setVisibility(View.GONE);
+//                    paint.setVisibility(View.GONE);
+//                    setMessage.setVisibility(View.VISIBLE);
+//                    mSave.setVisibility(View.GONE);
+//
+//                    // mSave.requestFocus();
+//                    setName.setVisibility(View.GONE);
+//                    myName.setVisibility(View.VISIBLE);
+//                    myName.setText(s);
+//                    setName1.setNickName(s);
+//                    time = System.currentTimeMillis();
+//                    serviceApi.setName(setName1).subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe(new Consumer<LogOut>() {
+//                                @Override
+//                                public void accept(LogOut logOut) throws Exception {
+//
+//                                }
+//                            }, new Consumer<Throwable>() {
+//                                @Override
+//                                public void accept(Throwable throwable) throws Exception {
+//
+//                                }
+//                            });
+//
+//
+//                    beginupload();
+//
+//
+//                } else {
+//                    Toast.makeText(getActivity(), "输入字符不能为空", Toast.LENGTH_SHORT).show();
+//                }
+//
+//
+//            }
+//        });
 
         mCallCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -795,6 +867,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
                     }
                 });
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -830,7 +903,16 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         public void onComplete(PlatformType platform_type, Map<String, String> map) {
 //            Toast.makeText(getActivity(), platform_type + " login onComplete", Toast.LENGTH_SHORT).show();
 //            Log.i("tsy", "login onComplete:" + map);
-            String code = map.get("code");
+             code = map.get("code");
+             if(code!=null)
+             {
+                 Intent intent = new Intent(getActivity(),WeiXinSendActivity.class);
+                 Bundle bundle = new Bundle();
+                 bundle.putString("wxcode",code);
+                 bundle.putString("num",s);
+                 intent.putExtras(bundle);
+                 startActivity(intent);
+             }
 
         }
 
@@ -933,5 +1015,11 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 //            Thread authThread = new Thread(authRunnable);
 //            authThread.start();
 //        }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
 
+        /** 触摸事件的注销 */
+        ((MainActivity)this.getActivity()).unRegisterMyTouchListener(myTouchListener);
+    }
 }

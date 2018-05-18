@@ -44,7 +44,7 @@ public class VisitorMoreActivity extends AppCompatActivity implements View.OnCli
         initView();
         //拿到传递的数据
         visitorData = (Visitor) getIntent().getSerializableExtra("visitor_data");
-        mNum.setText(visitorData.getData().getAmount() + "位");
+        mNum.setText(visitorData.getData().getVuiAmount() + "位");
         mMoreList.setLayoutManager(new GridLayoutManager(this, 3));
         List<Visitor.DataBean.VuiListBean> vuiList = visitorData.getData().getVuiList();
         VisitorListAdapter adapter = new VisitorListAdapter(this, vuiList, false);

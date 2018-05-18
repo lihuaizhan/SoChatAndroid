@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +37,8 @@ public class HomeOthersMessageAdapter extends RecyclerView.Adapter<RecyclerView.
     private int size;
     private boolean isChange;
     private OnItemClickListener mOnItemClickListener;
+    private AlphaAnimation mHideAnimation;
+    private AlphaAnimation mShowAnimation;
   private int i;
     //定义RecyclView点击事件接口
     public interface OnItemClickListener {
@@ -100,7 +105,13 @@ public class HomeOthersMessageAdapter extends RecyclerView.Adapter<RecyclerView.
 //            holder1.otherPicture.setLayoutParams(layoutParams);
             holder1.otherRegis.setText(TimeConvertUtil.getTimeInterval(onlineUserListBean.getLastActiveTime()));
         }
-
+//         if(position>0)
+//         {
+////             setHideAnimation(holder1.otherName,1000);
+////             setHideAnimation(holder1.lable,1000);
+//             setShowAnimation(holder1.otherName,500);
+//             setShowAnimation(holder1.lable,500);
+//         }
         //判断点击接口是否为空
         if (mOnItemClickListener != null) {
             //点击事件
@@ -136,7 +147,7 @@ public class HomeOthersMessageAdapter extends RecyclerView.Adapter<RecyclerView.
         private TextView otherUss;
         private TextView otherRegis;
         private ImageView otherPicture;
-
+        private LinearLayout lable;
         public MyViewHolder(View itemView) {
             super(itemView);
             otherName = itemView.findViewById(R.id.other_name);
@@ -144,6 +155,7 @@ public class HomeOthersMessageAdapter extends RecyclerView.Adapter<RecyclerView.
             otherUss = itemView.findViewById(R.id.other_uss);
             otherRegis = itemView.findViewById(R.id.other_regis);
             otherPicture = itemView.findViewById(R.id.other_picture);
+            lable = itemView.findViewById(R.id.ll_lable);
 
         }
     }
@@ -152,5 +164,81 @@ public class HomeOthersMessageAdapter extends RecyclerView.Adapter<RecyclerView.
     public int setListSize() {
         size = list.size();
         return size;
+    }
+
+    //淡入淡出动画
+    public  void setHideAnimation( final View view, int duration)
+    {
+        if (null == view || duration < 0)
+        {
+            return;
+        }
+
+        if (null != mHideAnimation)
+        {
+            mHideAnimation.cancel();
+        }
+        // 监听动画结束的操作
+        mHideAnimation = new AlphaAnimation(1.0f, 0.0f);
+        mHideAnimation.setDuration(duration);
+        mHideAnimation.setFillAfter(true);
+        mHideAnimation.setAnimationListener(new Animation.AnimationListener()
+        {
+
+            @Override
+            public void onAnimationStart(Animation arg0)
+            {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0)
+            {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation arg0)
+            {
+                view.setVisibility(View.GONE);
+            }
+        });
+        view.startAnimation(mHideAnimation);
+    }
+    public  void setShowAnimation( final View view, int duration)
+    {
+        if (null == view || duration < 0)
+        {
+            return;
+        }
+        if (null != mShowAnimation)
+        {
+            mShowAnimation.cancel();
+        }
+        mShowAnimation = new AlphaAnimation(0.0f, 1.0f);
+        mShowAnimation.setDuration(duration);
+        mShowAnimation.setFillAfter(true);
+        mShowAnimation.setAnimationListener(new Animation.AnimationListener()
+        {
+
+            @Override
+            public void onAnimationStart(Animation arg0)
+            {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0)
+            {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation arg0)
+            {
+
+            }
+        });
+        view.startAnimation(mShowAnimation);
     }
 }

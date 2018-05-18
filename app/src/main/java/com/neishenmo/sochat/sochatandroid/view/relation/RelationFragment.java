@@ -51,6 +51,8 @@ public class RelationFragment extends BaseFragment {
     private ImageView likeMore;
     private ImageView friendsMore;
     private  SharedPreferences user;
+    private  ServiceApi serviceApi;
+
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.relation_layout, container, false);
@@ -73,7 +75,7 @@ public class RelationFragment extends BaseFragment {
 
 
         RelationShipRequest request = new RelationShipRequest("1", user.getString("token",""));
-        ServiceApi serviceApi = RetrofitHelper.getServiceApi();
+        serviceApi = RetrofitHelper.getServiceApi();
         //来访数据请求
         serviceApi.getVisitor(request)
                 .subscribeOn(Schedulers.io())
@@ -93,7 +95,7 @@ public class RelationFragment extends BaseFragment {
                         {
                             visitorMore.setVisibility(View.VISIBLE);
                         }
-                        visitorNum.setText(visitor.getData().getAmount()+"位");
+                        visitorNum.setText(visitor.getData().getVuiAmount()+"位");
                         //实例化适配器
                         VisitorListAdapter adapter = new VisitorListAdapter(getActivity(), vuiList, true);
                         //添加适配器

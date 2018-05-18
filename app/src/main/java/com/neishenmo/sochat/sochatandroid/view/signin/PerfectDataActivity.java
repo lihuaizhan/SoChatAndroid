@@ -444,6 +444,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         UtilAnim.showToUp(view, mIvPopupWindowBack);
     }
 
+
     /**
      * 选择头像的点击事件
      * @param view
@@ -499,7 +500,6 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
             return list.get(index) + "";
         }
     }
-
 
     /**
      * 设置字体大小

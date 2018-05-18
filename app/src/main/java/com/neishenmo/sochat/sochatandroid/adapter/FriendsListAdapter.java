@@ -2,6 +2,7 @@ package com.neishenmo.sochat.sochatandroid.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import com.neishenmo.sochat.sochatandroid.R;
 import com.neishenmo.sochat.sochatandroid.bean.Friends;
 import com.neishenmo.sochat.sochatandroid.bean.Like;
 import com.neishenmo.sochat.sochatandroid.bean.LogOut;
+import com.neishenmo.sochat.sochatandroid.net.RetrofitHelper;
+import com.neishenmo.sochat.sochatandroid.net.ServiceApi;
+import com.neishenmo.sochat.sochatandroid.requestbean.UnFriend;
 import com.neishenmo.sochat.sochatandroid.utils.GlideCircleTransform;
 import com.neishenmo.sochat.sochatandroid.utils.TimeConvertUtil;
 import com.neishenmo.sochat.sochatandroid.view.signin.SplaActivity;
@@ -42,7 +46,9 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private int size;
     private boolean isChange;
     private OnItemClickListener mOnItemClickListener;
-
+    private Friends.DataBean.FuiListBean fuiListBean ;
+    private SharedPreferences sp;
+    private int index;
     //定义RecyclView点击事件接口
     public interface OnItemClickListener {
         void onClick(int position);
@@ -72,7 +78,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final MyViewHolder holder1 = (MyViewHolder) holder;
-        Friends.DataBean.FuiListBean fuiListBean = list.get(position);
+         fuiListBean = list.get(position);
+         index = position;
         with = Glide.with(context);
         if (fuiListBean.getPicture().equals("baidu.com")) {
             with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(context)).into(holder1.visitorTou);
@@ -121,6 +128,27 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                             @Override
                             public void onAffirmClick(@NonNull BlurPopWin blurPopWin) {
+                                ServiceApi serviceApi = RetrofitHelper.getServiceApi();
+                                UnFriend unFriend = new UnFriend();
+                                unFriend.setFriendTelephone(fuiListBean.getTelephone());
+                                sp = context.getSharedPreferences("user",0);
+                                unFriend.setToken(sp.getString("token",""));
+                                serviceApi.unFriend(unFriend).subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Consumer<LogOut>() {
+                                            @Override
+                                            public void accept(LogOut logOut) throws Exception {
+                                                if(logOut.getCode()==200)
+                                                {
+                                                    notifilly(position);
+                                                }
+                                            }
+                                        }, new Consumer<Throwable>() {
+                                            @Override
+                                            public void accept(Throwable throwable) throws Exception {
+
+                                            }
+                                        });
                                 blurPopWin.dismiss();
                             }
                         }).show(holder1.deleteBg);
@@ -180,5 +208,9 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
 
+    }
+    public void notifilly(int position)
+    {      list.remove(position);
+           notifyDataSetChanged();
     }
 }

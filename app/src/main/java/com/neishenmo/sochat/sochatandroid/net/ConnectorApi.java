@@ -54,7 +54,8 @@ public class ConnectorApi {
     //支付宝提现
     public static final String ALI_WITHD_RAWAL  = "AliPay/aliWithdrawal";
     //微信提现：
-
     public static final String WEIXIN_WITHD_RAWAL  = "WeiXinPay/wexinWithdrawal";
+    //删除好友(单项删除)
+    public static final String UN_FRIEND  = "relationship/unfriending";
 
 }

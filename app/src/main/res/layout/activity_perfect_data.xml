@@ -158,51 +158,51 @@
 
     <!--&lt;!&ndash; 头像选择 &ndash;&gt;-->
     <!--<RelativeLayout-->
-        <!--android:id="@+id/rl_popup_window"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:visibility="gone">-->
+    <!--android:id="@+id/rl_popup_window"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:visibility="gone">-->
 
-        <!--<TextView-->
-        <!--android:id="@+id/tv_menu_1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="#FFFFFFFF"-->
-        <!--android:clickable="true"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="15dp"-->
-        <!--android:text="拍照"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:textSize="18sp" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_menu_1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="#FFFFFFFF"-->
+    <!--android:clickable="true"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="15dp"-->
+    <!--android:text="拍照"-->
+    <!--android:textColor="@color/colorPrimary"-->
+    <!--android:textSize="18sp" />-->
 
-        <!--<TextView-->
-        <!--android:id="@+id/tv_menu_2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/tv_menu_1"-->
-        <!--android:background="#FFFFFFFF"-->
-        <!--android:clickable="true"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="15dp"-->
-        <!--android:text="相册选择"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:textSize="18sp" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_menu_2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/tv_menu_1"-->
+    <!--android:background="#FFFFFFFF"-->
+    <!--android:clickable="true"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="15dp"-->
+    <!--android:text="相册选择"-->
+    <!--android:textColor="@color/colorPrimary"-->
+    <!--android:textSize="18sp" />-->
 
-        <!--<TextView-->
-        <!--android:id="@+id/tv_close_popup_window"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/tv_menu_2"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:background="#FFFFFFFF"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="15dp"-->
-        <!--android:text="取消"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:textSize="18sp" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_close_popup_window"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/tv_menu_2"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:background="#FFFFFFFF"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="15dp"-->
+    <!--android:text="取消"-->
+    <!--android:textColor="@color/colorPrimary"-->
+    <!--android:textSize="18sp" />-->
 
     <!--</RelativeLayout>-->
 
