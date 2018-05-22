@@ -253,7 +253,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        //获取sp
-        user = getActivity().getSharedPreferences("user", 0);
+
 //        if (user.getString("token", "").equals("")) {
 //            Intent intent = new Intent(getActivity(), SplaActivity.class);
 //            startActivity(intent);
@@ -268,7 +268,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
             savedInstanceState) {
 
         view = inflater.inflate(R.layout.presenter_layout, container, false);
-
+        user = getActivity().getSharedPreferences("user", 0);
         return view;
     }
     /** 接收MainActivity的Touch回调的对象，重写其中的onTouchEvent函数 */
@@ -318,6 +318,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
     };
     @Override
     protected void initData() {
+
         Log.d("sssssss",user.getString("token",""));
         PlatformConfig.setWeixin(WX_APPID);
         ((MainActivity)this.getActivity()).registerMyTouchListener(myTouchListener);
@@ -349,7 +350,16 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         //设置余额
         mMoneyTotal.setText("¥"+user.getString("balance",""));
         String balance = user.getString("balance", "");
-        double v = Double.parseDouble(balance);
+        /*Double v = new Double(balance.trim());*/
+        double v = 0;
+        try {
+             v = Double.parseDouble(balance.trim());
+        }
+        catch (Exception e)
+        {
+
+        }
+
         double v1 = v % 100;
         int v2 = (int) (v / 100);
         mReminder.setText("当前最大提现余额为"+v2*100);
@@ -453,7 +463,7 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
 //        });
 
         //获取token
-        request = new RelationShipRequest("0", user.getString("token", ""));
+        request = new RelationShipRequest("1", user.getString("token", ""));
         //获取网络请求辅助类
         serviceApi = RetrofitHelper.getServiceApi();
         LogUtils.d("ssssssssssss", user.getString("token", ""));
@@ -741,37 +751,41 @@ public class PersonageFragment extends BaseFragment implements EasyPermissions.P
         });
 
         //请求参数
-        RelationShipRequest request = new RelationShipRequest("", user.getString("token", ""));
-        //请求获取个人信息
-        serviceApi = RetrofitHelper.getServiceApi();
-        serviceApi.getMyMessage(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MyMessage>() {
-                    @Override
-                    public void accept(MyMessage myMessage) throws Exception {
-                        //glide图片加载框架
-                        with = Glide.with(getActivity());
-                        //获取昵称并显示
-                        myName.setText(myMessage.getDataMap().getNickName());
-                        //获取收到红包数量并显示
-                        mMoneyNum.setText(myMessage.getDataMap().getCountRedPacket() + "");
-                        //获取收到点赞数量并显示
-                        mLoveNum.setText(myMessage.getDataMap().getCountThumbsUp() + "");
-                        setName.setText(myMessage.getDataMap().getNickName());
-                        //判断头像非空
-                        if (myMessage.getDataMap().getPicture().equals("baidu.com")) {
-                            with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(getActivity())).into(picture);
-                        } else {
-                            with.load(myMessage.getDataMap().getPicture()).transform(new GlideCircleTransform(getActivity())).into(picture);
+        RelationShipRequest request = new RelationShipRequest("1", user.getString("token", ""));
+        if(!user.getString("token","").equals("")||user.getString("token","")!=null)
+        {
+            //请求获取个人信息
+            serviceApi = RetrofitHelper.getServiceApi();
+            serviceApi.getMyMessage(request)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<MyMessage>() {
+                        @Override
+                        public void accept(MyMessage myMessage) throws Exception {
+                            //glide图片加载框架
+                            with = Glide.with(getActivity());
+                            //获取昵称并显示
+                            myName.setText(myMessage.getDataMap().getNickName());
+                            //获取收到红包数量并显示
+                            mMoneyNum.setText(myMessage.getDataMap().getCountRedPacket() + "");
+                            //获取收到点赞数量并显示
+                            mLoveNum.setText(myMessage.getDataMap().getCountThumbsUp() + "");
+                            setName.setText(myMessage.getDataMap().getNickName());
+                            //判断头像非空
+                            if (myMessage.getDataMap().getPicture().equals("baidu.com")) {
+                                with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(getActivity())).into(picture);
+                            } else {
+                                with.load(myMessage.getDataMap().getPicture()).transform(new GlideCircleTransform(getActivity())).into(picture);
+                            }
                         }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
 
-                    }
-                });
+                        }
+                    });
+        }
+
     }
 
     @Override

@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.utils.EaseUserUtils;
@@ -42,6 +43,7 @@ import com.neishenmo.sochat.sochatandroid.requestbean.HomeRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.MoneyListRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.RelationShipRequest;
 import com.neishenmo.sochat.sochatandroid.utils.LogUtils;
+import com.neishenmo.sochat.sochatandroid.utils.PermissionPageUtils;
 import com.neishenmo.sochat.sochatandroid.utils.StringUtil;
 import com.neishenmo.sochat.sochatandroid.utils.ToastUtils;
 import com.neishenmo.sochat.sochatandroid.view.MainActivity;
@@ -154,10 +156,22 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         MainActivity activity = (MainActivity) getActivity();
         activity.setLocation(new MainActivity.GetLocationData() {
             @Override
-            public void getData(String lon, String lat, String address) {
+            public void getData(String lon, String lat, String address, BDLocation location) {
                  lon1 = lon;
                  lat1 = lat;
                  address1 = address;
+                //获取sharedPreferences对象
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("location", getActivity().MODE_PRIVATE);
+                //获取editor对象
+                SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+                //存储键值对
+                editor.putString("lon", lon1);
+
+                editor.putString("lat", lat1);
+                editor.putFloat("rudio", location.getRadius());
+                //提交
+                editor.commit();//提交修改
+
             }
         });
         list = new ArrayList<>();
@@ -194,44 +208,54 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         request.setLat(lat1);
         request.setLon(lon1);
         request.setSimpleAddress(address1);
-        //请求首页数据
-        serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<HomeOthers>() {
-                                    @Override
-                                    public void accept(HomeOthers homeOthers) throws Exception {
+        if (PermissionPageUtils.isLocServiceEnable(getActivity())) {
+            //请求首页数据
+            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<HomeOthers>() {
+                        @Override
+                        public void accept(HomeOthers homeOthers) throws Exception {
+                             if(homeOthers.getCode() ==301)
+                             {
+                                 Toast.makeText(getActivity(),"登录失效",Toast.LENGTH_SHORT).show();
+                                 Intent intent = new Intent(getActivity(),SplaActivity.class);
+                                 SharedPreferences.Editor editor = user.edit();
+                                 editor.clear();
+                                 startActivity(intent);
+                             }
+                            list = homeOthers.getData().getOnlineUserList();
+                            // List<HomeOthers.DataBean.OnlineUserListBean> list01 = StringUtil.removeDuplicateWithOrder(HomePageFragment.this.list);
+                            homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
+                            homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
+                                @Override
+                                public void onClick(int position) {
+                                    // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+                                    HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
+                                    Intent intent = new Intent(getActivity(), ParticularActivity.class);
+                                    Bundle mBundle = new Bundle();
+                                    mBundle.putSerializable("home", onlineUserListBean);
+                                    intent.putExtras(mBundle);
+                                    startActivity(intent);
+                                }
 
-                                        list = homeOthers.getData().getOnlineUserList();
-                                       // List<HomeOthers.DataBean.OnlineUserListBean> list01 = StringUtil.removeDuplicateWithOrder(HomePageFragment.this.list);
-                                         homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
-                                        homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
-                                            @Override
-                                            public void onClick(int position) {
-                                                // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onLongClick(int position) {
 
-                                                HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
-                                                Intent intent = new Intent(getActivity(), ParticularActivity.class);
-                                                Bundle mBundle = new Bundle();
-                                                mBundle.putSerializable("home", onlineUserListBean);
-                                                intent.putExtras(mBundle);
-                                                startActivity(intent);
-                                            }
-
-                                            @Override
-                                            public void onLongClick(int position) {
-
-                                            }
-                                        });
-                        mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
+                                }
+                            });
+                            mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
 
 
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        String s = throwable.getMessage().toString();
-                    }
-                });
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            String s = throwable.getMessage().toString();
+                        }
+                    });
+        }
+
+
 //        RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
 //        //判断是当前layoutManager是否为LinearLayoutManager
 //        // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
@@ -241,10 +265,14 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 //            int lastItemPosition = linearManager.findLastVisibleItemPosition();
 //
 //        }
+        /***
+         *
+         * 判断数据只有一条再次请求
+         */
 
         if(list.size() == 0)
         {
-            Toast.makeText(getActivity(),"只有一条",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(),"只有一条",Toast.LENGTH_SHORT).show();
             //请求首页数据
             serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

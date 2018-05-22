@@ -170,6 +170,8 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                         editor.putString("token", bean.getData().getToken());
                         editor.putString("hxPassword", bean.getData().getHxPassword());
                         editor.putString("balance", bean.getData().getBalance().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+
+
                         editor.commit();
                         if (bean.getCode() == 200) {
                             emClient(String.valueOf(bean.getData().getUserId()), bean.getData().getHxPassword());

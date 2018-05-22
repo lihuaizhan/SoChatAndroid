@@ -1,6 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.neishenmo.sochat.sochatandroid.bean.LiveContent;
 import com.neishenmo.sochat.sochatandroid.bean.OtherLiveMsg;
 import com.neishenmo.sochat.sochatandroid.utils.GlideCircleTransform;
 import com.neishenmo.sochat.sochatandroid.utils.TimeConvertUtil;
+import com.neishenmo.sochat.sochatandroid.view.particular.AMapActivity;
+import com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity;
 
 import java.util.List;
 
@@ -34,14 +37,16 @@ public class OthersMesgAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private int size;
     private boolean isChange;
     private OnItemClickListener mOnItemClickListener;
-  private int i;
+    private int i;
+
     //定义RecyclView点击事件接口
     public interface OnItemClickListener {
         void onClick(int position);
 
         void onLongClick(int position);
     }
-    private interface InGetPosition{
+
+    private interface InGetPosition {
 
     }
 
@@ -73,46 +78,46 @@ public class OthersMesgAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         LiveContent liveContent = new Gson().fromJson(bListBean.getContent(), LiveContent.class);
         String picture = liveContent.getPicture();
         String substring;
-        if(type==0)
-        {   if(liveContent.getLon()!=null&!liveContent.getLon().equals("")&liveContent.getLat()!=null&!liveContent.getLat().equals(""))
-           {
-               String s ="http://api.map.baidu.com/staticimage/v2?ak=bS5Dns38GvWtZb8lADEkPr6mWIdMpWg3&mcode=DD:7B:2D:CF:E9:6E:2B:3C:1B:1A:72:67:11:FA:2F:74:1E:BC:A2:AC;com.neishenmo.sochat.sochatandroid&center=" +
-                      liveContent.getLon()+","+liveContent.getLat()+
-                       "&width=300&height=300&zoom=18";
-               with.load(s)
-                       .transform(new GlideCircleTransform(context)).into(holder1.liveContent);
-           }
-            holder1.liveIcon.setBackgroundResource(R.drawable.location_icon);
+        if (type == 0) {
+            if (liveContent.getLon() != null & !liveContent.getLon().equals("") & liveContent.getLat() != null & !liveContent.getLat().equals("")) {
+                String s = "http://api.map.baidu.com/staticimage/v2?ak=bS5Dns38GvWtZb8lADEkPr6mWIdMpWg3&mcode=DD:7B:2D:CF:E9:6E:2B:3C:1B:1A:72:67:11:FA:2F:74:1E:BC:A2:AC;com.neishenmo.sochat.sochatandroid&center=" +
+                        liveContent.getLon() + "," + liveContent.getLat() +
+                        "&width=300&height=300&zoom=18";
+                with.load(s)
+                        .transform(new GlideCircleTransform(context)).into(holder1.liveContent);
+            }
             holder1.liveIdtor.setText(liveContent.getSimpleAddress());
-        }
-        else if(type==1)
-        {
-            if (!".jpg".equals(picture.substring(picture.length()-4,picture.length()))) {
+            holder1.liveContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, AMapActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        } else if (type == 1) {
+            if (!".jpg".equals(picture.substring(picture.length() - 4, picture.length()))) {
                 with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(context)).into(holder1.liveContent);
             } else {
 
                 with.load(picture).transform(new GlideCircleTransform(context)).into(holder1.liveContent);
             }
             holder1.liveIcon.setBackgroundResource(R.mipmap.love);
-            holder1.liveIdtor.setText("+"+liveContent.getAmount());
-        }
-        else {
-            if (!".jpg".equals(picture.substring(picture.length()-4,picture.length()))) {
+            holder1.liveIdtor.setText("+" + liveContent.getAmount());
+        } else {
+            if (!".jpg".equals(picture.substring(picture.length() - 4, picture.length()))) {
                 with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(context)).into(holder1.liveContent);
             } else {
 
                 with.load(picture).transform(new GlideCircleTransform(context)).into(holder1.liveContent);
             }
         }
-        if(!"".equals(picture)||picture!=null)
-        {
+        if (!"".equals(picture) || picture != null) {
             //substring = picture.substring(0, picture.length() - 1);
 
         }
 //        else {
 //            substring="https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg";
 //        }
-
 
 
 //        try {
@@ -132,13 +137,12 @@ public class OthersMesgAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //        {
 //            holder1.visitorTime.setText();
 //        }
-        if(!isChange)
-        {
+        if (!isChange) {
 //            ViewGroup.LayoutParams layoutParams = holder1.otherPicture.getLayoutParams();
 //            layoutParams.height=300;
 //            layoutParams.width=300;
 //            holder1.otherPicture.setLayoutParams(layoutParams);
-          //  holder1.otherRegis.setText(TimeConvertUtil.getTimeInterval(onlineUserListBean.getLastActiveTime()));
+            //  holder1.otherRegis.setText(TimeConvertUtil.getTimeInterval(onlineUserListBean.getLastActiveTime()));
         }
 
         //判断点击接口是否为空

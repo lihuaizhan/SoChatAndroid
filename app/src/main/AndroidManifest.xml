@@ -135,7 +135,8 @@
 
         <activity android:name=".view.personage.SendInternalCodeActivity" />
         <activity android:name=".view.personage.WithSuccessActivity" />
-        <activity android:name=".view.personage.WeiXinSendActivity"></activity>
+        <activity android:name=".view.personage.WeiXinSendActivity" />
+        <activity android:name=".view.particular.AMapActivity"></activity>
     </application>
 
 </manifest>
