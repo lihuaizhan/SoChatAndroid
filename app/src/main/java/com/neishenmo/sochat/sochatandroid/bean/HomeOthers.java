@@ -100,6 +100,8 @@ public class HomeOthers implements Serializable{
             private String lastActiveTime;
             private String lastLoginTime;
 
+
+
             public String getUserId() {
                 return userId;
             }

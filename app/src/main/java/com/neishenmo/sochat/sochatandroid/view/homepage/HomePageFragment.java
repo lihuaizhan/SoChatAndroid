@@ -73,7 +73,8 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private SharedPreferences sp;
     private RecyclerViewPager mRecycleViewPage;
     private ServiceApi serviceApi;
-    private View view;
+   // private View view;
+   private RelativeLayout relation;
     private SharedPreferences user;
     private List<HomeOthers.DataBean.OnlineUserListBean> list;
     private List<HomeListBean.DataBean.OnlineUserListBean> mHomeList;
@@ -108,251 +109,227 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
     private  String address1 ;
     private  HomeRequst request ;
     private  HomeOthersMessageAdapter homeOthersMessageAdapter ;
+//
+//    @Override
+//    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        view = inflater.inflate(R.layout.homepage_layout, container, false);
+//
+////        HomeList();
+//
+////        test.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////                //   getActivity().findViewById(R.id.magic_indicator4).setVisibility(View.INVISIBLE);
+////                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.RED);
+////            }
+////        });
+//        return view;
+//    }
 
-    @Override
-    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.homepage_layout, container, false);
 
-//        HomeList();
-
-//        test.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    protected void initData() {
+////        arguments = getArguments();
+//        MainActivity activity = (MainActivity) getActivity();
+//        activity.setLocation(new MainActivity.GetLocationData() {
 //            @Override
-//            public void onClick(View view) {
-//                //   getActivity().findViewById(R.id.magic_indicator4).setVisibility(View.INVISIBLE);
-//                getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.RED);
+//            public void getData(String lon, String lat, String address, BDLocation location) {
+//                 lon1 = lon;
+//                 lat1 = lat;
+//                 address1 = address;
+//                //获取sharedPreferences对象
+//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("location", getActivity().MODE_PRIVATE);
+//                //获取editor对象
+//                SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+//                //存储键值对
+//                editor.putString("lon", lon1);
+//
+//                editor.putString("lat", lat1);
+//                editor.putFloat("rudio", location.getRadius());
+//                //提交
+//                editor.commit();//提交修改
+//
 //            }
 //        });
-        return view;
-    }
-
-    /**
-     * 获取首页列表
-     */
-//    private void HomeList() {
-//        HomeRequst requst;
-//        if (sp.getString("token","") == ""){
-//            requst = new HomeRequst("","1","1","苏州街","1");
+//        list = new ArrayList<>();
+//        //  colorBean = new ArrayList<>();
+//        // initAddList();
+//        thumbs = new Thumbs();
+//        sp = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
+//        user = getActivity().getSharedPreferences("user", 0);
+//        serviceApi = RetrofitHelper.getServiceApi();
+//        //获取控件id
+//        mIvLove = view.findViewById(R.id.iv_love);
+//        mIvMoney = view.findViewById(R.id.iv_money);
+//        mRecycleViewPage = view.findViewById(R.id.rl_user);
+//        relation = view.findViewById(R.id.rl_home);
+//        mRlHome = view.findViewById(R.id.rl_home);
+//        // mHiPraiseAnimationView = view.findViewById(R.id.praise_animation);
+//
+//
+//        //点击监听
+//        mIvLove.setOnClickListener(this);
+//        mIvMoney.setOnClickListener(this);
+//
+//
+//        LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+//        mRecycleViewPage.setLayoutManager(layout);
+//        //首页请求参数
+//         request = new HomeRequst();
+//        if(user.getString("token","")=="")
+//        {
+//            page = 1;
 //        }
-//        else {
-//            requst = new HomeRequst("","1","1","苏州街");
+//        request.setPageNo(page+"");
+//        request.setToken(user.getString("token",""));
+//        request.setLat(lat1);
+//        request.setLon(lon1);
+//        request.setSimpleAddress(address1);
+//        if (PermissionPageUtils.isLocServiceEnable(getActivity())) {
+//            //请求首页数据
+//            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Consumer<HomeOthers>() {
+//                        @Override
+//                        public void accept(HomeOthers homeOthers) throws Exception {
+//                             if(homeOthers.getCode() ==301)
+//                             {
+//                                 Toast.makeText(getActivity(),"登录失效",Toast.LENGTH_SHORT).show();
+//                                 Intent intent = new Intent(getActivity(),SplaActivity.class);
+//                                 SharedPreferences.Editor editor = user.edit();
+//                                 editor.clear();
+//                                 startActivity(intent);
+//                             }
+//                            list = homeOthers.getData().getOnlineUserList();
+//                            // List<HomeOthers.DataBean.OnlineUserListBean> list01 = StringUtil.removeDuplicateWithOrder(HomePageFragment.this.list);
+//                            homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
+//                            homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
+//                                @Override
+//                                public void onClick(int position) {
+//                                    // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+//                                    HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
+//                                    Intent intent = new Intent(getActivity(), ParticularActivity.class);
+//                                    Bundle mBundle = new Bundle();
+//                                    mBundle.putSerializable("home", onlineUserListBean);
+//                                    intent.putExtras(mBundle);
+//                                    startActivity(intent);
+//                                }
+//
+//                                @Override
+//                                public void onLongClick(int position) {
+//
+//                                }
+//                            });
+//                            mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
+//
+//
+//                        }
+//                    }, new Consumer<Throwable>() {
+//                        @Override
+//                        public void accept(Throwable throwable) throws Exception {
+//                            String s = throwable.getMessage().toString();
+//                        }
+//                    });
 //        }
-//        ServiceApi api = RetrofitHelper.getServiceApi();
-//        api.getHomeList(requst)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<HomeListBean>() {
-//                    @Override
-//                    public void accept(HomeListBean homeListBean) throws Exception {
-////                        HomeListBean bean = homeListBean;
-////                        mHomeList.add(bean);
-////                        mViewPager.setAdapter(new HomeAdapter());
-//                    }
-//                });
+//
+//
+////        RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
+////        //判断是当前layoutManager是否为LinearLayoutManager
+////        // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+////        if (layoutManager instanceof LinearLayoutManager) {
+////            LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+////            //获取最后一个可见view的位置
+////            int lastItemPosition = linearManager.findLastVisibleItemPosition();
+////
+////        }
+//        /***
+//         *
+//         * 判断数据只有一条再次请求
+//         */
+//
+//        if(list.size() == 0)
+//        {
+//            //Toast.makeText(getActivity(),"只有一条",Toast.LENGTH_SHORT).show();
+//            //请求首页数据
+//            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Consumer<HomeOthers>() {
+//                        @Override
+//                        public void accept(HomeOthers homeOthers) throws Exception {
+//
+//                            List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList01 = homeOthers.getData().getOnlineUserList();
+//                            list.addAll(onlineUserList01);
+//
+//                            ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
+//                            homeOthersMessageAdapter.notifyDataSetChanged();
+//
+//                        }
+//                    }, new Consumer<Throwable>() {
+//                        @Override
+//                        public void accept(Throwable throwable) throws Exception {
+//                            String s = throwable.getMessage().toString();
+//                        }
+//                    });
+//        }
+//      mRecycleViewPage.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//          //用来标记是否正在向左滑动
+//          private boolean isSlidingToLeft = false;
+//          @Override
+//          public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//              super.onScrollStateChanged(recyclerView, newState);
+//              LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+////              if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+////              {
+////                  homeOthersMessageAdapter.
+////              }
+//              // 当不滑动时
+//              if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                  // 获取最后一个完全显示的itemPosition
+//                  int lastItemPosition = manager.findLastCompletelyVisibleItemPosition();
+//                  int itemCount = manager.getItemCount();
+//
+//                  // 判断是否滑动到了最后一个Item，并且是向左滑动
+//                  if (lastItemPosition == (itemCount - 1) && isSlidingToLeft) {
+//                      //请求首页数据
+//                      serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+//                              .observeOn(AndroidSchedulers.mainThread())
+//                              .subscribe(new Consumer<HomeOthers>() {
+//                                  @Override
+//                                  public void accept(HomeOthers homeOthers) throws Exception {
+//
+//                                       List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList = homeOthers.getData().getOnlineUserList();
+//                                      list.addAll(onlineUserList);
+//
+//                                      ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
+//                                      homeOthersMessageAdapter.notifyDataSetChanged();
+//
+//                                  }
+//                              }, new Consumer<Throwable>() {
+//                                  @Override
+//                                  public void accept(Throwable throwable) throws Exception {
+//                                      String s = throwable.getMessage().toString();
+//                                  }
+//                              });
+//
+//                  }
+//              }
+//          }
+//
+//          @Override
+//          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//              super.onScrolled(recyclerView, dx, dy);
+//              // dx值大于0表示正在向左滑动，小于或等于0表示向右滑动或停止
+//              isSlidingToLeft = dx > 0;
+//          }
+//      });
 //
 //    }
-    @Override
-    protected void initData() {
-//        arguments = getArguments();
-        MainActivity activity = (MainActivity) getActivity();
-        activity.setLocation(new MainActivity.GetLocationData() {
-            @Override
-            public void getData(String lon, String lat, String address, BDLocation location) {
-                 lon1 = lon;
-                 lat1 = lat;
-                 address1 = address;
-                //获取sharedPreferences对象
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("location", getActivity().MODE_PRIVATE);
-                //获取editor对象
-                SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
-                //存储键值对
-                editor.putString("lon", lon1);
-
-                editor.putString("lat", lat1);
-                editor.putFloat("rudio", location.getRadius());
-                //提交
-                editor.commit();//提交修改
-
-            }
-        });
-        list = new ArrayList<>();
-        //  colorBean = new ArrayList<>();
-        // initAddList();
-        thumbs = new Thumbs();
-        sp = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
-        user = getActivity().getSharedPreferences("user", 0);
-        serviceApi = RetrofitHelper.getServiceApi();
-        //获取控件id
-        mIvLove = view.findViewById(R.id.iv_love);
-        mIvMoney = view.findViewById(R.id.iv_money);
-        mRecycleViewPage = view.findViewById(R.id.rl_user);
-        view = view.findViewById(R.id.rl_home);
-        mRlHome = view.findViewById(R.id.rl_home);
-        // mHiPraiseAnimationView = view.findViewById(R.id.praise_animation);
-
-
-        //点击监听
-        mIvLove.setOnClickListener(this);
-        mIvMoney.setOnClickListener(this);
-
-
-        LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRecycleViewPage.setLayoutManager(layout);
-        //首页请求参数
-         request = new HomeRequst();
-        if(user.getString("token","")=="")
-        {
-            page = 1;
-        }
-        request.setPageNo(page+"");
-        request.setToken(user.getString("token",""));
-        request.setLat(lat1);
-        request.setLon(lon1);
-        request.setSimpleAddress(address1);
-        if (PermissionPageUtils.isLocServiceEnable(getActivity())) {
-            //请求首页数据
-            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<HomeOthers>() {
-                        @Override
-                        public void accept(HomeOthers homeOthers) throws Exception {
-                             if(homeOthers.getCode() ==301)
-                             {
-                                 Toast.makeText(getActivity(),"登录失效",Toast.LENGTH_SHORT).show();
-                                 Intent intent = new Intent(getActivity(),SplaActivity.class);
-                                 SharedPreferences.Editor editor = user.edit();
-                                 editor.clear();
-                                 startActivity(intent);
-                             }
-                            list = homeOthers.getData().getOnlineUserList();
-                            // List<HomeOthers.DataBean.OnlineUserListBean> list01 = StringUtil.removeDuplicateWithOrder(HomePageFragment.this.list);
-                            homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
-                            homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
-                                @Override
-                                public void onClick(int position) {
-                                    // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
-                                    HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
-                                    Intent intent = new Intent(getActivity(), ParticularActivity.class);
-                                    Bundle mBundle = new Bundle();
-                                    mBundle.putSerializable("home", onlineUserListBean);
-                                    intent.putExtras(mBundle);
-                                    startActivity(intent);
-                                }
-
-                                @Override
-                                public void onLongClick(int position) {
-
-                                }
-                            });
-                            mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
-
-
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            String s = throwable.getMessage().toString();
-                        }
-                    });
-        }
-
-
-//        RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
-//        //判断是当前layoutManager是否为LinearLayoutManager
-//        // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
-//        if (layoutManager instanceof LinearLayoutManager) {
-//            LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
-//            //获取最后一个可见view的位置
-//            int lastItemPosition = linearManager.findLastVisibleItemPosition();
 //
-//        }
-        /***
-         *
-         * 判断数据只有一条再次请求
-         */
-
-        if(list.size() == 0)
-        {
-            //Toast.makeText(getActivity(),"只有一条",Toast.LENGTH_SHORT).show();
-            //请求首页数据
-            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<HomeOthers>() {
-                        @Override
-                        public void accept(HomeOthers homeOthers) throws Exception {
-
-                            List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList01 = homeOthers.getData().getOnlineUserList();
-                            list.addAll(onlineUserList01);
-
-                            ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
-                            homeOthersMessageAdapter.notifyDataSetChanged();
-
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            String s = throwable.getMessage().toString();
-                        }
-                    });
-        }
-      mRecycleViewPage.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
-          //用来标记是否正在向左滑动
-          private boolean isSlidingToLeft = false;
-          @Override
-          public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-              super.onScrollStateChanged(recyclerView, newState);
-              LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-//              if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
-//              {
-//                  homeOthersMessageAdapter.
-//              }
-              // 当不滑动时
-              if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                  // 获取最后一个完全显示的itemPosition
-                  int lastItemPosition = manager.findLastCompletelyVisibleItemPosition();
-                  int itemCount = manager.getItemCount();
-
-                  // 判断是否滑动到了最后一个Item，并且是向左滑动
-                  if (lastItemPosition == (itemCount - 1) && isSlidingToLeft) {
-                      //请求首页数据
-                      serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
-                              .observeOn(AndroidSchedulers.mainThread())
-                              .subscribe(new Consumer<HomeOthers>() {
-                                  @Override
-                                  public void accept(HomeOthers homeOthers) throws Exception {
-
-                                       List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList = homeOthers.getData().getOnlineUserList();
-                                      list.addAll(onlineUserList);
-
-                                      ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
-                                      homeOthersMessageAdapter.notifyDataSetChanged();
-
-                                  }
-                              }, new Consumer<Throwable>() {
-                                  @Override
-                                  public void accept(Throwable throwable) throws Exception {
-                                      String s = throwable.getMessage().toString();
-                                  }
-                              });
-
-                  }
-              }
-          }
-
-          @Override
-          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-              super.onScrolled(recyclerView, dx, dy);
-              // dx值大于0表示正在向左滑动，小于或等于0表示向右滑动或停止
-              isSlidingToLeft = dx > 0;
-          }
-      });
-
-    }
-
-    @Override
-    protected void setDefaultFragmentTitle(String title) {
-
-    }
+//    @Override
+//    protected void setDefaultFragmentTitle(String title) {
+//
+//    }
 
     @Override
     public void onClick(View v) {
@@ -379,7 +356,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
                             animationColorGradient(Color.rgb(r, g, b), Color.rgb(r1, g1, b1));
                         } else {
                             //Toast.makeText(getActivity(), "不快", Toast.LENGTH_SHORT).show();
-                            getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.rgb(r, g, b));
+                         //   getActivity().findViewById(R.id.home_layout).setBackgroundColor(Color.rgb(r, g, b));
                             //  animationColorGradient(Color.rgb(r,g,b),Color.parseColor("#333232"));
 
 
@@ -463,7 +440,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 int i = ((Integer) animation.getAnimatedValue()).intValue();
-                getActivity().findViewById(R.id.home_layout).setBackgroundColor(i);
+             //   getActivity().findViewById(R.id.home_layout).setBackgroundColor(i);
             }
         });
         valueAnimator.start();
@@ -475,7 +452,7 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                getActivity().findViewById(R.id.home_layout).setBackgroundResource(R.color.bg);
+               // getActivity().findViewById(R.id.home_layout).setBackgroundResource(R.color.bg);
             }
 
             @Override
@@ -488,5 +465,218 @@ public class HomePageFragment extends BaseFragment implements View.OnClickListen
 
             }
         });
+    }
+
+    @Override
+    protected int setContentView() {
+        return R.layout.homepage_layout;
+    }
+
+    @Override
+    protected void init() {
+        list = new ArrayList<>();
+        //  colorBean = new ArrayList<>();
+        // initAddList();
+        thumbs = new Thumbs();
+        sp = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
+        user = getActivity().getSharedPreferences("user", 0);
+        serviceApi = RetrofitHelper.getServiceApi();
+        //获取控件id
+        mIvLove = rootView.findViewById(R.id.iv_love);
+        mIvMoney = rootView.findViewById(R.id.iv_money);
+        mRecycleViewPage = rootView.findViewById(R.id.rl_user);
+        relation = rootView.findViewById(R.id.rl_home);
+        mRlHome = rootView.findViewById(R.id.rl_home);
+        // mHiPraiseAnimationView = view.findViewById(R.id.praise_animation);
+
+
+        //点击监听
+        mIvLove.setOnClickListener(this);
+        mIvMoney.setOnClickListener(this);
+
+
+        LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRecycleViewPage.setLayoutManager(layout);
+
+//        arguments = getArguments();
+            MainActivity activity = (MainActivity) getActivity();
+            activity.setLocation(new MainActivity.GetLocationData() {
+                @Override
+                public void getData(String lon, String lat, String address, BDLocation location) {
+                    lon1 = lon;
+                    lat1 = lat;
+                    address1 = address;
+                    //获取sharedPreferences对象
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("location", getActivity().MODE_PRIVATE);
+                    //获取editor对象
+                    SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+                    //存储键值对
+                    editor.putString("lon", lon1);
+
+                    editor.putString("lat", lat1);
+                    editor.putFloat("rudio", location.getRadius());
+                    //提交
+                    editor.commit();//提交修改
+                    //首页请求参数
+                    request = new HomeRequst();
+                    if(user.getString("token","")=="")
+                    {
+                        page = 1;
+                    }
+                    request.setPageNo(page+"");
+                    request.setToken(user.getString("token",""));
+                    request.setLat(lat1);
+                    request.setLon(lon1);
+                    request.setSimpleAddress(address1);
+                    // if (PermissionPageUtils.isLocServiceEnable(getActivity())) {
+                    //请求首页数据
+                    serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<HomeOthers>() {
+                                @Override
+                                public void accept(HomeOthers homeOthers) throws Exception {
+                                    if(homeOthers.getCode() ==301)
+                                    {
+                                        Toast.makeText(getActivity(),"登录失效",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getActivity(),SplaActivity.class);
+                                        SharedPreferences.Editor editor = user.edit();
+                                        editor.clear();
+                                        startActivity(intent);
+                                    }
+                                    list = homeOthers.getData().getOnlineUserList();
+                                  //  Toast.makeText(getActivity(),"数据"+list.toString(),Toast.LENGTH_SHORT).show();
+                                    // List<HomeOthers.DataBean.OnlineUserListBean> list01 = StringUtil.removeDuplicateWithOrder(HomePageFragment.this.list);
+                                    homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), list, false);
+                                    homeOthersMessageAdapter.setOnItemClickListener(new HomeOthersMessageAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void onClick(int position) {
+                                            // Toast.makeText(getActivity(),position+"",Toast.LENGTH_SHORT).show();
+                                            HomeOthers.DataBean.OnlineUserListBean onlineUserListBean = list.get(position);
+                                            Intent intent = new Intent(getActivity(), ParticularActivity.class);
+                                            Bundle mBundle = new Bundle();
+                                            mBundle.putSerializable("home", onlineUserListBean);
+                                            intent.putExtras(mBundle);
+                                            startActivity(intent);
+                                        }
+
+                                        @Override
+                                        public void onLongClick(int position) {
+
+                                        }
+                                    });
+                                    mRecycleViewPage.setAdapter(homeOthersMessageAdapter);
+
+
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    String s = throwable.getMessage().toString();
+                                }
+                            });
+                    // }
+
+                }
+            });
+
+
+
+//        RecyclerView.LayoutManager layoutManager = mRecycleViewPage.getLayoutManager();
+//        //判断是当前layoutManager是否为LinearLayoutManager
+//        // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+//        if (layoutManager instanceof LinearLayoutManager) {
+//            LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+//            //获取最后一个可见view的位置
+//            int lastItemPosition = linearManager.findLastVisibleItemPosition();
+//
+//        }
+            /***
+             *
+             * 判断数据只有一条再次请求
+             */
+
+            if(list.size() == 0)
+            {
+                //Toast.makeText(getActivity(),"只有一条",Toast.LENGTH_SHORT).show();
+                //请求首页数据
+                serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<HomeOthers>() {
+                            @Override
+                            public void accept(HomeOthers homeOthers) throws Exception {
+
+                                List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList01 = homeOthers.getData().getOnlineUserList();
+                                list.addAll(onlineUserList01);
+
+                                ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
+                                homeOthersMessageAdapter.notifyDataSetChanged();
+
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                String s = throwable.getMessage().toString();
+                            }
+                        });
+            }
+            mRecycleViewPage.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+                //用来标记是否正在向左滑动
+                private boolean isSlidingToLeft = false;
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//              if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+//              {
+//                  homeOthersMessageAdapter.
+//              }
+                    // 当不滑动时
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        // 获取最后一个完全显示的itemPosition
+                        int lastItemPosition = manager.findLastCompletelyVisibleItemPosition();
+                        int itemCount = manager.getItemCount();
+
+                        // 判断是否滑动到了最后一个Item，并且是向左滑动
+                        if (lastItemPosition == (itemCount - 1) && isSlidingToLeft) {
+                            //请求首页数据
+                            serviceApi.getHomeOthers(request).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Consumer<HomeOthers>() {
+                                        @Override
+                                        public void accept(HomeOthers homeOthers) throws Exception {
+
+                                            List<HomeOthers.DataBean.OnlineUserListBean> onlineUserList = homeOthers.getData().getOnlineUserList();
+                                            list.addAll(onlineUserList);
+
+                                            ////homeOthersMessageAdapter = new HomeOthersMessageAdapter(getActivity(), onlineUserList, false);
+                                            homeOthersMessageAdapter.notifyDataSetChanged();
+
+                                        }
+                                    }, new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+                                            String s = throwable.getMessage().toString();
+                                        }
+                                    });
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    // dx值大于0表示正在向左滑动，小于或等于0表示向右滑动或停止
+                    isSlidingToLeft = dx > 0;
+                }
+            });
+
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+
     }
 }

@@ -1,6 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.view.particular;
 
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -35,6 +36,9 @@ public class AMapActivity extends AppCompatActivity {
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.statusBarColor(R.color.colorTheme).fitsSystemWindows(true).init();   //所有子类都将继承这些相同的属性
         setContentView(R.layout.activity_amap);
+        Intent intent = getIntent();
+        float lat1 = Float.parseFloat(intent.getStringExtra("lat"));
+        float lon1 = Float.parseFloat(intent.getStringExtra("lon"));
         mMapView = (MapView) findViewById(R.id.mmap);
         mBaiduMap = mMapView.getMap();
         SharedPreferences location = getSharedPreferences("location", 0);
@@ -45,16 +49,14 @@ public class AMapActivity extends AppCompatActivity {
         MyLocationData locData = new MyLocationData.Builder()
                 .accuracy(500)
                 // 此处设置开发者获取到的方向信息，顺时针0-360
-                .direction(100).latitude(lat)
-                .longitude(lon).build();
+                .direction(100).latitude(lat1)
+                .longitude(lon1).build();
 
 // 设置定位数据
         mBaiduMap.setMyLocationData(locData);
 
 // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
-        BitmapDescriptor mCurrentMarker  = BitmapDescriptorFactory
-                .fromResource(R.drawable.ic_launcher);
-
+        //纯色转bitmap
         Bitmap bitmap = Bitmap.createBitmap(1, 1
                 ,
                 Bitmap.Config.ARGB_8888);
@@ -62,17 +64,9 @@ public class AMapActivity extends AppCompatActivity {
         BitmapDescriptor mCurrentMarker1  = BitmapDescriptorFactory.fromBitmap(bitmap);
         MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, mCurrentMarker1, 0xAAE22018, 0xAAE22018);
         mBaiduMap.setMyLocationConfiguration(config);
-//        MyLocationData locData = new MyLocationData.Builder()
-//                .accuracy(location.getFloat("rudio", 0))
-//                .direction(location.getFloat("rudio", 0)).latitude(lat)
-//                .longitude(lon).build();
-//        mBaiduMap.setMyLocationData(locData);
-//               BitmapDescriptor mCurrentMarker  = BitmapDescriptorFactory
-//               .fromResource(R.drawable.location_icon);
-//       MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, mCurrentMarker, Color.RED, 0xAA00FF00);
-//        mBaiduMap.setMyLocationConfiguration(config);
+
         if (true) {
-            LatLng ll = new LatLng(lat, lon);
+            LatLng ll = new LatLng(lat1, lon1);
             MapStatus.Builder builder = new MapStatus.Builder();
             builder.target(ll).zoom(15.0f);
             mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));

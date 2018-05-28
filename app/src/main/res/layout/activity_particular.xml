@@ -9,24 +9,92 @@
     android:layout_gravity="center_horizontal"
     android:background="#333232"
     tools:context="com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity">
-
-    <TextView
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:text="姓名"
-        android:textColor="#ffffff"
-        android:id="@+id/part_name"
-        android:textSize="24sp"
-        android:layout_marginTop="35dp"
-        />
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/love"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lovenum"
+            android:textColor="#ffffff"
+            android:id="@+id/loves_num"
+            />
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/part_picture"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="10dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/par_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="姓名"
+            android:textColor="#ffffff"
+            android:id="@+id/part_name"
+            android:textSize="24sp"
+            android:layout_marginTop="35dp"
+            />
+
+        <ImageView
+            android:id="@+id/part_picture"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/money"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="lovenum"
+            android:id="@+id/packet_num"
+            />
+    </LinearLayout>
+</RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

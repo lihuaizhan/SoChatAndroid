@@ -262,4 +262,5 @@ public class VerificationActivity extends Activity implements View.OnClickListen
                     }
                 });
     }
+
 }

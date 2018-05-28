@@ -46,72 +46,259 @@ public class RelationFragment extends BaseFragment {
     private TextView visitorNum;
     private TextView likeNum;
     private TextView friendsNum;
-    private View view;
+    //private View view;
     private ImageView visitorMore;
     private ImageView likeMore;
     private ImageView friendsMore;
     private  SharedPreferences user;
     private  ServiceApi serviceApi;
 
+//    @Override
+//    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        view = inflater.inflate(R.layout.relation_layout, container, false);
+//        return view;
+//    }
+
+   // @Override
+//    protected void initData() {
+//        //获取控件id
+//        visitorRc = view.findViewById(R.id.visitor_list);
+//        likeRc = view.findViewById(R.id.like_list);
+//        friendsRc = view.findViewById(R.id.friends_list);
+//        visitorNum = view.findViewById(R.id.visitor_num);
+//        likeNum = view.findViewById(R.id.like_num);
+//        friendsNum = view.findViewById(R.id.friends_num);
+//        visitorMore = view.findViewById(R.id.visitor_more);
+//        likeMore = view.findViewById(R.id.like_more);
+//        friendsMore = view.findViewById(R.id.friends_more);
+//        user = getActivity().getSharedPreferences("user", 0);
+//
+//
+//        RelationShipRequest request = new RelationShipRequest("1", user.getString("token",""));
+//        serviceApi = RetrofitHelper.getServiceApi();
+//        //来访数据请求
+//        serviceApi.getVisitor(request)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<Visitor>() {
+//                    @Override
+//                    public void accept(final Visitor visitor) throws Exception {
+//
+//                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//                        //recyclerView设置布局管理器
+//                        visitorRc.setLayoutManager(linearLayoutManager);
+//                        //拿到数据
+//                        final Visitor.DataBean data = visitor.getData();
+//                        List<Visitor.DataBean.VuiListBean> vuiList = data.getVuiList();
+//                        if(vuiList.size()>5)
+//                        {
+//                            visitorMore.setVisibility(View.VISIBLE);
+//                        }
+//                        visitorNum.setText(visitor.getData().getVuiAmount()+"位");
+//                        //实例化适配器
+//                        VisitorListAdapter adapter = new VisitorListAdapter(getActivity(), vuiList, true);
+//                        //添加适配器
+//                        visitorRc.setAdapter(adapter);
+//
+//                        //访问查看更多
+//                        visitorMore.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//
+//                               Intent intent = new Intent(getActivity(),VisitorMoreActivity.class);
+//                                intent.putExtra("visitor_data", visitor);
+//                                startActivity(intent);
+//                                getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+//                            }
+//                        });
+////                        //点击事件
+////                        adapter.setOnItemClickListener(new VisitorListAdapter.OnItemClickListener() {
+////                            @Override
+////                            public void onClick(int position) {
+////                                Toast.makeText(getActivity(),"您点击了"+position+"行",Toast.LENGTH_SHORT).show();
+////                            }
+////                            @Override
+////                            public void onLongClick(int position) {
+////                                Toast.makeText(getActivity(),"您长按点击了"+position+"行",Toast.LENGTH_SHORT).show();
+////                            }
+////                        });
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//
+//                    }
+//                });
+//        //喜欢数据请求
+//        serviceApi.getLike(request)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<Like>() {
+//                    @Override
+//                    public void accept(final Like like) throws Exception {
+//                        likeNum.setText(like.getData().getAmount()+"位");
+//                        //recyclerView设置布局管理器
+//                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//                        likeRc.setLayoutManager(linearLayoutManager);
+//                        //拿到数据
+//                        List<Like.DataBean.TuuiListBean> vuiList = like.getData().getTuuiList();
+//                        if(vuiList.size()>5)
+//                        {
+//                            likeMore.setVisibility(View.VISIBLE);
+//                        }
+//                        //实例化适配器
+//                        LikeListAdapter likeAdapter = new LikeListAdapter(getActivity(), vuiList, true);
+//                        //添加适配器
+//                        likeRc.setAdapter(likeAdapter);
+//                        //喜欢查看更多
+//                        likeMore.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                Intent intent = new Intent(getActivity(),LikeMoreActivity.class);
+//                                intent.putExtra("like_data", like);
+//                                startActivity(intent);
+//                                getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+//                            }
+//                        });
+////                        //点击事件
+////                        adapter.setOnItemClickListener(new VisitorListAdapter.OnItemClickListener() {
+////                            @Override
+////                            public void onClick(int position) {
+////                                Toast.makeText(getActivity(),"您点击了"+position+"行",Toast.LENGTH_SHORT).show();
+////                            }
+////                            @Override
+////                            public void onLongClick(int position) {
+////                                Toast.makeText(getActivity(),"您长按点击了"+position+"行",Toast.LENGTH_SHORT).show();
+////                            }
+////                        });
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//
+//                    }
+//                });
+//        //好友数据请求
+//        serviceApi.getFriends(request)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<Friends>() {
+//                    @Override
+//                    public void accept(final Friends friends) throws Exception {
+//                        friendsNum.setText(friends.getData().getAmount()+"位");
+//                        //recyclerView设置布局管理器
+//                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//                        friendsRc.setLayoutManager(linearLayoutManager);
+//                        //拿到数据
+//                        final Friends.DataBean friendsData = friends.getData();
+//                        List<Friends.DataBean.FuiListBean> fuiList = friendsData.getFuiList();
+//                        if(fuiList.size()>5)
+//                        {
+//                            friendsMore.setVisibility(View.VISIBLE);
+//                        }
+//
+//                        //实例化适配器
+//                        FriendsListAdapter friendsAdapter = new FriendsListAdapter(getActivity(), fuiList, true);
+//                        //添加适配器
+//                        friendsRc.setAdapter(friendsAdapter);
+//
+//                        //好友查看更多
+//                        friendsMore.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                Intent intent = new Intent(getActivity(),FriendsMoreActivity.class);
+//                                intent.putExtra("friend_data", friends);
+//                                startActivity(intent);
+//                                getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+//                            }
+//                        });
+////                        //点击事件
+////                        adapter.setOnItemClickListener(new VisitorListAdapter.OnItemClickListener() {
+////                            @Override
+////                            public void onClick(int position) {
+////                                Toast.makeText(getActivity(),"您点击了"+position+"行",Toast.LENGTH_SHORT).show();
+////                            }
+////                            @Override
+////                            public void onLongClick(int position) {
+////                                Toast.makeText(getActivity(),"您长按点击了"+position+"行",Toast.LENGTH_SHORT).show();
+////                            }
+////                        });
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//
+//                    }
+//                });
+//    }
+
+//    @Override
+//    protected void setDefaultFragmentTitle(String title) {
+//
+//    }
+
     @Override
-    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.relation_layout, container, false);
-        return view;
+    protected int setContentView() {
+        return R.layout.relation_layout;
     }
 
     @Override
-    protected void initData() {
-        //获取控件id
-        visitorRc = view.findViewById(R.id.visitor_list);
-        likeRc = view.findViewById(R.id.like_list);
-        friendsRc = view.findViewById(R.id.friends_list);
-        visitorNum = view.findViewById(R.id.visitor_num);
-        likeNum = view.findViewById(R.id.like_num);
-        friendsNum = view.findViewById(R.id.friends_num);
-        visitorMore = view.findViewById(R.id.visitor_more);
-        likeMore = view.findViewById(R.id.like_more);
-        friendsMore = view.findViewById(R.id.friends_more);
-        user = getActivity().getSharedPreferences("user", 0);
+    protected void init() {
+
+            //获取控件id
+            visitorRc = rootView.findViewById(R.id.visitor_list);
+            likeRc = rootView.findViewById(R.id.like_list);
+            friendsRc = rootView.findViewById(R.id.friends_list);
+            visitorNum = rootView.findViewById(R.id.visitor_num);
+            likeNum = rootView.findViewById(R.id.like_num);
+            friendsNum = rootView.findViewById(R.id.friends_num);
+            visitorMore = rootView.findViewById(R.id.visitor_more);
+            likeMore = rootView.findViewById(R.id.like_more);
+            friendsMore = rootView.findViewById(R.id.friends_more);
+            user = getActivity().getSharedPreferences("user", 0);
 
 
-        RelationShipRequest request = new RelationShipRequest("1", user.getString("token",""));
-        serviceApi = RetrofitHelper.getServiceApi();
-        //来访数据请求
-        serviceApi.getVisitor(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Visitor>() {
-                    @Override
-                    public void accept(final Visitor visitor) throws Exception {
+            RelationShipRequest request = new RelationShipRequest("1", user.getString("token",""));
+            serviceApi = RetrofitHelper.getServiceApi();
+            //来访数据请求
+            serviceApi.getVisitor(request)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Visitor>() {
+                        @Override
+                        public void accept(final Visitor visitor) throws Exception {
 
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                        //recyclerView设置布局管理器
-                        visitorRc.setLayoutManager(linearLayoutManager);
-                        //拿到数据
-                        final Visitor.DataBean data = visitor.getData();
-                        List<Visitor.DataBean.VuiListBean> vuiList = data.getVuiList();
-                        if(vuiList.size()>5)
-                        {
-                            visitorMore.setVisibility(View.VISIBLE);
-                        }
-                        visitorNum.setText(visitor.getData().getVuiAmount()+"位");
-                        //实例化适配器
-                        VisitorListAdapter adapter = new VisitorListAdapter(getActivity(), vuiList, true);
-                        //添加适配器
-                        visitorRc.setAdapter(adapter);
-
-                        //访问查看更多
-                        visitorMore.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                               Intent intent = new Intent(getActivity(),VisitorMoreActivity.class);
-                                intent.putExtra("visitor_data", visitor);
-                                startActivity(intent);
-                                getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                            //recyclerView设置布局管理器
+                            visitorRc.setLayoutManager(linearLayoutManager);
+                            //拿到数据
+                            final Visitor.DataBean data = visitor.getData();
+                            List<Visitor.DataBean.VuiListBean> vuiList = data.getVuiList();
+                            if(vuiList.size()>5)
+                            {
+                                visitorMore.setVisibility(View.VISIBLE);
                             }
-                        });
+                            visitorNum.setText(visitor.getData().getVuiAmount()+"位");
+                            //实例化适配器
+                            VisitorListAdapter adapter = new VisitorListAdapter(getActivity(), vuiList, true);
+                            //添加适配器
+                            visitorRc.setAdapter(adapter);
+
+                            //访问查看更多
+                            visitorMore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    Intent intent = new Intent(getActivity(),VisitorMoreActivity.class);
+                                    intent.putExtra("visitor_data", visitor);
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+                                }
+                            });
 //                        //点击事件
 //                        adapter.setOnItemClickListener(new VisitorListAdapter.OnItemClickListener() {
 //                            @Override
@@ -123,45 +310,45 @@ public class RelationFragment extends BaseFragment {
 //                                Toast.makeText(getActivity(),"您长按点击了"+position+"行",Toast.LENGTH_SHORT).show();
 //                            }
 //                        });
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-
-                    }
-                });
-        //喜欢数据请求
-        serviceApi.getLike(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Like>() {
-                    @Override
-                    public void accept(final Like like) throws Exception {
-                        likeNum.setText(like.getData().getAmount()+"位");
-                        //recyclerView设置布局管理器
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                        likeRc.setLayoutManager(linearLayoutManager);
-                        //拿到数据
-                        List<Like.DataBean.TuuiListBean> vuiList = like.getData().getTuuiList();
-                        if(vuiList.size()>5)
-                        {
-                            likeMore.setVisibility(View.VISIBLE);
                         }
-                        //实例化适配器
-                        LikeListAdapter likeAdapter = new LikeListAdapter(getActivity(), vuiList, true);
-                        //添加适配器
-                        likeRc.setAdapter(likeAdapter);
-                        //喜欢查看更多
-                        likeMore.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent(getActivity(),LikeMoreActivity.class);
-                                intent.putExtra("like_data", like);
-                                startActivity(intent);
-                                getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+
+                        }
+                    });
+            //喜欢数据请求
+            serviceApi.getLike(request)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Like>() {
+                        @Override
+                        public void accept(final Like like) throws Exception {
+                            likeNum.setText(like.getData().getAmount()+"位");
+                            //recyclerView设置布局管理器
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                            likeRc.setLayoutManager(linearLayoutManager);
+                            //拿到数据
+                            List<Like.DataBean.TuuiListBean> vuiList = like.getData().getTuuiList();
+                            if(vuiList.size()>5)
+                            {
+                                likeMore.setVisibility(View.VISIBLE);
                             }
-                        });
+                            //实例化适配器
+                            LikeListAdapter likeAdapter = new LikeListAdapter(getActivity(), vuiList, true);
+                            //添加适配器
+                            likeRc.setAdapter(likeAdapter);
+                            //喜欢查看更多
+                            likeMore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(),LikeMoreActivity.class);
+                                    intent.putExtra("like_data", like);
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+                                }
+                            });
 //                        //点击事件
 //                        adapter.setOnItemClickListener(new VisitorListAdapter.OnItemClickListener() {
 //                            @Override
@@ -173,48 +360,48 @@ public class RelationFragment extends BaseFragment {
 //                                Toast.makeText(getActivity(),"您长按点击了"+position+"行",Toast.LENGTH_SHORT).show();
 //                            }
 //                        });
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-
-                    }
-                });
-        //好友数据请求
-        serviceApi.getFriends(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Friends>() {
-                    @Override
-                    public void accept(final Friends friends) throws Exception {
-                        friendsNum.setText(friends.getData().getAmount()+"位");
-                        //recyclerView设置布局管理器
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                        friendsRc.setLayoutManager(linearLayoutManager);
-                        //拿到数据
-                        final Friends.DataBean friendsData = friends.getData();
-                        List<Friends.DataBean.FuiListBean> fuiList = friendsData.getFuiList();
-                        if(fuiList.size()>5)
-                        {
-                            friendsMore.setVisibility(View.VISIBLE);
                         }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
 
-                        //实例化适配器
-                        FriendsListAdapter friendsAdapter = new FriendsListAdapter(getActivity(), fuiList, true);
-                        //添加适配器
-                        friendsRc.setAdapter(friendsAdapter);
-
-                        //好友查看更多
-                        friendsMore.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent(getActivity(),FriendsMoreActivity.class);
-                                intent.putExtra("friend_data", friends);
-                                startActivity(intent);
-                                getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+                        }
+                    });
+            //好友数据请求
+            serviceApi.getFriends(request)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Friends>() {
+                        @Override
+                        public void accept(final Friends friends) throws Exception {
+                            friendsNum.setText(friends.getData().getAmount()+"位");
+                            //recyclerView设置布局管理器
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                            friendsRc.setLayoutManager(linearLayoutManager);
+                            //拿到数据
+                            final Friends.DataBean friendsData = friends.getData();
+                            List<Friends.DataBean.FuiListBean> fuiList = friendsData.getFuiList();
+                            if(fuiList.size()>5)
+                            {
+                                friendsMore.setVisibility(View.VISIBLE);
                             }
-                        });
+
+                            //实例化适配器
+                            FriendsListAdapter friendsAdapter = new FriendsListAdapter(getActivity(), fuiList, true);
+                            //添加适配器
+                            friendsRc.setAdapter(friendsAdapter);
+
+                            //好友查看更多
+                            friendsMore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(),FriendsMoreActivity.class);
+                                    intent.putExtra("friend_data", friends);
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.zoom_out,R.anim.zoom_in);
+                                }
+                            });
 //                        //点击事件
 //                        adapter.setOnItemClickListener(new VisitorListAdapter.OnItemClickListener() {
 //                            @Override
@@ -226,17 +413,18 @@ public class RelationFragment extends BaseFragment {
 //                                Toast.makeText(getActivity(),"您长按点击了"+position+"行",Toast.LENGTH_SHORT).show();
 //                            }
 //                        });
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
 
-                    }
-                });
+                        }
+                    });
+
     }
 
     @Override
-    protected void setDefaultFragmentTitle(String title) {
+    protected void lazyLoad() {
 
     }
 }

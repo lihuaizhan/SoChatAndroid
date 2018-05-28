@@ -54,114 +54,114 @@ public class MessageFragment extends BaseFragment {
     private EaseChatFragment chatFragment;
     private SharedPreferences sp;
 
-    @Override
-    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.message_layout, container, false);
-//        SharedPreferences sp = getActivity().getSharedPreferences("user",getActivity().MODE_PRIVATE);
-        sp = getActivity().getSharedPreferences("config", getActivity().MODE_PRIVATE);
-//        EaseChatFragment chatFragment = new EaseChatFragment();
-//        chatFragment.hideTitleBar();
-//        //传入参数
-//        Bundle args = new Bundle();
-//        args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-//        args.putString(EaseConstant.EXTRA_USER_ID, "开发测试");
-//        chatFragment.setArguments(args);
-//        getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
-//        initDatas();
-
-        datas = initConversationData();
-
-
-//得到控件
-        recyclerView = (RecyclerView) view.findViewById(R.id.recy);
-        AutoUtils.auto(recyclerView);
-        LinearLayoutManager ms = new LinearLayoutManager(getContext());
-        ms.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 recyclerview 布局方式为横向布局
-        recyclerView.setLayoutManager(ms);
-        recyclerView.setAdapter(adapter = new ContactsAdapter(getActivity(), new ContactsAdapter.CallBack() {
-            @Override
-            public void click(View v, int postion) {
-                if (postion < datas.size()) {
-                    EMClient.getInstance().chatManager().deleteConversation(datas.get(postion).telephone, true);
-                    refresh();
-                }
-            }
-        }));
-        adapter.addAll(datas);
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-                adapter.setSelected(position);
-                adapter.notifyDataSetChanged();
-//                viewPager.setCurrentItem(position);
-                EMConversation conversation = conversationList.get(position);
-                tochatUserName = conversation.conversationId();
-//                dealWithRedOrPraise(conversation);
-                if (tochatUserName.equals(EMClient.getInstance().getCurrentUser()))
-                    Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
-                else {
-                    // start chat acitivity
-                    chatFragment = new EaseChatFragment();
-                    //pass parameters to chat fragment
-                    Bundle args = new Bundle();
-                    args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-                    args.putString(EaseConstant.EXTRA_USER_ID,datas.get(position).telephone);
-                    chatFragment.setArguments(args);
-                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
-                }
-            }
-        });
-//设置布局管理器
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        mRecyclerView.setLayoutManager(linearLayoutManager);
-////设置适配器
-//        mAdapter = new GalleryAdapter(getActivity(), conversationList);
-//        conversationList.addAll(loadConversationList());
-//        mAdapter.setOnItemClickListener(new ItemClickListener() {
+//    @Override
+//    protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.message_layout, container, false);
+////        SharedPreferences sp = getActivity().getSharedPreferences("user",getActivity().MODE_PRIVATE);
+//        sp = getActivity().getSharedPreferences("config", getActivity().MODE_PRIVATE);
+////        EaseChatFragment chatFragment = new EaseChatFragment();
+////        chatFragment.hideTitleBar();
+////        //传入参数
+////        Bundle args = new Bundle();
+////        args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+////        args.putString(EaseConstant.EXTRA_USER_ID, "开发测试");
+////        chatFragment.setArguments(args);
+////        getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+////        initDatas();
+//
+//        datas = initConversationData();
+//
+//
+////得到控件
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recy);
+//        AutoUtils.auto(recyclerView);
+//        LinearLayoutManager ms = new LinearLayoutManager(getContext());
+//        ms.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 recyclerview 布局方式为横向布局
+//        recyclerView.setLayoutManager(ms);
+//        recyclerView.setAdapter(adapter = new ContactsAdapter(getActivity(), new ContactsAdapter.CallBack() {
 //            @Override
-//            public void onItemClick(String position) {
-////                Toast.makeText(getActivity(), "123456788"+position, Toast.LENGTH_SHORT).show();
+//            public void click(View v, int postion) {
+//                if (postion < datas.size()) {
+//                    EMClient.getInstance().chatManager().deleteConversation(datas.get(postion).telephone, true);
+//                    refresh();
+//                }
+//            }
+//        }));
+//        adapter.addAll(datas);
+//        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
 //
-//                EaseChatFragment chatFragment = new EaseChatFragment();
-//                chatFragment.hideTitleBar();
-//                //传入参数
-//                Bundle args = new Bundle();
-//                args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-//                args.putString(EaseConstant.EXTRA_USER_ID,position );
-//                chatFragment.setArguments(args);
-//
-//
-//                getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
-//
-//
-//
+//                adapter.setSelected(position);
+//                adapter.notifyDataSetChanged();
+////                viewPager.setCurrentItem(position);
+//                EMConversation conversation = conversationList.get(position);
+//                tochatUserName = conversation.conversationId();
+////                dealWithRedOrPraise(conversation);
+//                if (tochatUserName.equals(EMClient.getInstance().getCurrentUser()))
+//                    Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
+//                else {
+//                    // start chat acitivity
+//                    chatFragment = new EaseChatFragment();
+//                    //pass parameters to chat fragment
+//                    Bundle args = new Bundle();
+//                    args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+//                    args.putString(EaseConstant.EXTRA_USER_ID,datas.get(position).telephone);
+//                    chatFragment.setArguments(args);
+//                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+//                }
 //            }
 //        });
-////        myAdapter=new ConversationAdapter(getActivity(),0,conversationList);
-////        myAdapter=new ConversationAdapter(getActivity(),0,mDatas)
-//        mRecyclerView.setAdapter(mAdapter);
-
-////会话列表控件
-//        conversationListView = (EaseConversationList) getView().findViewById(R.id.list);
-////初始化，参数为会话列表集合
-//        conversationListView.init(conversationList);
-////刷新列表
-//        conversationListView.refresh();
+////设置布局管理器
+////        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+////        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+////        mRecyclerView.setLayoutManager(linearLayoutManager);
+//////设置适配器
+////        mAdapter = new GalleryAdapter(getActivity(), conversationList);
+////        conversationList.addAll(loadConversationList());
+////        mAdapter.setOnItemClickListener(new ItemClickListener() {
+////            @Override
+////            public void onItemClick(String position) {
+//////                Toast.makeText(getActivity(), "123456788"+position, Toast.LENGTH_SHORT).show();
+////
+////                EaseChatFragment chatFragment = new EaseChatFragment();
+////                chatFragment.hideTitleBar();
+////                //传入参数
+////                Bundle args = new Bundle();
+////                args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+////                args.putString(EaseConstant.EXTRA_USER_ID,position );
+////                chatFragment.setArguments(args);
+////
+////
+////                getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+////
+////
+////
+////            }
+////        });
+//////        myAdapter=new ConversationAdapter(getActivity(),0,conversationList);
+//////        myAdapter=new ConversationAdapter(getActivity(),0,mDatas)
+////        mRecyclerView.setAdapter(mAdapter);
 //
-//        conversationListFragment = new EaseConversationListFragment();
-//        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
-//            @Override
-//            public void onListItemClicked(EMConversation conversation) {
-//                Toast.makeText(getActivity(), "..............", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//        getFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment).show(conversationListFragment)
-//                .commit();
-        return view;
-    }
+//////会话列表控件
+////        conversationListView = (EaseConversationList) getView().findViewById(R.id.list);
+//////初始化，参数为会话列表集合
+////        conversationListView.init(conversationList);
+//////刷新列表
+////        conversationListView.refresh();
+////
+////        conversationListFragment = new EaseConversationListFragment();
+////        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
+////            @Override
+////            public void onListItemClicked(EMConversation conversation) {
+////                Toast.makeText(getActivity(), "..............", Toast.LENGTH_SHORT).show();
+////
+////            }
+////        });
+////        getFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment).show(conversationListFragment)
+////                .commit();
+//        return view;
+//    }
 
     private ArrayList<MemberModel> initConversationData() {
         conversationList = loadConversationList();
@@ -173,15 +173,15 @@ public class MessageFragment extends BaseFragment {
         return datas;
     }
 
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void setDefaultFragmentTitle(String title) {
-
-    }
+//    @Override
+//    protected void initData() {
+//
+//    }
+//
+//    @Override
+//    protected void setDefaultFragmentTitle(String title) {
+//
+//    }
 
     private void initRecyclerView() {
 //        if(null!=datas&&datas.size()>0){
@@ -423,4 +423,120 @@ public class MessageFragment extends BaseFragment {
         }
     }
 
+    @Override
+    protected int setContentView() {
+        return R.layout.message_layout;
+    }
+
+    @Override
+    protected void init() {
+//        SharedPreferences sp = getActivity().getSharedPreferences("user",getActivity().MODE_PRIVATE);
+        sp = getActivity().getSharedPreferences("config", getActivity().MODE_PRIVATE);
+//        EaseChatFragment chatFragment = new EaseChatFragment();
+//        chatFragment.hideTitleBar();
+//        //传入参数
+//        Bundle args = new Bundle();
+//        args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+//        args.putString(EaseConstant.EXTRA_USER_ID, "开发测试");
+//        chatFragment.setArguments(args);
+//        getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+//        initDatas();
+
+        datas = initConversationData();
+
+
+//得到控件
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recy);
+        AutoUtils.auto(recyclerView);
+        LinearLayoutManager ms = new LinearLayoutManager(getContext());
+        ms.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 recyclerview 布局方式为横向布局
+        recyclerView.setLayoutManager(ms);
+        recyclerView.setAdapter(adapter = new ContactsAdapter(getActivity(), new ContactsAdapter.CallBack() {
+            @Override
+            public void click(View v, int postion) {
+                if (postion < datas.size()) {
+                    EMClient.getInstance().chatManager().deleteConversation(datas.get(postion).telephone, true);
+                    refresh();
+                }
+            }
+        }));
+        adapter.addAll(datas);
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                adapter.setSelected(position);
+                adapter.notifyDataSetChanged();
+//                viewPager.setCurrentItem(position);
+                EMConversation conversation = conversationList.get(position);
+                tochatUserName = conversation.conversationId();
+//                dealWithRedOrPraise(conversation);
+                if (tochatUserName.equals(EMClient.getInstance().getCurrentUser()))
+                    Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
+                else {
+                    // start chat acitivity
+                    chatFragment = new EaseChatFragment();
+                    //pass parameters to chat fragment
+                    Bundle args = new Bundle();
+                    args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+                    args.putString(EaseConstant.EXTRA_USER_ID,datas.get(position).telephone);
+                    chatFragment.setArguments(args);
+                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+                }
+            }
+        });
+//设置布局管理器
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        mRecyclerView.setLayoutManager(linearLayoutManager);
+////设置适配器
+//        mAdapter = new GalleryAdapter(getActivity(), conversationList);
+//        conversationList.addAll(loadConversationList());
+//        mAdapter.setOnItemClickListener(new ItemClickListener() {
+//            @Override
+//            public void onItemClick(String position) {
+////                Toast.makeText(getActivity(), "123456788"+position, Toast.LENGTH_SHORT).show();
+//
+//                EaseChatFragment chatFragment = new EaseChatFragment();
+//                chatFragment.hideTitleBar();
+//                //传入参数
+//                Bundle args = new Bundle();
+//                args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+//                args.putString(EaseConstant.EXTRA_USER_ID,position );
+//                chatFragment.setArguments(args);
+//
+//
+//                getFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+//
+//
+//
+//            }
+//        });
+////        myAdapter=new ConversationAdapter(getActivity(),0,conversationList);
+////        myAdapter=new ConversationAdapter(getActivity(),0,mDatas)
+//        mRecyclerView.setAdapter(mAdapter);
+
+////会话列表控件
+//        conversationListView = (EaseConversationList) getView().findViewById(R.id.list);
+////初始化，参数为会话列表集合
+//        conversationListView.init(conversationList);
+////刷新列表
+//        conversationListView.refresh();
+//
+//        conversationListFragment = new EaseConversationListFragment();
+//        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
+//            @Override
+//            public void onListItemClicked(EMConversation conversation) {
+//                Toast.makeText(getActivity(), "..............", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//        getFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment).show(conversationListFragment)
+//                .commit();
+    }
+
+    @Override
+    protected void lazyLoad() {
+
+    }
 }

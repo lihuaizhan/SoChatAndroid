@@ -2,6 +2,7 @@ package com.neishenmo.sochat.sochatandroid.net;
 
 
 import com.neishenmo.sochat.sochatandroid.bean.ApilyLogin;
+import com.neishenmo.sochat.sochatandroid.bean.BaseData;
 import com.neishenmo.sochat.sochatandroid.bean.Friends;
 import com.neishenmo.sochat.sochatandroid.bean.HomeListBean;
 import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
@@ -19,6 +20,7 @@ import com.neishenmo.sochat.sochatandroid.bean.Thumbs;
 import com.neishenmo.sochat.sochatandroid.bean.VerificationBean;
 import com.neishenmo.sochat.sochatandroid.bean.Visitor;
 import com.neishenmo.sochat.sochatandroid.requestbean.AliWith;
+import com.neishenmo.sochat.sochatandroid.requestbean.GetBaseData;
 import com.neishenmo.sochat.sochatandroid.requestbean.HeadRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.HomeRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.LoveListRequst;
@@ -128,6 +130,11 @@ public interface ServiceApi {
      */
     @POST(ConnectorApi.GETLIVE_MSG_URL+ConnectorApi.SUFFIX)
     Observable<OtherLiveMsg> getOtherLive(@Body PhoneRequest requst);
+    /**
+     * 获取他人基本信息
+     */
+    @POST(ConnectorApi.GETDATA_URL+ConnectorApi.SUFFIX)
+    Observable<BaseData> getBaseData(@Body GetBaseData requst);
     /**
      * 支付宝授权登录
      */

@@ -35,7 +35,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="20sp"
-        android:text="sssssssssss"
         android:textColor="#ffffff"
         android:layout_marginTop="10dp"
         />

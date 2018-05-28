@@ -16,10 +16,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.gyf.barlibrary.ImmersionBar;
 import com.neishenmo.sochat.sochatandroid.R;
+import com.neishenmo.sochat.sochatandroid.bean.BaseData;
 import com.neishenmo.sochat.sochatandroid.bean.HomeOthers;
 import com.neishenmo.sochat.sochatandroid.bean.OtherLiveMsg;
 import com.neishenmo.sochat.sochatandroid.net.RetrofitHelper;
 import com.neishenmo.sochat.sochatandroid.net.ServiceApi;
+import com.neishenmo.sochat.sochatandroid.requestbean.GetBaseData;
 import com.neishenmo.sochat.sochatandroid.requestbean.LoveListRequst;
 import com.neishenmo.sochat.sochatandroid.requestbean.PhoneRequest;
 import com.neishenmo.sochat.sochatandroid.utils.GlideCircleTransform;
@@ -51,6 +53,8 @@ public class ParticularActivity extends AppCompatActivity implements View.OnClic
      * 天蝎座
      */
     private TextView mOthersUss;
+    private TextView lovesNum;
+    private TextView packetNum;
     private int i;
     private HomeOthers.DataBean.OnlineUserListBean home;
     private RequestManager with;
@@ -93,6 +97,8 @@ public class ParticularActivity extends AppCompatActivity implements View.OnClic
         mTablayout = (TabLayout) findViewById(R.id.tablayout);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mParyicuFinish = (Button) findViewById(R.id.paryicu_finish);
+        lovesNum = findViewById(R.id.loves_num);
+        packetNum = findViewById(R.id.packet_num);
         otherLiveMsgs = new OtherLiveMsg();
         try {
 
@@ -105,13 +111,37 @@ public class ParticularActivity extends AppCompatActivity implements View.OnClic
         mPartName.setText( StringUtils.toUtf8(home.getNickName()));
         mOthersOld.setText(i + "岁");
         mOthersUss.setText(home.getConstellation());
-        if (home.getPicture().equals("baidu.com")) {
-            with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(getApplicationContext())).into(mPartPicture);
-        } else {
-            with.load(home.getPicture()).transform(new GlideCircleTransform(getApplicationContext())).into(mPartPicture);
-        }
+
+//        if (home.getPicture().equals("baidu.com")) {
+//            with.load("https://neishenme.oss-cn-beijing.aliyuncs.com/17311368776/15216003370.jpg").transform(new GlideCircleTransform(getApplicationContext())).into(mPartPicture);
+//        } else {
+            with.load(home.getPicture()).error(R.drawable.get_more_btn_bg_f).transform(new GlideCircleTransform(getApplicationContext())).into(mPartPicture);
+     //   }
 
         mParyicuFinish.setOnClickListener(this);
+        //显示他人基本信息
+        GetBaseData getBaseData = new GetBaseData();
+        getBaseData.setLat(home.getLat());
+        getBaseData.setLon(home.getLon());
+        getBaseData.setTelephone(home.getTelephone());
+        getBaseData.setToken(user.getString("token",""));
+        serviceApi.getBaseData(getBaseData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<BaseData>() {
+                    @Override
+                    public void accept(BaseData baseData) throws Exception {
+                        packetNum.setText(baseData.getData().getOtherUserInfo().getRedPacketNum()+"次");
+                        lovesNum.setText(baseData.getData().getOtherUserInfo().getThumbsUpNum()+"次");
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+
+
         PhoneRequest requst = new PhoneRequest(home.getTelephone());
         serviceApi.getOtherLive(requst).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
