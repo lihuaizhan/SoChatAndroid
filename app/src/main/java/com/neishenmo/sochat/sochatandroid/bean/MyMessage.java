@@ -1,5 +1,7 @@
 package com.neishenmo.sochat.sochatandroid.bean;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Administrator on 2018-05-03.
  */
@@ -50,18 +52,18 @@ public class MyMessage {
          * countThumbsUp : 0
          */
 
-        private Object balance;
+        private BigDecimal balance;
         private String nickName;
         private int countRedPacket;
         private String telephone;
         private String picture;
         private int countThumbsUp;
 
-        public Object getBalance() {
+        public BigDecimal getBalance() {
             return balance;
         }
 
-        public void setBalance(Object balance) {
+        public void setBalance(BigDecimal balance) {
             this.balance = balance;
         }
 

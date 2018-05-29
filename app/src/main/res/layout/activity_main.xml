@@ -12,13 +12,13 @@
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<!--主布局内容-->
+        <!--主布局内容-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
             >
-          <!--首页数据展示-->
+            <!--首页数据展示-->
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="100dp"
@@ -55,8 +55,8 @@
                             android:id="@+id/head_distance"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
                             android:layout_marginTop="5dp"
+                            android:layout_weight="1"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -80,51 +80,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="bottom"
+            android:orientation="horizontal"
 
             >
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
+                    android:id="@+id/call"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/call"
-                    android:id="@+id/call"
-                    />
+                    android:background="@drawable/call" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
+                    android:id="@+id/parkets"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/parkets"
-                    android:id="@+id/parkets"
-                    />
+                    android:background="@drawable/parkets" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
+                    android:id="@+id/creameroll"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/creameroll"
-                    android:id="@+id/creameroll"
-                    />
+                    android:background="@drawable/creameroll" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>
@@ -185,25 +184,62 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="gone">
+             >
 
-                <ImageView
-                    android:id="@+id/person_head"
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp">
 
-                <TextView
-                    android:id="@+id/person_name"
-                    android:layout_width="wrap_content"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/person_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/creame"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/creame" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="姓名" />
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/person_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="姓名"
+                        android:padding="10dp"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/person_set_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:textColor="#525252"
+                        android:maxLength="10"
+                        android:textColorHint="#D0D0D5"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/person_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textSize="20sp"
                     android:text="日期" />
             </LinearLayout>
 
@@ -214,32 +250,34 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
+
                 <EditText
+                    android:id="@+id/import_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/import_money"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="80dp"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
                     android:hint="输入金额"
+                    android:inputType="number|numberDecimal"
+                    android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:maxLines="1"
-                    android:cursorVisible="false"
-                    android:inputType="number|numberDecimal"
-                    android:textSize="40sp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#525252"
                     android:textColorHint="#D0D0D5"
-                    android:background="@null"
-                    android:layout_marginTop="80dp"
+                    android:textSize="40sp"
 
                     />
+
                 <TextView
+                    android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/balance"
-                    android:text="当前余额"
                     android:layout_marginTop="10dp"
-                    />
+                    android:text="当前余额" />
+
                 <ImageView
                     android:id="@+id/apily_ant"
                     android:layout_width="50dp"

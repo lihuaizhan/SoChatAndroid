@@ -6,11 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +54,8 @@ import com.neishenmo.sochat.sochatandroid.wheelView.OnWheelChangedListener;
 import com.neishenmo.sochat.sochatandroid.wheelView.OnWheelScrollListener;
 import com.neishenmo.sochat.sochatandroid.wheelView.WheelView;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,7 +89,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
     private long time;
 
 
-    public static int PICTUR_HEAD = 11;
+   // public static int PICTUR_HEAD = 11;
     private String sex = "男";
 
 
@@ -112,7 +119,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
 
 //    private String token;
 
-    private  String mPhotoPath;
+    private String mPhotoPath;
 
     private String endpoint = "https://oss-cn-beijing.aliyuncs.com";
     private static final String testBucket = "neishenme";
@@ -123,18 +130,27 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
     private String uploadFilePath;
 
     private String AliYunPath;
-    private  String code;
-    private  String phone;
+    private String code;
+    private String phone;
+    //相册请求码
+    private static final int ALBUM_REQUEST_CODE = 1;
+    //相机请求码
+    private static final int CAMERA_REQUEST_CODE = 2;
+    //剪裁请求码
+    private static final int CROP_REQUEST_CODE = 3;
 
-  //  private SharedPreferences sp;
+    //调用照相机返回图片文件
+    private File tempFile;
+
+    //  private SharedPreferences sp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfect_data);
         Intent intent = getIntent();
-         code = intent.getStringExtra("code");
-         phone = intent.getStringExtra("call");
+        code = intent.getStringExtra("code");
+        phone = intent.getStringExtra("call");
         initView();
         //初始化阿里云
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(accessKeyId, accessKeySecret);
@@ -144,7 +160,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         conf.setMaxConcurrentRequest(5); //最大发送数
         conf.setMaxErrorRetry(2); // 失败后最大重连次数
         OSSLog.enableLog();
-        oss = new OSSClient(getApplicationContext(),endpoint,credentialProvider,conf);
+        oss = new OSSClient(getApplicationContext(), endpoint, credentialProvider, conf);
 
     }
 
@@ -177,7 +193,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
 
         mIvMan.setSelected(true);
         mIvWoman.setSelected(false);
-       // token = sp.getString("token","");
+        // token = sp.getString("token","");
 //        token = getIntent().getStringExtra("token");
 //        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
@@ -333,7 +349,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
              * 头像
              */
             case R.id.civ_head_portrait:
-                new CommonPopupWindow(this,this).show();
+                new CommonPopupWindow(this, this).show();
 //                clickPopupWindow(mRlPopupWindow);
                 break;
 
@@ -385,7 +401,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
      * 把设置好的信息传入服务器
      */
     private void NextStop() {
-       // Log.d("TAG","https://neishenme.oss-cn-beijing.aliyuncs.com/" + time);
+        // Log.d("TAG","https://neishenme.oss-cn-beijing.aliyuncs.com/" + time);
         PerfectDataRequst requst = new PerfectDataRequst();
         requst.setNickName(mEtName.getText().toString());
         requst.setPicture("https://neishenme.oss-cn-beijing.aliyuncs.com/" + time);
@@ -393,7 +409,7 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         requst.setSex(sex);
         requst.setMsgCode(code);
         requst.setTelephone(phone);
-      //  requst.set
+        //  requst.set
         ServiceApi api = RetrofitHelper.getServiceApi();
         api.getPerfectData(requst)
                 .subscribeOn(Schedulers.io())
@@ -403,17 +419,17 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
                     public void accept(PerfectDataBean perfectDataBean) throws Exception {
                         PerfectDataBean bean = perfectDataBean;
                         if (bean.getCode() == 200) {
-                            SharedPreferences sp = getSharedPreferences("user",MODE_PRIVATE);
+                            SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
-                            editor.putString("userId",String.valueOf(bean.getData().getUserId()));
-                            editor.putString("telephone",bean.getData().getTelephone());
-                            editor.putString("nickName",bean.getData().getNickName());
-                            editor.putString("picture",bean.getData().getPicture());
-                            editor.putString("birthday",bean.getData().getBirthday());
-                            editor.putString("sex",bean.getData().getSex());
-                            editor.putString("constellation",bean.getData().getConstellation());
-                            editor.putString("token",bean.getData().getToken());
-                            editor.putString("hxPassword",bean.getData().getHxPassword());
+                            editor.putString("userId", String.valueOf(bean.getData().getUserId()));
+                            editor.putString("telephone", bean.getData().getTelephone());
+                            editor.putString("nickName", bean.getData().getNickName());
+                            editor.putString("picture", bean.getData().getPicture());
+                            editor.putString("birthday", bean.getData().getBirthday());
+                            editor.putString("sex", bean.getData().getSex());
+                            editor.putString("constellation", bean.getData().getConstellation());
+                            editor.putString("token", bean.getData().getToken());
+                            editor.putString("hxPassword", bean.getData().getHxPassword());
                             editor.commit();
                             Intent intent = new Intent(PerfectDataActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -447,18 +463,20 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
 
     /**
      * 选择头像的点击事件
+     *
      * @param view
      */
     @Override
     public void onPopWindowClickListener(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             /**
              * 头像 拍照
              */
             case R.id.tv_menu_1:
-                mPhotoPath = ObtainAlbumUtils.getSDPath()+"/"+ObtainAlbumUtils.getPhotoFileName();
-                ObtainAlbumUtils.openCamera(PerfectDataActivity.this,mPhotoPath);
+//                mPhotoPath = ObtainAlbumUtils.getSDPath() + "/" + ObtainAlbumUtils.getPhotoFileName();
+//                ObtainAlbumUtils.openCamera(PerfectDataActivity.this, mPhotoPath);
 //                openCamera();
+                getPicFromCamera();
                 break;
             /**
              * 头像  相册选择
@@ -675,8 +693,32 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
      * 打开相册
      */
     private void openAlbum() {
-        Intent intent = new Intent(PerfectDataActivity.this, AlbumActivity.class);
-        startActivityForResult(intent, PICTUR_HEAD);
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
+//        Intent intent = new Intent(PerfectDataActivity.this, AlbumActivity.class);
+//        startActivityForResult(intent, PICTUR_HEAD);
+
+    }
+
+    /**
+     * 从相机获取图片
+     */
+    private void getPicFromCamera() {
+        //用于保存调用相机拍照后所生成的文件
+        tempFile = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis() + ".jpg");
+        //跳转到调用系统相机
+        Intent photoPickerIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //判断版本
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
+            photoPickerIntent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(PerfectDataActivity.this, "com.neishenmo.sochat.sochatandroid", tempFile);
+            photoPickerIntent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+            Log.e("dasd", contentUri.toString());
+        } else {    //否则使用Uri.fromFile(file)方法获取Uri
+            photoPickerIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+        }
+        startActivityForResult(photoPickerIntent, CAMERA_REQUEST_CODE);
     }
 
 
@@ -685,70 +727,117 @@ public class PerfectDataActivity extends Activity implements View.OnClickListene
         if (mLlYearMonthDay.getVisibility() != View.GONE) {
             mLlYearMonthDay.setVisibility(View.GONE);
             UtilAnim.hideToDown(mLlYearMonthDay, mIvPopupWindowBack);
-        }
-
-        else {
+        } else {
             super.onBackPressed();
         }
+    }
+
+    /**
+     * 裁剪图片
+     */
+    private void cropPhoto(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
+        intent.putExtra("return-data", true);
+
+        startActivityForResult(intent, CROP_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /**
-         * 截图完成后传回
-         */
-        if (requestCode == PICTUR_HEAD && resultCode == AlbumActivity.HEAD_OK) {
-            Bundle bundle = data.getExtras();
-            Bitmap bitmap = bundle.getParcelable("bitmap");
-            uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
-            mCivHeadPortrait.setImageBitmap(bitmap);
-        }
-        /**
-         * 调用截图
-         */
-        else if (requestCode  == 33){
-            if (data!=null){
-                ObtainAlbumUtils.BitmapScreenshot(data,PerfectDataActivity.this);
-            }
-        }
-        /**
-         * 截图之后设置头像
-         */
-        else if (requestCode == ObtainAlbumUtils.HEAD_SCREENSHOT){
-            if (data!=null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(bitmap);
-                mCivHeadPortrait.setImageBitmap(bitmap);
-            }
+
+        switch (requestCode) {
+
+            case CAMERA_REQUEST_CODE:   //调用相机后返回
+                if (resultCode == RESULT_OK) {
+                    //用相机返回的照片去调用剪裁也需要对Uri进行处理
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        Uri contentUri = FileProvider.getUriForFile(PerfectDataActivity.this, "com.neishenmo.sochat.sochatandroid", tempFile);
+                        cropPhoto(contentUri);
+                    } else {
+                        cropPhoto(Uri.fromFile(tempFile));
+                    }
+                }
+                break;
+
+            case ALBUM_REQUEST_CODE:    //调用相册后返回
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    cropPhoto(uri);
+                }
+                break;
+
+            case CROP_REQUEST_CODE:     //调用剪裁后返回
+                Bundle bundle = data.getExtras();
+                if (bundle != null) {
+                    //在这里获得了剪裁后的Bitmap对象，可以用于上传
+                    Bitmap image = bundle.getParcelable("data");
+                    //设置到ImageView上
+                    uploadFilePath = ObtainAlbumUtils.writeFileByBitmap(image);
+                    mCivHeadPortrait.setImageBitmap(image);
+                    //也可以进行一些保存、压缩等操作后上传
+//                    String path = saveImage("crop", image);
+                }
+                break;
         }
     }
+
+
 
     /**
      * 图片传到阿里云服务器
      */
     private void beginupload() {
-        PutObjectRequest put = new PutObjectRequest(testBucket,""+time,uploadFilePath);
+        PutObjectRequest put = new PutObjectRequest(testBucket, "" + time, uploadFilePath);
         OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 NextStop();
                 Log.d("TAG", "UploadSuccess");
-                Log.d("TAG", "ETag"+result.getETag());
-                Log.d("TAG", "RequestId"+result.getRequestId());
+                Log.d("TAG", "ETag" + result.getETag());
+                Log.d("TAG", "RequestId" + result.getRequestId());
             }
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
                 if (clientException != null) {
-                    Log.d("TAG","本地异常");
+                    Log.d("TAG", "本地异常");
                     // 本地异常如网络异常等
                 }
                 if (serviceException != null) {
-                    Log.d("TAG","服务异常");
+                    Log.d("TAG", "服务异常");
                     // 服务异常
                 }
             }
         });
+    }
+
+    //保存截图
+    public String saveImage(String name, Bitmap bmp) {
+        File appDir = new File(Environment.getExternalStorageDirectory().getPath());
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = name + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+            return file.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
