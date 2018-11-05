@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:background="#333232"
+    tools:context="com.neishenmo.sochat.sochatandroid.view.particular.ParticularActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/love"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lovenum"
+            android:textColor="#ffffff"
+            android:id="@+id/loves_num"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/par_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="姓名"
+            android:textColor="#ffffff"
+            android:id="@+id/part_name"
+            android:textSize="24sp"
+            android:layout_marginTop="35dp"
+            />
+
+        <ImageView
+            android:id="@+id/part_picture"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/money"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="lovenum"
+            android:id="@+id/packet_num"
+            />
+    </LinearLayout>
+</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y5"
+        >
+        <TextView
+            android:id="@+id/others_old"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_label"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="22岁" />
+
+        <TextView
+            android:id="@+id/others_uss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_uss"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="天蝎座" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333232"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabTextAppearance="@style/CustomTabLayoutTextAppearance"
+            android:layout_gravity="center"
+            app:tabBackground="@null"
+            app:tabGravity="center"
+            app:tabPaddingStart="50dp"
+            app:tabPaddingEnd="8dp"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable">
+        </android.support.design.widget.TabLayout>
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        ></android.support.v4.view.ViewPager>
+
+    <Button
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/y20"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape"
+        android:textColor="#ffffff"
+        android:layout_marginTop="@dimen/y6"
+        android:text="返回"
+        android:id="@+id/paryicu_finish"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+</LinearLayout>

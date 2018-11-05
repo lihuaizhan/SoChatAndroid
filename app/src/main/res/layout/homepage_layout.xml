@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_home"
+   >
+
+
+    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+        android:id="@+id/rl_user"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:rvp_triggerOffset="0.1"
+        app:rvp_singlePageFling="true"
+        android:clipToPadding="false"/>
+    <!--<org.limlee.hipraiseanimationlib.HiPraiseAnimationView-->
+        <!--android:id="@+id/praise_animation"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="600dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+       <!--/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_user"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/iv_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/love"
+            android:layout_margin="20dp"/>
+
+        <ImageView
+            android:id="@+id/iv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/money"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"/>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

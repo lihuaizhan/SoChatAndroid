@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333232"
+    android:orientation="vertical">
+    <!--来访-->
+    <LinearLayout
+        android:id="@+id/visitor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="来访"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/visitor_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="位"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/visitor_list"
+                android:layout_width="@dimen/x270"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="@dimen/x40"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x10">
+
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/y20"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/y5"
+                    android:background="@drawable/more"
+                    android:visibility="gone"
+                    android:id="@+id/visitor_more"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--喜欢-->
+    <LinearLayout
+        android:id="@+id/like"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="喜欢"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/like_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="位"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/like_list"
+                android:layout_width="@dimen/x270"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="@dimen/x40"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x10">
+
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/y20"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/y5"
+                    android:background="@drawable/more"
+                    android:id="@+id/like_more"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--好友-->
+    <LinearLayout
+        android:id="@+id/friends"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="好友"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/friends_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="位"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/friends_list"
+                android:layout_width="@dimen/x270"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="@dimen/x40"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x10">
+
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/y20"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/y5"
+                    android:background="@drawable/more"
+                    android:id="@+id/friends_more"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
