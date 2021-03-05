@@ -1,9 +1,9 @@
 <application>
   <component name="FileTypeManager" version="17">
     <extensionMap>
-      <mapping ext="webp" type="Image" />
       <mapping ext="db" type="SQL" />
       <mapping pattern="title_bgm" type="XML" />
+      <mapping pattern="styleable" type="XML" />
     </extensionMap>
   </component>
 </application>
