@@ -3,6 +3,6 @@
     <option name="COMPLETION_CASE_SENSITIVE" value="2" />
   </component>
   <component name="EditorSettings">
-    <option name="USE_SOFT_WRAPS" value="CONSOLE" />
+    <option name="USE_SOFT_WRAPS" value="" />
   </component>
 </application>
