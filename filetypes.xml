@@ -1,9 +1,12 @@
 <application>
-  <component name="FileTypeManager" version="17">
+  <component name="FileTypeManager" version="18">
     <extensionMap>
+      <mapping ext="main.kts" type="Kotlin" />
       <mapping ext="db" type="SQL" />
-      <mapping pattern="title_bgm" type="XML" />
       <mapping pattern="styleable" type="XML" />
+      <mapping pattern="title_bgm" type="XML" />
+      <removed_mapping ext="apk" approved="true" type="ARCHIVE" />
+      <removed_mapping ext="psd" approved="true" type="Image" />
     </extensionMap>
   </component>
 </application>
