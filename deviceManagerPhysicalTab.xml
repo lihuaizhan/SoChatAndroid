@@ -8,9 +8,10 @@
             <value value="EJL7N16912025410" />
           </Key>
         </key>
-        <name value="Device" />
-        <target value="Android 1.0" />
-        <api value="1" />
+        <lastOnlineTime value="2022-05-06T02:56:19.403822Z" />
+        <name value="HUAWEI HUAWEI MLA-AL10" />
+        <target value="Android 7.0" />
+        <api value="24" />
       </PhysicalDevice>
     </physicalDevices>
   </component>
