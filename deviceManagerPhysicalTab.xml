@@ -8,7 +8,6 @@
             <value value="10AC5Q0WWZ001AN" />
           </Key>
         </key>
-        <lastOnlineTime value="2022-06-12T13:04:01.001834Z" />
         <name value="vivo V2183A" />
         <target value="Android 12.0" />
         <api value="31" />
@@ -20,10 +19,20 @@
             <value value="EJL7N16912025410" />
           </Key>
         </key>
-        <lastOnlineTime value="2022-05-06T02:56:19.403822Z" />
         <name value="HUAWEI HUAWEI MLA-AL10" />
         <target value="Android 7.0" />
         <api value="24" />
+      </PhysicalDevice>
+      <PhysicalDevice>
+        <key>
+          <Key>
+            <type value="SERIAL_NUMBER" />
+            <value value="027502FY5CXPWS0" />
+          </Key>
+        </key>
+        <name value="alps L052B" />
+        <target value="Android 8.1" />
+        <api value="27" />
       </PhysicalDevice>
     </physicalDevices>
   </component>
