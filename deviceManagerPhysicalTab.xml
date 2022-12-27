@@ -34,6 +34,17 @@
         <target value="Android 7.0" />
         <api value="24" />
       </PhysicalDevice>
+      <PhysicalDevice>
+        <key>
+          <Key>
+            <type value="SERIAL_NUMBER" />
+            <value value="0275027PT3GLV90" />
+          </Key>
+        </key>
+        <name value="alps L052B" />
+        <target value="Android 8.1" />
+        <api value="27" />
+      </PhysicalDevice>
     </physicalDevices>
   </component>
 </application>
