@@ -133,6 +133,17 @@
         <target value="Android 8.1" />
         <api value="27" />
       </PhysicalDevice>
+      <PhysicalDevice>
+        <key>
+          <Key>
+            <type value="SERIAL_NUMBER" />
+            <value value="0275254MWP7LDB0" />
+          </Key>
+        </key>
+        <name value="alps FP025" />
+        <target value="Android 8.1" />
+        <api value="27" />
+      </PhysicalDevice>
     </physicalDevices>
   </component>
 </application>
