@@ -5,23 +5,23 @@
         <key>
           <Key>
             <type value="SERIAL_NUMBER" />
+            <value value="10AC5Q0WWZ001AN" />
+          </Key>
+        </key>
+        <name value="vivo V2183A" />
+        <target value="Android API 33" />
+        <api value="33" />
+      </PhysicalDevice>
+      <PhysicalDevice>
+        <key>
+          <Key>
+            <type value="SERIAL_NUMBER" />
             <value value="027502FY5CXPWS0" />
           </Key>
         </key>
         <name value="alps L052E" />
         <target value="Android 8.1" />
         <api value="27" />
-      </PhysicalDevice>
-      <PhysicalDevice>
-        <key>
-          <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="10AC5Q0WWZ001AN" />
-          </Key>
-        </key>
-        <name value="vivo V2183A" />
-        <target value="Android 12.0" />
-        <api value="31" />
       </PhysicalDevice>
       <PhysicalDevice>
         <key>
